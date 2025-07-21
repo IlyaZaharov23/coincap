@@ -1,8 +1,6 @@
-import { createSelector } from "@reduxjs/toolkit";
-
 import { createAppSlice } from "lib/createAppSlice";
-import type { Asset } from "types/types";
 
+import { assetsSelectors } from "./assets.selectors";
 import { createThunkHandlers } from "./assets.thunkHandlers";
 import { getAssetDetails, getAssetHistory, getAssets } from "./assets.thunks";
 import { AssetsState } from "./assets.types";
@@ -33,23 +31,10 @@ export const assetsSlice = createAppSlice({
             createThunkHandlers<AssetsState>({ stateField: "history" }),
         ),
     }),
-    selectors: {
-        selectAssets: (state) => state.assets,
-        selectAssetDetails: (state) => state.assetDetails,
-        selectPriceHistory: (state) => state.history,
-        selectLoading: (state) => state.loading,
-        selectError: (state) => state.error,
-
-        selectAssetBySymbol: createSelector(
-            [(state) => state.assets, (state, symbol: string) => symbol],
-            (assets, symbol) => assets.find((asset: Asset) => asset.symbol === symbol),
-        ),
-    },
+    selectors: assetsSelectors,
 });
 
 export const { clearAssetDetails, fetchAssets, fetchAssetDetails, fetchAssetHistory } = assetsSlice.actions;
 
 export const { selectAssets, selectAssetDetails, selectPriceHistory, selectLoading, selectError, selectAssetBySymbol } =
     assetsSlice.selectors;
-
-// export default assetsSlice.reducer;

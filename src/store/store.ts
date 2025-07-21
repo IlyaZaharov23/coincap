@@ -2,7 +2,6 @@ import { configureStore } from "@reduxjs/toolkit";
 
 import { assetsSlice } from "./slices/assets/assets.slice";
 
-// store.ts
 const makeStore = () => {
     if (typeof window === "undefined") {
         return configureStore({
