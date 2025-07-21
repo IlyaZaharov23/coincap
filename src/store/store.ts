@@ -1,10 +1,26 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-export const store = configureStore({
-    reducer: {
+import { assetsSlice } from "./slices/assets/assets.slice";
 
+// store.ts
+const makeStore = () => {
+    if (typeof window === "undefined") {
+        return configureStore({
+            reducer: {
+                coincap: assetsSlice.reducer,
+            },
+        });
     }
-})
 
-export type RootState = ReturnType<typeof store.getState>
-export type AppDispatch = typeof store.dispatch
+    return configureStore({
+        reducer: {
+            coincap: assetsSlice.reducer,
+        },
+        devTools: process.env.NODE_ENV !== "production",
+    });
+};
+
+export const store = makeStore();
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
