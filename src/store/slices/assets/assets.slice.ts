@@ -1,4 +1,4 @@
-import { createAppSlice } from "lib/createAppSlice";
+import { createAppSlice } from "shared/lib/createAppSlice";
 
 import { assetsSelectors } from "./assets.selectors";
 import { createThunkHandlers } from "./assets.thunkHandlers";
