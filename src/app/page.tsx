@@ -1,6 +1,6 @@
 import { Stack, Text } from "@chakra-ui/react";
 
-import { Header } from "components/Header/header.component";
+import { Header } from "components/header/header.component";
 import { bluePrimary } from "shared/constants/colors";
 
 export default function Home() {

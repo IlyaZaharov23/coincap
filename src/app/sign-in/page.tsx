@@ -1,8 +1,8 @@
-import { Stack, Text } from "@chakra-ui/react";
+import { Stack } from "@chakra-ui/react";
 
-import { Header } from "components/Header/header.component";
+import { Header } from "components/header/header.component";
 
-import { SignInForm } from "./components/SignInForm/sign-in-form.component";
+import { SignInForm } from "./components/sign-in-form/sign-in-form.component";
 import { styles } from "./page.styles";
 
 const SignIn = () => {
@@ -10,7 +10,6 @@ const SignIn = () => {
         <Stack>
             <Header showSignOut />
             <Stack sx={styles.contentWrapper}>
-                <Text sx={styles.title}>Sign In</Text>
                 <SignInForm />
             </Stack>
         </Stack>

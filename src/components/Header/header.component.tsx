@@ -4,10 +4,10 @@ import { FC } from "react";
 
 import { Stack } from "@chakra-ui/react";
 
-import { Button } from "components/Button/button.component";
-import { BUTTON_VARIANT } from "components/Button/button.variants";
-import { Logo } from "components/Logo/logo.component";
+import { Button } from "components/button/button.component";
+import { Logo } from "components/logo/logo.component";
 import { useRouter } from "next/navigation";
+import { BUTTON_VARIANT } from "shared/constants/button-variants";
 
 import { styles } from "./header.styles";
 import { HeaderPropsType } from "./header.types";
@@ -37,13 +37,13 @@ export const Header: FC<HeaderPropsType> = ({
             </Stack>
             <Stack sx={styles.buttonsWrapper}>
                 {showSignIn && (
-                    <Button onClick={navigateToSignIn} variant={BUTTON_VARIANT.SECONDARY}>
+                    <Button onClick={navigateToSignIn} variant={BUTTON_VARIANT.PRIMARY}>
                         Sign In
                     </Button>
                 )}
                 {showSignOut && (
                     <Button onClick={navigateToSignUp} variant={BUTTON_VARIANT.PRIMARY}>
-                        Sign Out
+                        Sign Up
                     </Button>
                 )}
                 {showLogOut && <Button variant={BUTTON_VARIANT.PRIMARY}>Log Out</Button>}

@@ -1,4 +1,4 @@
-import { bluePrimary, lightGray } from "shared/constants/colors";
+import { black, bluePrimary, lightGray } from "shared/constants/colors";
 
 export const styles = {
     mainWrapper: {
@@ -10,5 +10,11 @@ export const styles = {
         borderRadius: "10px",
         backgroundColor: lightGray,
         padding: "2rem",
+    },
+    text: {
+        fontSize: "2rem",
+        fontWeight: "700",
+        color: black,
+        marginBottom: "1rem",
     },
 };
