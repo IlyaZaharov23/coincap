@@ -17,4 +17,15 @@ export const styles = {
         color: black,
         marginBottom: "1rem",
     },
+    textButtonWrapper: {
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "center",
+    },
+    helperText: {
+        fontSize: "1rem",
+        fontWeight: "500",
+        color: black,
+    },
 };

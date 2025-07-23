@@ -1,7 +1,7 @@
 import { black, errorRed } from "shared/constants/colors";
 
 export const styles = {
-    inputWrapper: (hasError: boolean) => ({
+    inputWrapper: (hasError: boolean | undefined) => ({
         display: "flex",
         flexDirection: "column",
         alignItems: "flex-start",

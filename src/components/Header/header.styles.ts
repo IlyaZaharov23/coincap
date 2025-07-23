@@ -9,14 +9,15 @@ export const styles = {
         justifyContent: "space-between",
         alignItems: "center",
         width: "100vw",
-        padding: `${HEADER_PADDING_Y}px 48px`,
+        padding: `${HEADER_PADDING_Y}px 32px`,
         backgroundColor: white,
         borderBottom: `1px solid ${borderGray}`,
     },
-    buttonsWrapper: {
+    contentWrapper: {
+        width: "55vw",
         display: "flex",
         flexDirection: "row",
         alignItems: "center",
-        gap: "8px",
+        justifyContent: "space-between",
     },
 };

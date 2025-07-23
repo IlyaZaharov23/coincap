@@ -5,6 +5,7 @@ export const PASSWORD_REQUIREMENT_KEYS = {
     SYMBOL: "symbol",
     LENGTH: "length",
     EMPTY: "empty",
+    WRONG: "wrong",
 };
 
 export const EMAIL_REQUIREMENT_KEYS = {

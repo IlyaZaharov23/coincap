@@ -4,11 +4,11 @@ import { FC } from "react";
 
 import { Stack } from "@chakra-ui/react";
 
-import { Button } from "components/button/button.component";
 import { Logo } from "components/logo/logo.component";
-import { useRouter } from "next/navigation";
-import { BUTTON_VARIANT } from "shared/constants/button-variants";
 
+import { ActionButtons } from "./components/action-buttons/header.action-buttons.component";
+import { Navbar } from "./components/navbar/header.navbar.component";
+import { TopCurrencies } from "./components/top-currencies/header.top-currencies.component";
 import { styles } from "./header.styles";
 import { HeaderPropsType } from "./header.types";
 
@@ -16,38 +16,18 @@ export const Header: FC<HeaderPropsType> = ({
     showPopularCoins,
     showLogOut,
     showSignIn,
-    showSignOut,
+    showSignUp,
+    showNavbar,
     popularCoins,
 }) => {
-    const router = useRouter();
-
-    const navigateToSignIn = () => {
-        router.push("/sign-in");
-    };
-
-    const navigateToSignUp = () => {
-        router.push("/sign-up");
-    };
-
     return (
         <Stack sx={styles.headerWrapper}>
-            <Stack marginLeft="4rem">
+            <Stack sx={styles.contentWrapper}>
                 <Logo />
-                {/* {showPopularCoins && popularCoins.length > 0 && <></>} */}
+                {showPopularCoins && <TopCurrencies />}
+                {showNavbar && <Navbar />}
             </Stack>
-            <Stack sx={styles.buttonsWrapper}>
-                {showSignIn && (
-                    <Button onClick={navigateToSignIn} variant={BUTTON_VARIANT.PRIMARY}>
-                        Sign In
-                    </Button>
-                )}
-                {showSignOut && (
-                    <Button onClick={navigateToSignUp} variant={BUTTON_VARIANT.PRIMARY}>
-                        Sign Up
-                    </Button>
-                )}
-                {showLogOut && <Button variant={BUTTON_VARIANT.PRIMARY}>Log Out</Button>}
-            </Stack>
+            <ActionButtons showLogOut={showLogOut} showSignIn={showSignIn} showSignUp={showSignUp} />
         </Stack>
     );
 };

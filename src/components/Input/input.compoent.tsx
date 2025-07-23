@@ -12,12 +12,7 @@ export const Input: FC<CombinedInputProps> = ({ size, label, hasError, errorText
     return (
         <Stack sx={styles.inputWrapper(hasError)}>
             <Text sx={styles.label}>{label}</Text>
-            <ChakraInput
-                borderColor={bluePrimary}
-                height={inputSizeMap[size].height}
-                width={inputSizeMap[size].width}
-                {...rest}
-            />
+            <ChakraInput borderColor={bluePrimary} height={inputSizeMap[size].height} {...rest} />
             {hasError && <Text sx={styles.errorText}>{errorText}</Text>}
         </Stack>
     );

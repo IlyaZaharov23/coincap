@@ -1,7 +1,8 @@
 export type HeaderPropsType = {
     showPopularCoins?: boolean;
     showSignIn?: boolean;
-    showSignOut?: boolean;
+    showSignUp?: boolean;
     showLogOut?: boolean;
+    showNavbar?: boolean;
     popularCoins?: [];
 };
