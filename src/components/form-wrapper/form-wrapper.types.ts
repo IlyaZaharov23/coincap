@@ -13,6 +13,10 @@ export type FormWrapperPropsType = {
     image: string | StaticImport;
     buttonTitle: string;
     formTitle: string;
+    textButtonTitle: string;
+    textButtonHelper?: string;
+    hasAccount?: boolean;
     children: ReactNode;
     formData: FormData;
+    navigate: () => void;
 };

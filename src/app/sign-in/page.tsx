@@ -8,7 +8,7 @@ import { styles } from "./page.styles";
 const SignIn = () => {
     return (
         <Stack>
-            <Header showSignOut />
+            <Header />
             <Stack sx={styles.contentWrapper}>
                 <SignInForm />
             </Stack>

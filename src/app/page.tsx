@@ -3,19 +3,20 @@ import { Stack, Text } from "@chakra-ui/react";
 import { Header } from "components/header/header.component";
 import { bluePrimary } from "shared/constants/colors";
 
+import { Description } from "./components/description/app.description.component";
+import { Exchange } from "./components/exchange/app.exchange.component";
+import { styles } from "./page.styles";
+
 export default function Home() {
     return (
-        <Stack display="flex" flexDirection="column" alignItems="center" height="100vh">
-            <Header showSignIn showSignOut />
-            <Stack
-                sx={{
-                    width: "500px",
-                    height: "200px",
-                    border: `2px solid ${bluePrimary}`,
-                    borderRadius: "6px",
-                }}
-            >
-                <Text>Top 3 cryptocurrencies</Text>
+        <Stack sx={styles.pageWrapper}>
+            <Header showSignIn showSignUp showPopularCoins showNavbar />
+            <Stack sx={styles.contentWrapper}>
+                <Stack sx={styles.topContentWrapper}>
+                    <Description />
+                    <Exchange />
+                </Stack>
+                <Stack>{/* Markets */}</Stack>
             </Stack>
         </Stack>
     );

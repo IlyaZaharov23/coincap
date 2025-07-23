@@ -30,4 +30,12 @@ export const buttonVariantsMap = {
         },
         textDecoration: "underline",
     },
+    [BUTTON_VARIANT.TAB]: {
+        backgroundColor: white,
+        color: black,
+        hover: {
+            backgroundColor: white,
+            color: bluePrimary,
+        },
+    },
 };

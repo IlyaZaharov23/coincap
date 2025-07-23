@@ -5,7 +5,7 @@ import {
     USERNAME_REQUIREMENT_KEYS,
 } from "shared/constants/form-requirements";
 
-export const passwordRequirenmentsMap = {
+export const passwordRequirementsMap = {
     [PASSWORD_REQUIREMENT_KEYS.EMPTY]: "This field cannot be empty.",
     [PASSWORD_REQUIREMENT_KEYS.LENGTH]: "Password must be at least 8 characters long.",
     [PASSWORD_REQUIREMENT_KEYS.UPPER_CASE]: "Password must contain at least one uppercase letter (A-Z).",
@@ -13,6 +13,10 @@ export const passwordRequirenmentsMap = {
     [PASSWORD_REQUIREMENT_KEYS.DIGIT]: "Password must contain at least one digit (0-9).",
     [PASSWORD_REQUIREMENT_KEYS.SYMBOL]: "Password must contain at least one special character (!@#$% etc.).",
 };
+
+export const passwordMessages = Object.entries(passwordRequirementsMap)
+    .filter(([key]) => key !== PASSWORD_REQUIREMENT_KEYS.EMPTY)
+    .map(([, value]) => value);
 
 export const emailRequirementsMap = {
     [EMAIL_REQUIREMENT_KEYS.EMPTY]: "This field cannot be empty.",

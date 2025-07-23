@@ -12,6 +12,7 @@ export const Button: FC<CombinedButtonProps> = ({ children, variant, ...rest }) 
             color={buttonVariantsMap[variant].color}
             _hover={buttonVariantsMap[variant].hover}
             textDecoration={buttonVariantsMap[variant].textDecoration}
+            borderRadius="20px"
             {...rest}
         >
             {children}
