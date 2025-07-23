@@ -1,4 +1,4 @@
-import { INPUT_SIZE } from "./input.size";
+import { INPUT_SIZE } from "../../shared/constants/input-sizes";
 
 export const inputSizeMap = {
     [INPUT_SIZE.SMALL]: {

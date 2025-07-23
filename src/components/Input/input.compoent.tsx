@@ -10,7 +10,7 @@ import { CombinedInputProps } from "./input.types";
 
 export const Input: FC<CombinedInputProps> = ({ size, label, hasError, errorText, ...rest }) => {
     return (
-        <Stack sx={styles.inputWrapper}>
+        <Stack sx={styles.inputWrapper(hasError)}>
             <Text sx={styles.label}>{label}</Text>
             <ChakraInput
                 borderColor={bluePrimary}

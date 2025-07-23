@@ -1,6 +1,6 @@
 import { black, bluePrimary, blueSecondary, hoverGray, white } from "shared/constants/colors";
 
-import { BUTTON_VARIANT } from "./button.variants";
+import { BUTTON_VARIANT } from "../../shared/constants/button-variants";
 
 export const buttonVariantsMap = {
     [BUTTON_VARIANT.PRIMARY]: {
