@@ -10,7 +10,9 @@ export const buttonVariantsMap = {
             backgroundColor: blueSecondary,
             color: black,
         },
+        borderRadius: "20px",
         textDecoration: "none",
+        borderBottom: () => "none",
     },
     [BUTTON_VARIANT.SECONDARY]: {
         backgroundColor: blueSecondary,
@@ -19,7 +21,9 @@ export const buttonVariantsMap = {
             backgroundColor: hoverGray,
             color: black,
         },
+        borderRadius: "20px",
         textDecoration: "none",
+        borderBottom: () => "none",
     },
     [BUTTON_VARIANT.TEXT]: {
         backgroundColor: white,
@@ -28,7 +32,9 @@ export const buttonVariantsMap = {
             backgroundColor: white,
             color: bluePrimary,
         },
+        borderRadius: "20px",
         textDecoration: "underline",
+        borderBottom: () => "none",
     },
     [BUTTON_VARIANT.TAB]: {
         backgroundColor: white,
@@ -37,5 +43,8 @@ export const buttonVariantsMap = {
             backgroundColor: white,
             color: bluePrimary,
         },
+        borderRadius: "0",
+        textDecoration: "none",
+        borderBottom: (isActive?: boolean) => (isActive ? `1.5px solid ${bluePrimary}` : "none"),
     },
 };
