@@ -10,7 +10,7 @@ export const styles = {
         borderRadius: "20px",
         padding: "1.5rem 2rem",
         boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1), 0 2px 6px rgba(0, 0, 0, 0.05)",
-        width: "568px",
+        width: "500px",
     },
     topWrapper: {
         display: "flex",

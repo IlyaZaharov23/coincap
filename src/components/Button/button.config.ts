@@ -13,7 +13,7 @@ export const buttonVariantsMap = {
         textDecoration: "none",
     },
     [BUTTON_VARIANT.SECONDARY]: {
-        backgroundColor: white,
+        backgroundColor: blueSecondary,
         color: black,
         hover: {
             backgroundColor: hoverGray,

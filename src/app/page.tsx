@@ -1,10 +1,9 @@
-import { Stack, Text } from "@chakra-ui/react";
+import { Stack } from "@chakra-ui/react";
 
 import { Header } from "components/header/header.component";
-import { bluePrimary } from "shared/constants/colors";
 
+import { Converter } from "./components/converter/app.converter.component";
 import { Description } from "./components/description/app.description.component";
-import { Exchange } from "./components/exchange/app.exchange.component";
 import { styles } from "./page.styles";
 
 export default function Home() {
@@ -14,7 +13,7 @@ export default function Home() {
             <Stack sx={styles.contentWrapper}>
                 <Stack sx={styles.topContentWrapper}>
                     <Description />
-                    <Exchange />
+                    <Converter />
                 </Stack>
                 <Stack>{/* Markets */}</Stack>
             </Stack>

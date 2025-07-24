@@ -3,6 +3,8 @@ import { black, bluePrimary } from "shared/constants/colors";
 export const styles = {
     mainWrapper: {
         gap: "1rem",
+        padding: "1rem",
+        maxWidth: "500px",
     },
     mainTitle: {
         fontSize: "3rem",
