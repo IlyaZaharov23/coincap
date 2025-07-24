@@ -4,10 +4,11 @@ import { USER_AUTH } from "services/api-endpoints";
 import { ApiWrapper } from "services/api-wrapper";
 
 import { assetsSlice } from "../assets/assets.slice";
+import { AuthRespData, RegistrationRespData } from "./auth.types";
 
 export const userLogin = createAsyncThunk("auth/userLogin", async (data, thunkApi) => {
     try {
-        const resp = (await ApiWrapper.post(USER_AUTH.LOGIN, data)) as { data: { token: string } };
+        const resp = (await ApiWrapper.post(USER_AUTH.LOGIN, data)) as { data: AuthRespData };
         ApiWrapper.setToken(resp.data.token);
     } catch (error) {
         console.log(error);
@@ -28,7 +29,7 @@ export const userLogout = createAsyncThunk("auth/userLogout", (_, thunkApi) => {
 export const userRegistration = createAsyncThunk("auth/userRegistration", async (data, thunkApi) => {
     try {
         const resp = (await ApiWrapper.post(USER_AUTH.REGISTRATION, data)) as {
-            data: { id: number; username: string; email: string; gender: string; age: number };
+            data: RegistrationRespData;
         };
         ApiWrapper.setEmail(resp.data.email);
     } catch (error) {
