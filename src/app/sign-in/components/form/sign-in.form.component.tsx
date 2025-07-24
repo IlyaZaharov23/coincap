@@ -2,8 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 
-import { useToast } from "@chakra-ui/react";
-
 import { emailRequirementsMap } from "app/sign-up/constants/sign-up.config";
 import loginIcon from "assets/loginIcon.svg";
 import { FormWrapper } from "components/form-wrapper/form-wrapper.component";
@@ -17,12 +15,12 @@ import { ROUTES } from "shared/constants/routes";
 import { useAppDispatch } from "store/hooks";
 import { userLogin } from "store/slices/auth/auth.thunks";
 import { InputValidationUtil } from "utils/input-validation/input-validation.util";
+import { Toast } from "utils/toast/toast.util";
 
 import { formInitialData } from "./sign-in.form.config";
 
 export const SignInForm = () => {
     const dispatch = useAppDispatch();
-    const toast = useToast();
     const router = useRouter();
     const [formState, setFormState] = useState<FormData>(formInitialData);
     const [emailError, setEmailError] = useState<boolean>(false);
@@ -56,15 +54,10 @@ export const SignInForm = () => {
                 return;
             }
             await dispatch(userLogin(formState)).unwrap();
-            router.push(ROUTES.PRICES);
+            router.push(ROUTES.MARKETS);
+            Toast.success("Good to see you again! Data loaded successfully.");
         } catch (error) {
-            toast({
-                title: "Error",
-                description: "Invalid email or password. Please check your credentials and try again.",
-                status: "error",
-                duration: 9000,
-                isClosable: true,
-            });
+            Toast.error("Invalid email or password. Please check your credentials and try again.");
             console.log(error);
         }
     };
@@ -79,7 +72,7 @@ export const SignInForm = () => {
             authFormState={formState}
         >
             <Input
-                value={ApiWrapper.getEmail() || formState.email}
+                value={formState.email}
                 onChange={handleChange("email")}
                 placeholder="example@example.com"
                 size={INPUT_SIZE.LARGE}

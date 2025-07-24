@@ -1,6 +1,8 @@
 import axios from "axios";
 import { apiToken } from "shared/constants/api-token";
 
+import { AUTH_TOKEN, USER_EMAIL } from "./api.wrapper.constants";
+
 export class ApiWrapper {
     static getHeaders() {
         const headers = {
@@ -11,23 +13,27 @@ export class ApiWrapper {
         return { headers };
     }
     static setToken(token: string) {
-        localStorage.setItem("authToken", token);
+        localStorage.setItem(AUTH_TOKEN, token);
     }
 
     static deleteToken() {
-        localStorage.removeItem("authToken");
+        localStorage.removeItem(AUTH_TOKEN);
     }
 
     static getToken() {
-        return localStorage.getItem("authToken");
+        return localStorage.getItem(AUTH_TOKEN);
     }
 
     static setEmail(email: string) {
-        sessionStorage.setItem("userEmail", email);
+        sessionStorage.setItem(USER_EMAIL, email);
     }
 
     static getEmail() {
-        return sessionStorage.getItem("userEmail");
+        return sessionStorage.getItem(USER_EMAIL);
+    }
+
+    static removeEmail() {
+        sessionStorage.removeItem(USER_EMAIL);
     }
 
     static get(url: string) {

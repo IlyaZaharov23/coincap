@@ -2,8 +2,6 @@
 
 import { useState } from "react";
 
-import { useToast } from "@chakra-ui/react";
-
 import { passwordRequirementsMap } from "app/sign-up/constants/sign-up.config";
 import registrationIcon from "assets/registrationIcon.svg";
 import { FormWrapper } from "components/form-wrapper/form-wrapper.component";
@@ -16,12 +14,12 @@ import { useAppDispatch } from "store/hooks";
 import { userRegistration } from "store/slices/auth/auth.thunks";
 import { FormErrors, FormState } from "types/types";
 import { InputValidationUtil } from "utils/input-validation/input-validation.util";
+import { Toast } from "utils/toast/toast.util";
 
 import { PasswordRequirements } from "../password-requirements/sign-up-password-requirements.component";
 import { initialFormState } from "./sign-up.form.initial-state";
 
 export const SignUpForm = () => {
-    const toast = useToast();
     const router = useRouter();
     const dispatch = useAppDispatch();
     const [formState, setFormState] = useState<FormState>(initialFormState);
@@ -44,23 +42,11 @@ export const SignUpForm = () => {
                         gender: "male",
                     }),
                 ).unwrap();
-                toast({
-                    title: "Account created.",
-                    description: "We've created your account for you.",
-                    status: "success",
-                    duration: 9000,
-                    isClosable: true,
-                });
+                Toast.success("Your account has been successfully created!");
                 router.push(ROUTES.SIGN_IN);
             }
         } catch (error) {
-            toast({
-                title: "Error.",
-                description: "A user with this email or username already exists.",
-                status: "error",
-                duration: 9000,
-                isClosable: true,
-            });
+            Toast.error("A user with this email or username already exists.");
             console.log(error);
         }
     };
