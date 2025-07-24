@@ -1,3 +1,4 @@
+import axios from "axios";
 import { apiToken } from "shared/constants/api-token";
 
 export class ApiWrapper {
@@ -23,6 +24,10 @@ export class ApiWrapper {
 
     static setEmail(email: string) {
         sessionStorage.setItem("userEmail", email);
+    }
+
+    static getEmail() {
+        return sessionStorage.getItem("userEmail");
     }
 
     static get(url: string) {

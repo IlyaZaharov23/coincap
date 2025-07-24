@@ -1,5 +1,6 @@
 import {
     AGE_REQUIREMENT_KEYS,
+    CONFIRM_PASSWORD_KEYS,
     EMAIL_REQUIREMENT_KEYS,
     PASSWORD_REQUIREMENT_KEYS,
     USERNAME_REQUIREMENT_KEYS,
@@ -7,6 +8,7 @@ import {
 
 export const passwordRequirementsMap = {
     [PASSWORD_REQUIREMENT_KEYS.EMPTY]: "This field cannot be empty.",
+    [PASSWORD_REQUIREMENT_KEYS.WRONG]: "Password doesn't meet all requirements",
     [PASSWORD_REQUIREMENT_KEYS.LENGTH]: "Password must be at least 8 characters long.",
     [PASSWORD_REQUIREMENT_KEYS.UPPER_CASE]: "Password must contain at least one uppercase letter (A-Z).",
     [PASSWORD_REQUIREMENT_KEYS.LOWER_CASE]: "Password must contain at least one lowercase letter (a-z).",
@@ -15,8 +17,10 @@ export const passwordRequirementsMap = {
 };
 
 export const passwordMessages = Object.entries(passwordRequirementsMap)
-    .filter(([key]) => key !== PASSWORD_REQUIREMENT_KEYS.EMPTY)
-    .map(([, value]) => value);
+    .filter(([key]) => key !== PASSWORD_REQUIREMENT_KEYS.EMPTY && key !== PASSWORD_REQUIREMENT_KEYS.WRONG)
+    .map(([key, value]) => {
+        return { key, value };
+    });
 
 export const emailRequirementsMap = {
     [EMAIL_REQUIREMENT_KEYS.EMPTY]: "This field cannot be empty.",
@@ -32,4 +36,10 @@ export const usernameRequirementsMap = {
 export const ageRequirementsMap = {
     [AGE_REQUIREMENT_KEYS.EMPTY]: "This field cannot be empty.",
     [AGE_REQUIREMENT_KEYS.MIN_AGE]: "You must be 18 years or older.",
+    [AGE_REQUIREMENT_KEYS.IS_NAN]: "Please enter a valid number",
+};
+
+export const confirmPasswordMap = {
+    [CONFIRM_PASSWORD_KEYS.EMPTY]: "This field cannot be empty.",
+    [CONFIRM_PASSWORD_KEYS.WRONG]: "Passwords do not match. Please make sure both passwords are identical.",
 };

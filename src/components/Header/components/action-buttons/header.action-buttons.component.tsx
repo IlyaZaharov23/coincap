@@ -5,6 +5,7 @@ import { Stack } from "@chakra-ui/react";
 import { Button } from "components/button/button.component";
 import { useRouter } from "next/navigation";
 import { BUTTON_VARIANT } from "shared/constants/button-variants";
+import { ROUTES } from "shared/constants/routes";
 
 import { styles } from "./header.action-buttons.styles";
 import { ActionButtonsProps } from "./header.action-buttons.types";
@@ -13,11 +14,11 @@ export const ActionButtons: FC<ActionButtonsProps> = ({ showLogOut, showSignIn, 
     const router = useRouter();
 
     const navigateToSignIn = () => {
-        router.push("/sign-in");
+        router.push(ROUTES.SIGN_IN);
     };
 
     const navigateToSignUp = () => {
-        router.push("/sign-up");
+        router.push(ROUTES.SIGN_UP);
     };
     return (
         <Stack sx={styles.buttonsWrapper}>

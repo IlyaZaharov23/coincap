@@ -2,7 +2,7 @@ import { Stack } from "@chakra-ui/react";
 
 import { Header } from "components/header/header.component";
 
-import { SignUpForm } from "./components/form/sign-up-form.component";
+import { SignUpForm } from "./components/form/sign-up.form.component";
 import { styles } from "./page.styles";
 
 const SignUp = () => {

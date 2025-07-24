@@ -1,4 +1,4 @@
-import { black } from "shared/constants/colors";
+import { black, errorRed } from "shared/constants/colors";
 
 export const styles = {
     requirementsTitle: {
@@ -11,5 +11,8 @@ export const styles = {
         fontWeight: "400",
         color: black,
         marginLeft: "1rem",
+    },
+    requirementError: {
+        color: errorRed,
     },
 };

@@ -14,6 +14,11 @@ export const EMAIL_REQUIREMENT_KEYS = {
     EXIST: "exist",
 };
 
+export const CONFIRM_PASSWORD_KEYS = {
+    EMPTY: "empty",
+    WRONG: "wrong",
+};
+
 export const USERNAME_REQUIREMENT_KEYS = {
     EMPTY: "empty",
     EXIST: "exist",
@@ -22,4 +27,5 @@ export const USERNAME_REQUIREMENT_KEYS = {
 export const AGE_REQUIREMENT_KEYS = {
     EMPTY: "empty",
     MIN_AGE: "min_age",
+    IS_NAN: "is_nan",
 };

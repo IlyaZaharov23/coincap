@@ -3,6 +3,7 @@
 import { Stack, Text } from "@chakra-ui/react";
 
 import { useRouter } from "next/navigation";
+import { ROUTES } from "shared/constants/routes";
 
 import { styles } from "./app.desctiption.styles";
 
@@ -10,7 +11,7 @@ export const Description = () => {
     const router = useRouter();
 
     const navigateToSignUp = () => {
-        router.push("/sign-up");
+        router.push(ROUTES.SIGN_UP);
     };
     return (
         <Stack sx={styles.mainWrapper}>

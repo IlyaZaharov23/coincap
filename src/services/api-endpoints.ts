@@ -1,5 +1,5 @@
 const API_BASE = "https://api.coincap.io/v2";
-const AUTH_BASE = "https://todo-redev.herokuapp.com/";
+const AUTH_BASE = "https://todo-redev.herokuapp.com";
 
 export const COIN_CAP_API = {
     ASSETS: {

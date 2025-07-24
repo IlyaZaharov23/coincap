@@ -28,4 +28,14 @@ export const styles = {
         fontWeight: "500",
         color: black,
     },
+    confirmButton: {
+        marginTop: "1rem",
+        width: "300px",
+    },
+    textButton: {
+        padding: 0,
+    },
+    secondaryButton: {
+        width: "300px",
+    },
 };
