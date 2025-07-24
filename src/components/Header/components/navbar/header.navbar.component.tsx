@@ -8,7 +8,7 @@ import { styles } from "./header.navbar.styles";
 export const Navbar = () => {
     return (
         <Stack sx={styles.navPanel}>
-            <Button variant={BUTTON_VARIANT.TAB}>Fund Wallet</Button>
+            {/* <Button variant={BUTTON_VARIANT.TAB}>Converter</Button> */}
             <Button variant={BUTTON_VARIANT.TAB}>Markets</Button>
             <Button variant={BUTTON_VARIANT.TAB}>About</Button>
         </Stack>

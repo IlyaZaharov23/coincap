@@ -7,15 +7,15 @@ export interface Asset {
     changePercent24Hr: string;
     volumeUsd24Hr: string;
     marketCapUsd: string;
-  }
-  
-  export interface AssetHistory {
+}
+
+export interface AssetHistory {
     priceUsd: string;
     time: number;
     date: string;
-  }
+}
 
-  export type AssetHistoryApi = {
-    priceUsd: string;
-    time: number;
-  }; 
+// export type AssetHistoryApi = {
+//     priceUsd: string;
+//     time: number;
+// };
