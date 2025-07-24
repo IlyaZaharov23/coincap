@@ -13,8 +13,6 @@ export const Navbar = () => {
     const pathname = usePathname();
     const router = useRouter();
 
-    console.log(pathname);
-
     const navigateToMarkets = () => {
         router.push(ROUTES.MARKETS);
     };
