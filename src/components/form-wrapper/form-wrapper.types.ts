@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
+import { FormState } from "types/types";
 
 export type FormData = {
     email: string;
@@ -15,8 +16,10 @@ export type FormWrapperPropsType = {
     formTitle: string;
     textButtonTitle: string;
     textButtonHelper?: string;
-    hasAccount?: boolean;
+    isRegistrationFlow?: boolean;
     children: ReactNode;
-    formData: FormData;
     navigate: () => void;
+    onSubmit: () => void;
+    regFormState?: FormState;
+    authFormState?: FormData;
 };

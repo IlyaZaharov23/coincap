@@ -5,13 +5,14 @@ import { Stack, Text } from "@chakra-ui/react";
 import mainLogo from "assets/appLogo.svg";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { ROUTES } from "shared/constants/routes";
 
 import { styles } from "./logo.styles";
 
 export const Logo = () => {
     const router = useRouter();
     const navigateToHome = () => {
-        router.push("/");
+        router.push(ROUTES.HOME);
     };
     return (
         <Stack onClick={navigateToHome} sx={styles.mainWrapper}>

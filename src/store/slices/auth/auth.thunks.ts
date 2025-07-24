@@ -4,15 +4,15 @@ import { USER_AUTH } from "services/api-endpoints";
 import { ApiWrapper } from "services/api-wrapper";
 
 import { assetsSlice } from "../assets/assets.slice";
-import { AuthRespData, RegistrationRespData } from "./auth.types";
+import { AuthRequestData, AuthRespData, RegRequestData, RegistrationRespData } from "./auth.types";
 
-export const userLogin = createAsyncThunk("auth/userLogin", async (data, thunkApi) => {
+export const userLogin = createAsyncThunk("auth/userLogin", async (data: AuthRequestData, thunkApi) => {
     try {
         const resp = (await ApiWrapper.post(USER_AUTH.LOGIN, data)) as { data: AuthRespData };
         ApiWrapper.setToken(resp.data.token);
     } catch (error) {
         console.log(error);
-        thunkApi.rejectWithValue("Failed to fetch user login");
+        return thunkApi.rejectWithValue("Failed to fetch user login");
     }
 });
 
@@ -22,11 +22,11 @@ export const userLogout = createAsyncThunk("auth/userLogout", (_, thunkApi) => {
         ApiWrapper.deleteToken();
     } catch (error) {
         console.log(error);
-        thunkApi.rejectWithValue("Failed to logout");
+        return thunkApi.rejectWithValue("Failed to logout");
     }
 });
 
-export const userRegistration = createAsyncThunk("auth/userRegistration", async (data, thunkApi) => {
+export const userRegistration = createAsyncThunk("auth/userRegistration", async (data: RegRequestData, thunkApi) => {
     try {
         const resp = (await ApiWrapper.post(USER_AUTH.REGISTRATION, data)) as {
             data: RegistrationRespData;
@@ -34,6 +34,6 @@ export const userRegistration = createAsyncThunk("auth/userRegistration", async 
         ApiWrapper.setEmail(resp.data.email);
     } catch (error) {
         console.log(error);
-        thunkApi.rejectWithValue("Failed to fetch user registration");
+        return thunkApi.rejectWithValue("Failed to fetch user registration");
     }
 });

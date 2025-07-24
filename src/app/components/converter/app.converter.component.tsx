@@ -1,3 +1,5 @@
+"use client";
+
 import { Select, Stack } from "@chakra-ui/react";
 
 import { Button } from "components/button/button.component";
