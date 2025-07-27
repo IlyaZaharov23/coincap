@@ -2,14 +2,15 @@ import { configureStore } from "@reduxjs/toolkit";
 
 import { assetsSlice } from "./slices/assets/assets.slice";
 
-// const makeStore = () => {
-//     return configureStore({
-//         reducer: {
-//             coincap: assetsSlice.reducer,
-//         },
-//         devTools: process.env.NODE_ENV !== "production",
-//     });
-// };
+export const makeStore = (preloadedState?: RootState) => {
+    return configureStore({
+        reducer: {
+            coincap: assetsSlice.reducer,
+        },
+        devTools: process.env.NODE_ENV !== "production",
+        preloadedState,
+    });
+};
 
 export const store = configureStore({
     reducer: {

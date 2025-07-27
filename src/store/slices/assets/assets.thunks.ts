@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-import { COIN_CAP_API } from "services/api-endpoints";
-import { ApiWrapper } from "services/api-wrapper";
+import { ApiWrapper } from "services/ApiWrapper";
+import { COIN_CAP_API } from "services/apiEndpoints";
 
 import { assetsSlice } from "./assets.slice";
 
@@ -12,9 +12,10 @@ export const getAssets = createAsyncThunk("assets/getAssets", async (limit: numb
         const resp = await ApiWrapper.get(COIN_CAP_API.ASSETS.GET_ALL(limit));
         thunkApi.dispatch(setAssetsList(resp.data));
         console.log(resp.data);
+        return resp.data;
     } catch (error) {
         console.log(error);
-        thunkApi.rejectWithValue("Failed to fetch assets");
+        return thunkApi.rejectWithValue("Failed to fetch assets");
     }
 });
 

@@ -1,6 +1,6 @@
 import { Stack } from "@chakra-ui/react";
 
-import { Header } from "components/header/header.component";
+import { Header } from "components/Header";
 
 const AboutPage = () => {
     return (

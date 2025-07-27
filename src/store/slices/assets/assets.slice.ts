@@ -15,7 +15,8 @@ export const assetsSlice = createSlice({
     initialState,
     reducers: {
         setAssetsList: (state, action) => {
-            state.assets = action.payload;
+            const { data } = action.payload;
+            state.assets = data;
         },
         setAssetDetails: (state, action) => {
             state.assetDetails = action.payload;

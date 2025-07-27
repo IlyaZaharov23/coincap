@@ -1,0 +1,1 @@
+export { TopCurrencies } from "./view";

@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-import { USER_AUTH } from "services/api-endpoints";
-import { ApiWrapper } from "services/api-wrapper";
+import { ApiWrapper } from "services/ApiWrapper";
+import { USER_AUTH } from "services/apiEndpoints";
 
 import { assetsSlice } from "../assets/assets.slice";
 import { AuthRequestData, AuthRespData, RegRequestData, RegistrationRespData } from "./auth.types";
