@@ -3,7 +3,8 @@ export const ROUTES = {
     SIGN_UP: "/sign-up",
     SIGN_IN: "/sign-in",
     MARKETS: "/markets",
-    ITEM_PRICE: (itemName: string) => `/${itemName}-price`,
+    MARKET_ITEM: (itemName: string) => `/${itemName}-price`,
     ABOUT: "/about",
     CONVERTER: "/converter",
+    PORTFOLIO: "/portfolio",
 };

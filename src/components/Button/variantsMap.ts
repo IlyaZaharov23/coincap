@@ -5,46 +5,42 @@ import { BUTTON_VARIANT } from "../../shared/constants/buttonVariants";
 export const buttonVariantsMap = {
     [BUTTON_VARIANT.PRIMARY]: {
         backgroundColor: bluePrimary,
-        color: white,
+        color: () => white,
         hover: {
             backgroundColor: blueSecondary,
             color: black,
         },
         borderRadius: "20px",
         textDecoration: "none",
-        borderBottom: () => "none",
     },
     [BUTTON_VARIANT.SECONDARY]: {
         backgroundColor: blueSecondary,
-        color: black,
+        color: () => black,
         hover: {
             backgroundColor: hoverGray,
             color: black,
         },
         borderRadius: "20px",
         textDecoration: "none",
-        borderBottom: () => "none",
     },
     [BUTTON_VARIANT.TEXT]: {
         backgroundColor: white,
-        color: bluePrimary,
+        color: () => bluePrimary,
         hover: {
             backgroundColor: white,
             color: bluePrimary,
         },
         borderRadius: "20px",
         textDecoration: "underline",
-        borderBottom: () => "none",
     },
     [BUTTON_VARIANT.TAB]: {
         backgroundColor: white,
-        color: black,
+        color: (isActive?: boolean) => (isActive ? bluePrimary : black),
         hover: {
             backgroundColor: white,
             color: bluePrimary,
         },
         borderRadius: "0",
         textDecoration: "none",
-        borderBottom: (isActive?: boolean) => (isActive ? `1.5px solid ${bluePrimary}` : "none"),
     },
 };

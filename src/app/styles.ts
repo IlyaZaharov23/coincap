@@ -1,4 +1,4 @@
-import { HEADER_PADDING_Y } from "components/header/styles";
+import { HEADER_PADDING_Y } from "components/Header/styles";
 
 export const styles = {
     pageWrapper: {
@@ -11,7 +11,7 @@ export const styles = {
     contentWrapper: {
         display: "flex",
         flexDirection: "column",
-        justifyContent: "center",
+        justifyContent: "space-evenly",
         alignItems: "center",
         height: `calc(100vh - ${HEADER_PADDING_Y * 2 + 50}px)`,
     },
@@ -24,5 +24,4 @@ export const styles = {
         padding: "0 3rem",
         gap: "3rem",
     },
-    bottomContentWrapper: {},
 };

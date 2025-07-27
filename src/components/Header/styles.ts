@@ -14,7 +14,7 @@ export const styles = {
         borderBottom: `1px solid ${borderGray}`,
     },
     contentWrapper: {
-        width: "55vw",
+        width: "50vw",
         display: "flex",
         flexDirection: "row",
         alignItems: "center",

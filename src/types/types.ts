@@ -1,12 +1,16 @@
 export interface Asset {
+    changePercent24Hr: string;
+    explorer: string;
     id: string;
-    rank: string;
-    symbol: string;
+    marketCapUsd: string;
+    maxSupply: string;
     name: string;
     priceUsd: string;
-    changePercent24Hr: string;
+    rank: string;
+    supply: string;
+    symbol: string;
     volumeUsd24Hr: string;
-    marketCapUsd: string;
+    vwap24Hr: string;
 }
 
 export interface AssetHistory {

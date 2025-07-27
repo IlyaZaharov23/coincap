@@ -9,11 +9,10 @@ export const Button: FC<CombinedButtonProps> = ({ children, variant, isDisabledS
     return (
         <ChakraButton
             backgroundColor={buttonVariantsMap[variant].backgroundColor}
-            color={buttonVariantsMap[variant].color}
+            color={buttonVariantsMap[variant].color(isActive)}
             _hover={!isDisabledState ? buttonVariantsMap[variant].hover : {}}
             textDecoration={buttonVariantsMap[variant].textDecoration}
             borderRadius={buttonVariantsMap[variant].borderRadius}
-            borderBottom={buttonVariantsMap[variant].borderBottom(isActive)}
             {...rest}
         >
             {children}

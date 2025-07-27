@@ -4,6 +4,7 @@ export interface AssetsState {
     assets: Asset[];
     assetDetails: Asset | null;
     history: AssetHistory[];
+    portfolioPrice: number;
     loading: boolean;
     error: string | null;
 }
