@@ -6,6 +6,7 @@ const initialState: AssetsState = {
     assets: [],
     assetDetails: null,
     history: [],
+    portfolioPrice: 0,
     loading: false,
     error: null,
 };
@@ -15,7 +16,8 @@ export const assetsSlice = createSlice({
     initialState,
     reducers: {
         setAssetsList: (state, action) => {
-            state.assets = action.payload;
+            const { data } = action.payload;
+            state.assets = data;
         },
         setAssetDetails: (state, action) => {
             state.assetDetails = action.payload;
@@ -26,6 +28,9 @@ export const assetsSlice = createSlice({
         clearAssetDetails: (state) => {
             state.assetDetails = null;
             state.history = [];
+        },
+        setPortfolioPrice: (state, action) => {
+            state.portfolioPrice = action.payload;
         },
     },
 });
