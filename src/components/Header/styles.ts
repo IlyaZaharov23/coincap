@@ -1,6 +1,7 @@
 import { borderGray, white } from "shared/constants/colors";
 
 export const HEADER_PADDING_Y = 12;
+export const HEADER_HEIGHT = 65;
 
 export const styles = {
     headerWrapper: {
@@ -12,6 +13,12 @@ export const styles = {
         padding: `${HEADER_PADDING_Y}px 32px`,
         backgroundColor: white,
         borderBottom: `1px solid ${borderGray}`,
+        height: `${HEADER_HEIGHT}px`,
+        position: "fixed",
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 10,
     },
     contentWrapper: {
         width: "50vw",

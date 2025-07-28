@@ -1,5 +1,4 @@
-import { black, darkGray, errorRed, green } from "shared/constants/colors";
-import { PRICE_STATUS } from "shared/constants/priceStatus";
+import { black } from "shared/constants/colors";
 
 export const styles = {
     mainWrapper: {
@@ -8,10 +7,12 @@ export const styles = {
         alignItems: "flex-start",
         justifyContent: "center",
     },
+    // TODO: переделать с добавлением кнопок для скролла (как рекомендации в GABBIAN)
     topAssetsWrapper: {
         display: "flex",
         flexDirection: "row",
         alignItems: "center",
+        flexWrap: "wrap",
         justifyContent: "center",
         gap: "2rem",
     },

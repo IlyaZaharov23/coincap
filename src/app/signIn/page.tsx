@@ -7,12 +7,12 @@ import { styles } from "./styles";
 
 const SignIn = () => {
     return (
-        <Stack>
+        <>
             <Header />
             <Stack sx={styles.contentWrapper}>
                 <SignInForm />
             </Stack>
-        </Stack>
+        </>
     );
 };
 

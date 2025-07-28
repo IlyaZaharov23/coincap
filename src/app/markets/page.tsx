@@ -9,9 +9,9 @@ import { styles } from "./styles";
 
 const PricesPage = () => {
     return (
-        <Stack>
+        <Stack width="100vw" overflowX="hidden">
             <Header showNavbar showLogOut />
-            <Stack>
+            <Stack sx={styles.contentWrapper}>
                 <Stack sx={styles.topWrapper}>
                     <TopCurrencies />
                     <PortfolioOverview />
