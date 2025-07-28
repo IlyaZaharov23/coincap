@@ -1,4 +1,4 @@
-import { HEADER_PADDING_Y } from "components/Header/styles";
+import { HEADER_HEIGHT } from "components/Header/styles";
 
 export const styles = {
     pageWrapper: {
@@ -13,7 +13,11 @@ export const styles = {
         flexDirection: "column",
         justifyContent: "space-evenly",
         alignItems: "center",
-        height: `calc(100vh - ${HEADER_PADDING_Y * 2 + 50}px)`,
+        minHeight: `calc(100vh - ${HEADER_HEIGHT}px)`,
+        marginTop: `${HEADER_HEIGHT}px`,
+        height: "auto",
+        overflowY: "auto",
+        padding: "20px 0",
     },
     topContentWrapper: {
         width: "60vw",

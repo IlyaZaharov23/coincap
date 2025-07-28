@@ -7,12 +7,12 @@ import { styles } from "./styles";
 
 const SignUp = () => {
     return (
-        <Stack height="100vh">
+        <>
             <Header />
             <Stack sx={styles.contentWrapper}>
                 <SignUpForm />
             </Stack>
-        </Stack>
+        </>
     );
 };
 

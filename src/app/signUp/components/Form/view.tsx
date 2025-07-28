@@ -63,7 +63,7 @@ export const SignUpForm = () => {
     };
 
     const navigateToSignIn = () => {
-        router.push("/sign-in");
+        router.push(ROUTES.SIGN_IN);
     };
 
     return (
