@@ -24,7 +24,10 @@ export const styles = {
         borderRadius: "6px 0 0 6px",
         width: "100%",
         borderColor: borderGray,
-        borderRight: "none",
+        "&:focus": {
+            borderColor: bluePrimary,
+            boxShadow: `0 0 0 1px ${bluePrimary}`,
+        },
     },
     select: {
         borderRadius: "0 6px 6px 0",
@@ -32,6 +35,10 @@ export const styles = {
         marginTop: "0.25rem",
         height: "42px",
         borderColor: borderGray,
+        "&:focus": {
+            borderColor: bluePrimary,
+            boxShadow: `0 0 0 1px ${bluePrimary}`,
+        },
     },
     fullWidthSelect: {
         width: "100%",

@@ -5,7 +5,8 @@ import { COIN_CAP_API } from "services/apiEndpoints";
 
 import { assetsSlice } from "./assets.slice";
 
-export const { setAssetsList, clearAssetDetails, setAssetDetails, setAssetHistory } = assetsSlice.actions;
+export const { setAssetsList, clearAssetDetails, setAssetDetails, setAssetHistory, setPortfolioPrice } =
+    assetsSlice.actions;
 
 export const getAssets = createAsyncThunk("assets/getAssets", async (limit: number = 100, thunkApi) => {
     try {

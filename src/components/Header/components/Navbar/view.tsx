@@ -7,11 +7,14 @@ import { usePathname, useRouter } from "next/navigation";
 import { BUTTON_VARIANT } from "shared/constants/buttonVariants";
 import { ROUTES } from "shared/constants/routes";
 
+import { NAV_BUTTON } from "./constants/navButtons";
+import { useActiveNav } from "./hooks/useActiveNav";
 import { styles } from "./styles";
 
 export const Navbar = () => {
     const pathname = usePathname();
     const router = useRouter();
+    const activeNav = useActiveNav();
 
     const navigateToMarkets = () => {
         router.push(ROUTES.MARKETS);
@@ -22,10 +25,14 @@ export const Navbar = () => {
     return (
         <Stack sx={styles.navPanel}>
             {/* <Button variant={BUTTON_VARIANT.TAB}>Converter</Button> */}
-            <Button variant={BUTTON_VARIANT.TAB} onClick={navigateToMarkets} isActive={pathname === ROUTES.MARKETS}>
+            <Button
+                variant={BUTTON_VARIANT.TAB}
+                onClick={navigateToMarkets}
+                isActive={activeNav === NAV_BUTTON.MARKETS}
+            >
                 Markets
             </Button>
-            <Button variant={BUTTON_VARIANT.TAB} onClick={navigateToAbout} isActive={pathname === ROUTES.ABOUT}>
+            <Button variant={BUTTON_VARIANT.TAB} onClick={navigateToAbout} isActive={activeNav === NAV_BUTTON.ABOUT}>
                 About
             </Button>
         </Stack>
