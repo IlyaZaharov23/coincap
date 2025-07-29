@@ -1,4 +1,4 @@
-import { black, bluePrimary, lightGray } from "shared/constants/colors";
+import { black, bluePrimary, formGray, hoverGray } from "shared/constants/colors";
 
 export const styles = {
     mainWrapper: {
@@ -8,7 +8,7 @@ export const styles = {
         justifyContent: "center",
         border: `2.5px solid ${bluePrimary}`,
         borderRadius: "10px",
-        backgroundColor: lightGray,
+        backgroundColor: formGray,
         padding: "2rem",
     },
     text: {

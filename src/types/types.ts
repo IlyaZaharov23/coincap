@@ -19,10 +19,10 @@ export interface AssetHistory {
     date: string;
 }
 
-// export type AssetHistoryApi = {
-//     priceUsd: string;
-//     time: number;
-// };
+export type AssetHistoryApi = {
+    priceUsd: string;
+    time: number;
+};
 
 export interface FormErrors {
     username?: string;

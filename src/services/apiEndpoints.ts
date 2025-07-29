@@ -5,7 +5,8 @@ export const COIN_CAP_API = {
     ASSETS: {
         GET_ALL: (limit: number, offset: number = 0) => `${API_BASE}/assets?limit=${limit}&offset=${offset}`,
         GET_BY_ID: (id: string) => `${API_BASE}/assets/${id}`,
-        GET_HISTORY: (id: string, interval: string = "d1") => `${API_BASE}/assets/${id}/history?interval=${interval}`,
+        GET_HISTORY: (id: string, interval: string = "d1", start: number, end: number) =>
+            `${API_BASE}/assets/${id}/history?interval=${interval}&start=${start}&end=${end}`,
         GET_MARKETS: (id: string) => `${API_BASE}/assets/${id}/markets`,
     },
     RATES: {

@@ -11,7 +11,6 @@ export const getAssets = createAsyncThunk("assets/getAssets", async (limit: numb
     try {
         const resp = await ApiWrapper.get(COIN_CAP_API.ASSETS.GET_ALL(limit));
         thunkApi.dispatch(setAssetsList(resp.data));
-        console.log(resp.data);
         return resp.data;
     } catch (error) {
         console.log(error);
@@ -23,7 +22,7 @@ export const getAssetById = createAsyncThunk("assets/getAssetById", async (id: s
     try {
         const resp = await ApiWrapper.get(COIN_CAP_API.ASSETS.GET_BY_ID(id));
         thunkApi.dispatch(setAssetDetails(resp.data));
-        console.log(resp.data);
+        return resp.data;
     } catch (error) {
         console.log(error);
         thunkApi.rejectWithValue("Failed to fetch asset details");
@@ -32,11 +31,10 @@ export const getAssetById = createAsyncThunk("assets/getAssetById", async (id: s
 
 export const getAssetHistory = createAsyncThunk(
     "assets/getAssetHistory",
-    async ({ id, interval }: { id: string; interval: string }, thunkApi) => {
+    async ({ id, interval, start, end }: { id: string; interval: string; start: number; end: number }, thunkApi) => {
         try {
-            const resp = await ApiWrapper.get(COIN_CAP_API.ASSETS.GET_HISTORY(id, interval));
+            const resp = await ApiWrapper.get(COIN_CAP_API.ASSETS.GET_HISTORY(id, interval, start, end));
             thunkApi.dispatch(setAssetHistory(resp.data));
-            console.log(resp.data);
         } catch (error) {
             console.log(error);
             thunkApi.rejectWithValue("Failed to fetch price history");

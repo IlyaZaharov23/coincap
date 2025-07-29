@@ -34,6 +34,9 @@ export class InputValidationUtil {
     static isPasswordHasSymbol(password: string) {
         return /[!@#$%^&*(),.?":{}|<>]/.test(password);
     }
+    static isDigit(value: string) {
+        return /^[0-9]*\.?[0-9]*$/.test(value);
+    }
     static validateRegForm(formState: FormState, setErrors: (newErrors: FormErrors) => void): boolean {
         const newErrors: FormErrors = {};
         const passwordErrorKeys: string[] = [];

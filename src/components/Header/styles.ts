@@ -1,4 +1,4 @@
-import { borderGray, white } from "shared/constants/colors";
+import { black, bluePrimary, borderGray, white } from "shared/constants/colors";
 
 export const HEADER_PADDING_Y = 12;
 export const HEADER_HEIGHT = 65;
@@ -26,5 +26,14 @@ export const styles = {
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between",
+    },
+    backIcon: {
+        cursor: "pointer",
+        width: "48px",
+        height: "48px",
+        color: bluePrimary,
+        "&:hover": {
+            color: black,
+        },
     },
 };

@@ -1,0 +1,1 @@
+export { BuyForm } from "./view";

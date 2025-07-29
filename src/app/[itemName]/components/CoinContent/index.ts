@@ -1,0 +1,1 @@
+export { CoinContent } from "./view";

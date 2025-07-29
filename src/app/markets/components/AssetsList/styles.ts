@@ -1,20 +1,22 @@
 import { TOP_WRAPPER_MARGIN } from "app/markets/styles";
 import { HEADER_HEIGHT } from "components/Header/styles";
-import { black, darkGray, hoverGray } from "shared/constants/colors";
+import { black, darkGray } from "shared/constants/colors";
 
 const TABLE_MARGIN_TOP = 32;
 
 const TABLE_HEADER_HEIGHT = 41;
 
-export const TABLE_BODY_MAX_HEIGHT = `calc(100vh - ${HEADER_HEIGHT + TOP_WRAPPER_MARGIN + TABLE_HEADER_HEIGHT}px)`;
-
 export const styles = {
+    wrapper: {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+    },
     container: {
-        borderTop: `1px solid ${hoverGray}`,
         marginTop: `${TABLE_MARGIN_TOP}px`,
-        width: "100%",
+        width: "75vw",
         maxWidth: "100vw",
-        height: `calc(100vh - ${HEADER_HEIGHT + TOP_WRAPPER_MARGIN + TABLE_HEADER_HEIGHT}px)`,
+        height: `calc(100vh - ${HEADER_HEIGHT + TOP_WRAPPER_MARGIN + TABLE_HEADER_HEIGHT + 128}px)`,
         overflow: "hidden",
         display: "flex",
         flexDirection: "column",
@@ -31,7 +33,6 @@ export const styles = {
         top: 0,
         zIndex: 1,
         backgroundColor: "white",
-        boxShadow: `0 2px 4px ${black}3A`,
         width: "100%",
     },
     bodyWrapper: {
