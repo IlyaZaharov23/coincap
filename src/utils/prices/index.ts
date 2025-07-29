@@ -72,4 +72,10 @@ export class PricesUtil {
         if (Number(inputValue) == 0) return "0$";
         return this.formatAsCurrency(String(Number(inputValue) * Number(assetPrice)));
     }
+    static solvePortfolio(prices: number[] | []) {
+        if (prices.length === 0) return `0`;
+        const result = prices.reduce((sum, price) => sum + price, 0);
+        const roundedSum = result.toFixed(2);
+        return roundedSum;
+    }
 }

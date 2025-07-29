@@ -15,6 +15,7 @@ import { BuyForm } from "../BuyForm";
 import { CoinChart } from "../CoinChart";
 import { MainInfo } from "../MainInfo";
 import { Market } from "../Market/view";
+import { PopularCoins } from "../PopularCoins";
 import { styles } from "./styles";
 
 export const CoinContent = () => {
@@ -53,6 +54,7 @@ export const CoinContent = () => {
             </Stack>
             <CoinChart />
             <Market />
+            <PopularCoins />
         </Stack>
     );
 };

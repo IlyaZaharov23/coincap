@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { ROUTES } from "shared/constants/routes";
 import { useAppSelector } from "store/hooks";
 import { getPortfolioPrice } from "store/slices/assets/assets.selectors";
+import { PricesUtil } from "utils/prices";
 
 import { styles } from "./styles";
 
@@ -17,12 +18,15 @@ export const PortfolioOverview = () => {
     const navigateToPortfolio = () => {
         router.push(ROUTES.PORTFOLIO);
     };
+
+    console.log(total);
+
     return (
         <Stack sx={styles.mainWrapper} onClick={navigateToPortfolio}>
             <Image src={portfolioIcon} alt="bag-icon" width={64} />
             <Stack sx={styles.textWrapper}>
                 <Text sx={styles.total}>Total:</Text>
-                <Text sx={styles.price}>{total} USD</Text>
+                <Text sx={styles.price}>{PricesUtil.solvePortfolio(Object.values(total))} USD</Text>
             </Stack>
         </Stack>
     );

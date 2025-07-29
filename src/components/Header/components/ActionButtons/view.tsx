@@ -4,6 +4,7 @@ import { Stack } from "@chakra-ui/react";
 
 import { Button } from "components/Button";
 import { useRouter } from "next/navigation";
+import { AUTH_TOKEN } from "services/constants";
 import { BUTTON_VARIANT } from "shared/constants/buttonVariants";
 import { ROUTES } from "shared/constants/routes";
 
@@ -20,19 +21,31 @@ export const ActionButtons: FC<ActionButtonsProps> = ({ showLogOut, showSignIn, 
     const navigateToSignUp = () => {
         router.push(ROUTES.SIGN_UP);
     };
+
+    const logOut = () => {
+        localStorage.removeItem(AUTH_TOKEN);
+        router.push(ROUTES.HOME);
+    };
     return (
         <Stack sx={styles.buttonsWrapper}>
-            {showSignIn && (
-                <Button onClick={navigateToSignIn} variant={BUTTON_VARIANT.PRIMARY}>
-                    Sign In
+            {showLogOut ? (
+                <Button variant={BUTTON_VARIANT.PRIMARY} onClick={logOut}>
+                    Log Out
                 </Button>
+            ) : (
+                <>
+                    {showSignIn && (
+                        <Button onClick={navigateToSignIn} variant={BUTTON_VARIANT.PRIMARY}>
+                            Sign In
+                        </Button>
+                    )}
+                    {showSignUp && (
+                        <Button onClick={navigateToSignUp} variant={BUTTON_VARIANT.PRIMARY}>
+                            Sign Up
+                        </Button>
+                    )}
+                </>
             )}
-            {showSignUp && (
-                <Button onClick={navigateToSignUp} variant={BUTTON_VARIANT.PRIMARY}>
-                    Sign Up
-                </Button>
-            )}
-            {showLogOut && <Button variant={BUTTON_VARIANT.PRIMARY}>Log Out</Button>}
         </Stack>
     );
 };

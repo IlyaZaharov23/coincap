@@ -1,0 +1,1 @@
+export { PopularCoins } from "./view";

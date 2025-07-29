@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import { hoverGray } from "shared/constants/colors";
 import { ROUTES } from "shared/constants/routes";
 import { useAppDispatch, useAppSelector } from "store/hooks";
-import { getAssetsList } from "store/slices/assets/assets.selectors";
+import { assetsListGet } from "store/slices/assets/assets.selectors";
 import { setAssetDetails } from "store/slices/assets/assets.thunks";
 import { getAssets } from "store/slices/assets/assets.thunks";
 import { Asset } from "types/types";
@@ -22,7 +22,7 @@ import { styles } from "./styles";
 export const AssetsList = () => {
     const dispatch = useAppDispatch();
     const router = useRouter();
-    const assets = useAppSelector(getAssetsList);
+    const assets = useAppSelector(assetsListGet);
 
     useEffect(() => {
         dispatch(getAssets(100));
