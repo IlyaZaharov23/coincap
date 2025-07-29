@@ -1,4 +1,4 @@
-import { black, bluePrimary, formGray, hoverGray } from "shared/constants/colors";
+import { black, bluePrimary, formGray } from "shared/constants/colors";
 
 export const styles = {
     mainWrapper: {

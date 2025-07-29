@@ -53,7 +53,6 @@ export const CoinContent = () => {
             </Stack>
             <CoinChart />
             <Market />
-            {/* <Stack></Stack> */}
         </Stack>
     );
 };
