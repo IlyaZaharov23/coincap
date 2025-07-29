@@ -19,8 +19,6 @@ export const PortfolioOverview = () => {
         router.push(ROUTES.PORTFOLIO);
     };
 
-    console.log(total);
-
     return (
         <Stack sx={styles.mainWrapper} onClick={navigateToPortfolio}>
             <Image src={portfolioIcon} alt="bag-icon" width={64} />
