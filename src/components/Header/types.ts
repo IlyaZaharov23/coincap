@@ -3,4 +3,5 @@ export type HeaderPropsType = {
     showSignUp?: boolean;
     showLogOut?: boolean;
     showNavbar?: boolean;
+    showBack?: boolean;
 };

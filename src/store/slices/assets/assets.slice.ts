@@ -20,10 +20,12 @@ export const assetsSlice = createSlice({
             state.assets = data;
         },
         setAssetDetails: (state, action) => {
-            state.assetDetails = action.payload;
+            const { data } = action.payload;
+            state.assetDetails = data;
         },
         setAssetHistory: (state, action) => {
-            state.history = action.payload;
+            const { data } = action.payload;
+            state.history = data;
         },
         clearAssetDetails: (state) => {
             state.assetDetails = null;

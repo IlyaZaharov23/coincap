@@ -6,7 +6,8 @@ export class PricesUtil {
 
         return `${priceNum.toFixed(2).replace(/\.?0+$/, "")}$`;
     }
-    static formatLargeCurrency(numberStr: string): string {
+    static formatLargeCurrency(numberStr: string | undefined) {
+        if (!numberStr) return;
         let number: number;
         try {
             number = parseFloat(numberStr);
@@ -43,14 +44,16 @@ export class PricesUtil {
 
         const formattedNum = scaled.toFixed(2).replace(/\.?0+$/, "");
 
-        return unit ? `$${formattedNum} ${unit} $` : `$${formattedNum} $`;
+        return unit ? `${formattedNum} ${unit} $` : `${formattedNum} $`;
     }
-    static getVWAPChangeValue(price: string, percentage: string): string {
-        const result = ((Number(price) * Number(percentage)) / 100).toFixed(2).replace(/\.?0+$/, "");
+    static getVWAPChangeValue(price: string | undefined, percentage: string | undefined) {
+        if (!price || !percentage) return;
+        const result = ((Number(price) * Math.abs(Number(percentage))) / 100).toFixed(2).replace(/\.?0+$/, "");
         if (Number(result) === 0) return result.replace(/^-/, "");
         return result + `$`;
     }
-    static getPriceStatus(price: string, percentageChange: string): string {
+    static getPriceStatus(price: string | undefined, percentageChange: string | undefined) {
+        if (!price || !percentageChange) return;
         let changes;
         const priceToNum = Number(price);
         const percentageToNum = Number(percentageChange) / 100;
@@ -64,5 +67,9 @@ export class PricesUtil {
             : Number(changes) < 0
               ? PRICE_STATUS.DECREASED
               : PRICE_STATUS.UNCHANGED;
+    }
+    static solvePrice(inputValue: string, assetPrice: string | undefined): string {
+        if (Number(inputValue) == 0) return "0$";
+        return this.formatAsCurrency(String(Number(inputValue) * Number(assetPrice)));
     }
 }

@@ -1,8 +1,9 @@
 export const black = "#000000";
 export const white = "#FFFFFF";
 export const hoverGray = "#EBEBEB";
-export const lightGray = "#FBFBFB";
+export const formGray = "#FBFBFB";
 export const borderGray = "#D9D9D9";
+export const semiDarkGray = "#B3B3B3";
 export const darkGray = "#333333";
 export const blueSecondary = "#D6E1F7";
 export const bluePrimary = "#3268d9";
