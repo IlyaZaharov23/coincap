@@ -11,7 +11,7 @@ import { ROUTES } from "shared/constants/routes";
 import { styles } from "./styles";
 import { ActionButtonsProps } from "./types";
 
-export const ActionButtons: FC<ActionButtonsProps> = ({ showLogOut, showSignIn, showSignUp }) => {
+export const ActionButtons: FC<ActionButtonsProps> = ({ showLogOut, isSignInHidden, isSignUpHidden }) => {
     const router = useRouter();
 
     const navigateToSignIn = () => {
@@ -34,12 +34,12 @@ export const ActionButtons: FC<ActionButtonsProps> = ({ showLogOut, showSignIn, 
                 </Button>
             ) : (
                 <>
-                    {showSignIn && (
+                    {!isSignInHidden && (
                         <Button onClick={navigateToSignIn} variant={BUTTON_VARIANT.PRIMARY}>
                             Sign In
                         </Button>
                     )}
-                    {showSignUp && (
+                    {!isSignUpHidden && (
                         <Button onClick={navigateToSignUp} variant={BUTTON_VARIANT.PRIMARY}>
                             Sign Up
                         </Button>

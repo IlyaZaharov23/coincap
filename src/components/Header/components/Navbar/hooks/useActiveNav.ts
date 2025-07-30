@@ -7,7 +7,7 @@ export const useActiveNav = () => {
     const pathname = usePathname();
     const assetsPaths = useAppSelector(getAssetsPaths);
 
-    if (pathname === ROUTES.MARKETS || pathname === ROUTES.PORTFOLIO) {
+    if (pathname === ROUTES.MARKETS || pathname === ROUTES.WALLET) {
         return "markets";
     }
 

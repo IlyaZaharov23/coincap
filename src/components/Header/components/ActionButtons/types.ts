@@ -1,5 +1,5 @@
 export type ActionButtonsProps = {
-    showSignIn?: boolean;
-    showSignUp?: boolean;
-    showLogOut?: boolean;
+    showLogOut?: boolean | string | null;
+    isSignInHidden?: boolean;
+    isSignUpHidden?: boolean;
 };

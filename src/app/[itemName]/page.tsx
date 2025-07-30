@@ -8,7 +8,7 @@ import { styles } from "./styles";
 export default function MarketItem() {
     return (
         <Stack>
-            <Header showBack showNavbar showLogOut />
+            <Header showBack showNavbar />
             <Stack sx={styles.contentWrapper}>
                 <CoinContent />
             </Stack>

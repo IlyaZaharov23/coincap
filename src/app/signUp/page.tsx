@@ -8,7 +8,7 @@ import { styles } from "./styles";
 const SignUp = () => {
     return (
         <>
-            <Header />
+            <Header isSignInHidden isSignUpHidden />
             <Stack sx={styles.contentWrapper}>
                 <SignUpForm />
             </Stack>

@@ -8,7 +8,7 @@ const initialState: AssetsState = {
     assets: [],
     assetDetails: null,
     history: [],
-    portfolioPrice: {},
+    wallet: {},
     assetsPaths: [],
     loading: false,
     error: null,
@@ -35,9 +35,15 @@ export const assetsSlice = createSlice({
             state.assetDetails = null;
             state.history = [];
         },
-        setPortfolioPrice: (state, action) => {
-            const { coinId, amount } = action.payload;
-            state.portfolioPrice[coinId] = amount;
+        addCoinToWallet: (state, action) => {
+            const { coinId, coinInfo } = action.payload;
+            state.wallet[coinId] = coinInfo;
+        },
+        removeCoinFromWallet: (state, action) => {
+            delete state.wallet[action.payload];
+        },
+        updateCoinsWallet: (state, action) => {
+            state.wallet = action.payload;
         },
     },
 });

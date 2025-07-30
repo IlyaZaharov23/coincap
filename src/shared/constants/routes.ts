@@ -6,5 +6,5 @@ export const ROUTES = {
     MARKET_ITEM: (itemName: string) => `/${itemName}`,
     ABOUT: "/about",
     CONVERTER: "/converter",
-    PORTFOLIO: "/portfolio",
+    WALLET: "/wallet",
 };

@@ -7,7 +7,7 @@ export const getTopThreeAssets = createSelector([assetsListGet], (assets) => ass
 export const getTopTwentyAssets = createSelector([assetsListGet], (assets) => assets.slice(0, 20));
 export const getAssetDetails = (state: RootState) => state.coincap.assetDetails;
 export const getPriceHistory = (state: RootState) => state.coincap.history;
-export const getPortfolioPrice = (state: RootState) => state.coincap.portfolioPrice;
+export const getWallet = (state: RootState) => state.coincap.wallet;
 export const getAssetsPaths = (state: RootState) => state.coincap.assetsPaths;
 export const getLoadingState = (state: RootState) => state.coincap.loading;
 export const getErrorState = (state: RootState) => state.coincap.error;

@@ -2,18 +2,16 @@ import { Stack } from "@chakra-ui/react";
 
 import { Header } from "components/Header";
 
-import { SignInForm } from "./components/Form";
+import { CoinsList } from "./components/CoinsList";
 import { styles } from "./styles";
 
-const SignIn = () => {
+export default function Wallet() {
     return (
-        <>
-            <Header isSignUpHidden isSignInHidden />
+        <Stack sx={styles.mainWrapper}>
+            <Header showNavbar />
             <Stack sx={styles.contentWrapper}>
-                <SignInForm />
+                <CoinsList />
             </Stack>
-        </>
+        </Stack>
     );
-};
-
-export default SignIn;
+}

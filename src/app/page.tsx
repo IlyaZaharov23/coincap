@@ -10,7 +10,7 @@ import { styles } from "./styles";
 export default function Home() {
     return (
         <Stack sx={styles.pageWrapper}>
-            <Header showSignIn showSignUp showNavbar />
+            <Header showNavbar />
             <Stack sx={styles.contentWrapper}>
                 <Stack sx={styles.topContentWrapper}>
                     <Description />
