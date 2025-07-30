@@ -1,7 +1,7 @@
 export const black = "#000000";
 export const white = "#FFFFFF";
 export const hoverGray = "#EBEBEB";
-export const formGray = "#FBFBFB";
+export const formGray = "#F7F7F8";
 export const borderGray = "#D9D9D9";
 export const semiDarkGray = "#B3B3B3";
 export const darkGray = "#333333";

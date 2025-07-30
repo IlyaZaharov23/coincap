@@ -9,7 +9,7 @@ import { CoinBuyContentProps } from "./types";
 
 export const CoinBuyContent = ({ coinName, coinsAmount, coinSymbol, changeCoinsAmount }: CoinBuyContentProps) => {
     return (
-        <Stack sx={styles.mainWrapper}>
+        <Stack>
             <Stack sx={styles.titleWrapper}>
                 <CryptoIcon symbol={coinSymbol} size={48} />
                 <Text sx={styles.title}>{coinName}</Text>

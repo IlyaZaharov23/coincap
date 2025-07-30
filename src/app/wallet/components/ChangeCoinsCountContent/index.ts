@@ -1,0 +1,1 @@
+export { ChangeCoinsCountContent } from "./view";

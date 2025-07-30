@@ -14,7 +14,7 @@ import { Navbar } from "./components/Navbar";
 import { styles } from "./styles";
 import { HeaderPropsType } from "./types";
 
-export const Header: FC<HeaderPropsType> = ({ showLogOut, showSignIn, showSignUp, showNavbar, showBack }) => {
+export const Header: FC<HeaderPropsType> = ({ showNavbar, showBack, isSignInHidden, isSignUpHidden }) => {
     const router = useRouter();
     const handleGoBack = () => {
         if (sessionStorage.getItem(USER_EMAIL)) {
@@ -22,14 +22,14 @@ export const Header: FC<HeaderPropsType> = ({ showLogOut, showSignIn, showSignUp
         }
         router.back();
     };
-    const isShowLogout = !!localStorage.getItem(AUTH_TOKEN);
+    const isShowLogout = localStorage.getItem(AUTH_TOKEN) && !!localStorage.getItem(AUTH_TOKEN);
     return (
         <Stack sx={styles.headerWrapper}>
             <Stack sx={styles.contentWrapper}>
                 {showBack ? <ChevronLeftIcon sx={styles.backIcon} onClick={handleGoBack} /> : <Logo />}
                 {showNavbar && <Navbar />}
             </Stack>
-            <ActionButtons showLogOut={isShowLogout} showSignIn={showSignIn} showSignUp={showSignUp} />
+            <ActionButtons showLogOut={isShowLogout} isSignInHidden={isSignInHidden} isSignUpHidden={isSignUpHidden} />
         </Stack>
     );
 };
