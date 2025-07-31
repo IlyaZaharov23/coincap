@@ -5,4 +5,7 @@ export class TextUtil {
             .map((item) => item.toLowerCase())
             .join("");
     }
+    static getUserId(email: string) {
+        return email.split("@")[0];
+    }
 }

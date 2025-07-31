@@ -28,4 +28,9 @@ export const styles = {
         fontWeight: "500",
         color: darkGray,
     },
+    text: {
+        fontSize: "1rem",
+        fontWeight: "400",
+        color: darkGray,
+    },
 };

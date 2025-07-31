@@ -1,26 +1,32 @@
 import { Stack, Text } from "@chakra-ui/react";
 
-import { CryptoIcon } from "components/CryptoIcon";
 import { Input } from "components/Input";
 import { INPUT_SIZE } from "shared/constants/inputSizes";
+import { PricesUtil } from "utils/prices";
 
 import { styles } from "./styles";
 import { CoinBuyContentProps } from "./types";
 
-export const CoinBuyContent = ({ coinName, coinsAmount, coinSymbol, changeCoinsAmount }: CoinBuyContentProps) => {
+export const CoinsAddModal = ({
+    coinsAmount,
+    changeCoinsAmount,
+    assetSymbol,
+    assetPrice,
+    helper,
+}: CoinBuyContentProps) => {
     return (
         <Stack>
-            <Stack sx={styles.titleWrapper}>
-                <CryptoIcon symbol={coinSymbol} size={48} />
-                <Text sx={styles.title}>{coinName}</Text>
-            </Stack>
             <Input
-                label="Coins amout"
+                label={`${assetSymbol} count`}
                 size={INPUT_SIZE.LARGE}
                 value={coinsAmount}
                 onChange={changeCoinsAmount}
                 width="100%"
             />
+            <Stack sx={styles.bottomWrapper}>
+                <Text sx={styles.info}>{helper}:</Text>
+                <Text sx={styles.price}>{PricesUtil.solvePrice(coinsAmount, assetPrice)}</Text>
+            </Stack>
         </Stack>
     );
 };

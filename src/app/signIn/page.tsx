@@ -1,16 +1,20 @@
-import { Stack } from "@chakra-ui/react";
+import { Spinner, Stack } from "@chakra-ui/react";
 
 import { Header } from "components/Header";
+import dynamic from "next/dynamic";
 
-import { SignInForm } from "./components/Form";
 import { styles } from "./styles";
+
+const DynamicSignIn = dynamic(() => import("./components/Form").then((mod) => mod.SignInForm), {
+    loading: () => <Spinner />,
+});
 
 const SignIn = () => {
     return (
         <>
             <Header isSignUpHidden isSignInHidden />
             <Stack sx={styles.contentWrapper}>
-                <SignInForm />
+                <DynamicSignIn />
             </Stack>
         </>
     );

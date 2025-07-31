@@ -1,15 +1,18 @@
 import { darkGray } from "shared/constants/colors";
 
 export const styles = {
-    titleWrapper: {
+    bottomWrapper: {
         display: "flex",
         flexDirection: "row",
         alignItems: "center",
-        gap: "1rem",
-        marginBottom: "1rem",
     },
-    title: {
-        fontSize: "1.5rem",
+    info: {
+        fontSize: "1rem",
+        fontWeight: "300",
+        color: darkGray,
+    },
+    price: {
+        fontSize: "1rem",
         fontWeight: "500",
         color: darkGray,
     },

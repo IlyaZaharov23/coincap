@@ -75,7 +75,7 @@ export class PricesUtil {
     }
     static solvePortfolio(prices: WalletItem[] | []) {
         if (prices.length === 0) return "0$";
-        const pricesToNum = prices.map((item) => Number(item.price.split("$")[0]));
+        const pricesToNum = prices.map((item) => Number(item.cost.split("$")[0]));
         const result = pricesToNum.reduce((sum, price) => sum + price, 0);
         const roundedSum = result.toFixed(2);
         return roundedSum + "$";

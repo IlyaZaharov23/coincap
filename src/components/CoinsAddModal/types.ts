@@ -1,6 +1,7 @@
 export interface CoinBuyContentProps {
-    coinName: string | undefined;
-    coinSymbol: string | undefined;
     coinsAmount: string;
+    assetSymbol: string;
+    assetPrice: string;
+    helper: string;
     changeCoinsAmount: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }

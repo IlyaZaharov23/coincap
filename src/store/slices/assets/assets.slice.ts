@@ -45,5 +45,8 @@ export const assetsSlice = createSlice({
         updateCoinsWallet: (state, action) => {
             state.wallet = action.payload;
         },
+        clearWallet: (state) => {
+            state.wallet = {};
+        },
     },
 });

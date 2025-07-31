@@ -5,4 +5,6 @@ export interface ModalWrapperProps extends Pick<ModalProps, "isOpen" | "onClose"
     submitButtonText: string;
     children: React.ReactNode;
     onSubmit: () => void;
+    isDelete?: boolean;
+    assetSymbol: string;
 }

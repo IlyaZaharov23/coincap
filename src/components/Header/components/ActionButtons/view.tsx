@@ -4,15 +4,18 @@ import { Stack } from "@chakra-ui/react";
 
 import { Button } from "components/Button";
 import { useRouter } from "next/navigation";
-import { AUTH_TOKEN } from "services/constants";
 import { BUTTON_VARIANT } from "shared/constants/buttonVariants";
 import { ROUTES } from "shared/constants/routes";
+import { useAppDispatch } from "store/hooks";
+import { clearWallet } from "store/slices/assets/assets.thunks";
+import { userLogout } from "store/slices/auth/auth.thunks";
 
 import { styles } from "./styles";
 import { ActionButtonsProps } from "./types";
 
 export const ActionButtons: FC<ActionButtonsProps> = ({ showLogOut, isSignInHidden, isSignUpHidden }) => {
     const router = useRouter();
+    const dispatch = useAppDispatch();
 
     const navigateToSignIn = () => {
         router.push(ROUTES.SIGN_IN);
@@ -23,8 +26,9 @@ export const ActionButtons: FC<ActionButtonsProps> = ({ showLogOut, isSignInHidd
     };
 
     const logOut = () => {
-        localStorage.removeItem(AUTH_TOKEN);
-        router.push(ROUTES.HOME);
+        dispatch(userLogout());
+        dispatch(clearWallet());
+        router.push(ROUTES.SIGN_IN);
     };
     return (
         <Stack sx={styles.buttonsWrapper}>

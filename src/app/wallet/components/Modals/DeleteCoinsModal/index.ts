@@ -1,0 +1,1 @@
+export { DeleteCoinsModal } from "./view";
