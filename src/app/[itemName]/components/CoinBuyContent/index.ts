@@ -1,1 +1,0 @@
-export { CoinBuyContent } from "./view";

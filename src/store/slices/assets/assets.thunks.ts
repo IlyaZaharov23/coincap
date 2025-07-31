@@ -13,6 +13,7 @@ export const {
     addCoinToWallet,
     updateCoinsWallet,
     removeCoinFromWallet,
+    clearWallet,
 } = assetsSlice.actions;
 
 export const getAssets = createAsyncThunk("assets/getAssets", async (limit: number = 100, thunkApi) => {

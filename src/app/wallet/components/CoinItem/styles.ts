@@ -38,6 +38,7 @@ export const styles = {
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "center",
+        gap: "0",
     },
     coinName: {
         fontSize: "1rem",

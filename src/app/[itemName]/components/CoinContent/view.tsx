@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { Stack } from "@chakra-ui/react";
 
 import { useParams } from "next/navigation";
+import { ApiWrapper } from "services/ApiWrapper";
 import { ASSET_HISTORY_INTERVALS } from "shared/constants/apiParams";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { getAssetDetails } from "store/slices/assets/assets.selectors";
@@ -42,6 +43,8 @@ export const CoinContent = () => {
         }
     };
 
+    const isUserAuth = !!ApiWrapper.getToken();
+
     useEffect(() => {
         getCoinData();
     }, []);
@@ -50,7 +53,7 @@ export const CoinContent = () => {
         <Stack display="flex" flexDirection="column" alignItems="center" justifyContent="center" width="70vw">
             <Stack sx={styles.topWrapper}>
                 <MainInfo />
-                <BuyForm />
+                {isUserAuth && <BuyForm />}
             </Stack>
             <CoinChart />
             <Market />

@@ -1,14 +1,14 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 import { Stack, Text } from "@chakra-ui/react";
 
-import { COINS_PORTFOLIO } from "services/constants";
+import { USER_ID } from "services/constants";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { getWallet } from "store/slices/assets/assets.selectors";
 import { updateCoinsWallet } from "store/slices/assets/assets.thunks";
-import { WalletItem } from "store/slices/assets/assets.types";
+import { LocalStorageUtil } from "utils/localStorage";
 import { PricesUtil } from "utils/prices";
 
 import { CoinItem } from "../CoinItem";
@@ -17,27 +17,20 @@ import { styles } from "./styles";
 export const CoinsList = () => {
     const wallet = useAppSelector(getWallet);
     const dispatch = useAppDispatch();
-    const [savedWallet, setSavedWallet] = useState<WalletItem[]>([]);
 
-    const updateWallet = () => {
-        if (Object.values(wallet).length > 0) return;
-        const storedWallet = localStorage.getItem(COINS_PORTFOLIO);
-        if (storedWallet) {
-            try {
-                const parsedWallet = JSON.parse(storedWallet);
-                setSavedWallet(Object.values(parsedWallet));
-                dispatch(updateCoinsWallet(parsedWallet));
-            } catch (error) {
-                console.log(error);
-            }
-        } else {
-            setSavedWallet(Object.values(wallet));
-        }
+    const setUserPortfolio = () => {
+        if (Object.keys(wallet).length > 0) return;
+        const userId = localStorage.getItem(USER_ID);
+        if (!userId) return;
+        const userPortfolio = LocalStorageUtil.getUserPortfolio(userId);
+        if (!userPortfolio) return;
+
+        dispatch(updateCoinsWallet(userPortfolio));
     };
 
     useEffect(() => {
-        updateWallet();
-    }, [wallet, dispatch]);
+        setUserPortfolio();
+    }, []);
 
     return (
         <>
@@ -45,11 +38,11 @@ export const CoinsList = () => {
                 <Text sx={styles.title}>Wallet</Text>
                 <Stack sx={styles.totalWrapper}>
                     <Text sx={styles.totalTitle}>Total wallet price:</Text>
-                    <Text sx={styles.totalValue}>{PricesUtil.solvePortfolio(savedWallet)}</Text>
+                    <Text sx={styles.totalValue}>{PricesUtil.solvePortfolio(Object.values(wallet))}</Text>
                 </Stack>
             </Stack>
             <Stack sx={styles.wrapper}>
-                {savedWallet.map((item) => (
+                {Object.values(wallet).map((item) => (
                     <CoinItem
                         key={item.id}
                         symbol={item.symbol}

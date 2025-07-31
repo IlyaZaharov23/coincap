@@ -1,6 +1,6 @@
 import { TOP_WRAPPER_MARGIN } from "app/markets/styles";
 import { HEADER_HEIGHT } from "components/Header/styles";
-import { black, darkGray } from "shared/constants/colors";
+import { black } from "shared/constants/colors";
 
 const TABLE_MARGIN_TOP = 32;
 
@@ -49,16 +49,5 @@ export const styles = {
     },
     headerItem: (width: string) => ({
         width,
-    }),
-    rowText: (width: string) => ({
-        fontSize: "0.875rem",
-        fontWeight: "400",
-        color: darkGray,
-        cursor: "pointer",
-        overflow: "hidden",
-        textOverflow: "ellipsis",
-        whiteSpace: "nowrap",
-        maxWidth: width,
-        width: width,
     }),
 };

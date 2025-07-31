@@ -7,7 +7,8 @@ import { Stack } from "@chakra-ui/react";
 
 import { Logo } from "components/Logo";
 import { useRouter } from "next/navigation";
-import { AUTH_TOKEN, USER_EMAIL } from "services/constants";
+import { ApiWrapper } from "services/ApiWrapper";
+import { USER_EMAIL } from "services/constants";
 
 import { ActionButtons } from "./components/ActionButtons";
 import { Navbar } from "./components/Navbar";
@@ -22,7 +23,7 @@ export const Header: FC<HeaderPropsType> = ({ showNavbar, showBack, isSignInHidd
         }
         router.back();
     };
-    const isShowLogout = localStorage.getItem(AUTH_TOKEN) && !!localStorage.getItem(AUTH_TOKEN);
+    const isShowLogout = !!ApiWrapper.getToken();
     return (
         <Stack sx={styles.headerWrapper}>
             <Stack sx={styles.contentWrapper}>
