@@ -1,8 +1,9 @@
 import { useState } from "react";
 
-import { Th, Tooltip, Tr, useDisclosure } from "@chakra-ui/react";
+import { Stack, Td, Text, Tooltip, Tr, useDisclosure } from "@chakra-ui/react";
 
 import { CoinsAddModal } from "components/CoinsAddModal";
+import { CryptoIcon } from "components/CryptoIcon";
 import { ModalWrapper } from "components/ModalWrapper";
 import { useRouter } from "next/navigation";
 import { ApiWrapper } from "services/ApiWrapper";
@@ -95,31 +96,38 @@ export const AssetItem = ({ asset }: AssetItemProps) => {
     return (
         <>
             <Tr key={asset.id} onClick={() => navigateToCurrency(asset)} _hover={{ backgroundColor: hoverGray }}>
-                <Th sx={styles.rowText("5vw")}>{Number(asset.rank)}</Th>
-                <Th sx={styles.rowText("18vw")}>{asset.name}</Th>
-                <Th sx={styles.rowText("11vw")}>{PricesUtil.formatAsCurrency(asset.vwap24Hr)}</Th>
-                <Th
-                    display="flex"
-                    alignItems="center"
-                    gap="0.25rem"
+                <Td sx={{ ...styles.rowText("23vw"), ...styles.nameWrapper }}>
+                    <CryptoIcon symbol={asset.symbol} size={40} />
+                    <Stack gap="0.25rem">
+                        <Text sx={styles.nameText}>{asset.name}</Text>
+                        <Text sx={styles.symbolText}>{asset.symbol}</Text>
+                    </Stack>
+                </Td>
+                <Td sx={styles.rowText("11vw")}>{PricesUtil.formatAsCurrency(asset.vwap24Hr)}</Td>
+                <Td
                     sx={{
                         ...styles.rowText("11vw"),
-                        fontWeight: "500",
                         color: StyleUtil.getCurrencyPriceChangeColor(
                             getPriceStatus(asset.vwap24Hr, asset.changePercent24Hr),
                         ),
                     }}
                 >
-                    {asset.vwap24Hr ? PricesUtil.getVWAPChangeValue(asset.vwap24Hr, asset.changePercent24Hr) : "0"}
-                    {getPriceArrowIcon(asset.vwap24Hr, asset.changePercent24Hr)}
-                </Th>
-                <Th sx={styles.rowText("14vw")}>{PricesUtil.formatLargeCurrency(asset.marketCapUsd)}</Th>
-                <Th sx={styles.rowText("11vw")}>{PricesUtil.formatAsCurrency(asset.priceUsd)}</Th>
+                    <Stack display="flex" flexDirection="row" alignItems="center" gap="0.25rem">
+                        <Text>
+                            {asset.vwap24Hr
+                                ? PricesUtil.getVWAPChangeValue(asset.vwap24Hr, asset.changePercent24Hr)
+                                : "0"}
+                        </Text>
+                        {getPriceArrowIcon(asset.vwap24Hr, asset.changePercent24Hr)}
+                    </Stack>
+                </Td>
+                <Td sx={styles.rowText("14vw")}>{PricesUtil.formatLargeCurrency(asset.marketCapUsd)}</Td>
+                <Td sx={styles.rowText("11vw")}>{PricesUtil.formatAsCurrency(asset.priceUsd)}</Td>
                 <Tooltip
                     isDisabled={isUserSignedIn}
                     label="You need to sign in to add coin to the wallet. Please log in or create an account."
                 >
-                    <Th
+                    <Td
                         sx={{
                             ...styles.rowText("5vw"),
                             color: isUserSignedIn ? darkGray : semiDarkGray,
@@ -127,7 +135,7 @@ export const AssetItem = ({ asset }: AssetItemProps) => {
                         onClick={handleOpenAddModal}
                     >
                         +
-                    </Th>
+                    </Td>
                 </Tooltip>
             </Tr>
             <ModalWrapper

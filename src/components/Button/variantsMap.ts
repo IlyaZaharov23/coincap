@@ -24,10 +24,10 @@ export const buttonVariantsMap = {
         textDecoration: "none",
     },
     [BUTTON_VARIANT.TEXT]: {
-        backgroundColor: white,
+        backgroundColor: "transparent",
         color: () => bluePrimary,
         hover: {
-            backgroundColor: white,
+            backgroundColor: "transparent",
             color: bluePrimary,
         },
         borderRadius: "20px",

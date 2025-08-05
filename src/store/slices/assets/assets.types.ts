@@ -10,7 +10,8 @@ export type WalletItem = {
 };
 
 export interface AssetsState {
-    assets: Asset[];
+    assets: { [id: number]: Asset[] };
+    topAssets: Asset[];
     assetDetails: Asset | null;
     history: AssetHistory[];
     wallet: { [coinId: string]: WalletItem };
