@@ -1,11 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { Asset } from "types/types";
-
 import { AssetsState } from "./assets.types";
 
+export const ITEMS_PER_PAGE = 10;
+
 const initialState: AssetsState = {
-    assets: [],
+    assets: {},
+    topAssets: [],
     assetDetails: null,
     history: [],
     wallet: {},
@@ -20,8 +21,20 @@ export const assetsSlice = createSlice({
     reducers: {
         setAssetsList: (state, action) => {
             const { data } = action.payload;
-            state.assets = data;
-            state.assetsPaths = data.map((item: Asset) => item.id);
+
+            const startPage =
+                Object.keys(state.assets).length === 0 ? 1 : Math.max(...Object.keys(state.assets).map(Number)) + 1;
+
+            for (let i = 0; i < data.length; i += ITEMS_PER_PAGE) {
+                const pageNumber = startPage + Math.floor(i / ITEMS_PER_PAGE);
+                const pageItems = data.slice(i, i + ITEMS_PER_PAGE);
+
+                state.assets[pageNumber] = pageItems;
+            }
+        },
+        setTopAssets: (state, action) => {
+            const { data } = action.payload;
+            state.topAssets = data;
         },
         setAssetDetails: (state, action) => {
             const { data } = action.payload;

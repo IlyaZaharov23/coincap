@@ -7,6 +7,7 @@ import { assetsSlice } from "./assets.slice";
 
 export const {
     setAssetsList,
+    setTopAssets,
     clearAssetDetails,
     setAssetDetails,
     setAssetHistory,
@@ -16,14 +17,27 @@ export const {
     clearWallet,
 } = assetsSlice.actions;
 
-export const getAssets = createAsyncThunk("assets/getAssets", async (limit: number = 100, thunkApi) => {
+export const getAssets = createAsyncThunk(
+    "assets/getAssets",
+    async ({ limit, offset }: { limit: number; offset: number }, thunkApi) => {
+        try {
+            const resp = await ApiWrapper.get(COIN_CAP_API.ASSETS.GET_ALL(limit, offset));
+            thunkApi.dispatch(setAssetsList(resp.data));
+            return resp.data;
+        } catch (error) {
+            console.log(error);
+            return thunkApi.rejectWithValue("Failed to fetch assets");
+        }
+    },
+);
+
+export const getTopAssets = createAsyncThunk("assets/getTopAssets", async (limit: number, thunkApi) => {
     try {
         const resp = await ApiWrapper.get(COIN_CAP_API.ASSETS.GET_ALL(limit));
-        thunkApi.dispatch(setAssetsList(resp.data));
-        return resp.data;
+        thunkApi.dispatch(setTopAssets(resp.data));
     } catch (error) {
         console.log(error);
-        return thunkApi.rejectWithValue("Failed to fetch assets");
+        return thunkApi.rejectWithValue("Failed to fetch top assets");
     }
 });
 
