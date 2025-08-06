@@ -6,6 +6,5 @@ export interface CurrencyDropdownItemProps {
     quoteCoin: Asset | null;
     isBaseCoin?: boolean;
     isQuoteCoin?: boolean;
-    handleSelectBaseCoin?: (coin: Asset) => void;
-    handleSelectQuoteCoin?: (coin: Asset) => void;
+    handleItemClick: (value: Asset) => void;
 }

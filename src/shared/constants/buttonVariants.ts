@@ -3,5 +3,4 @@ export const BUTTON_VARIANT = {
     SECONDARY: "secondary",
     TEXT: "text",
     TAB: "tab",
-    SELECT: "select",
 };

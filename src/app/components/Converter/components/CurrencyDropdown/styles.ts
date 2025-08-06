@@ -1,4 +1,4 @@
-import { bluePrimary, borderGray } from "shared/constants/colors";
+import { bluePrimary, borderGray, darkGray } from "shared/constants/colors";
 
 export const styles = {
     select: {
@@ -24,5 +24,33 @@ export const styles = {
             backgroundColor: borderGray,
             borderRadius: "3px",
         },
+    },
+    buttonWrapper: {
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        border: `1px solid ${borderGray}`,
+        borderRadius: "0 6px 6px 0",
+        cursor: "pointer",
+        padding: "0.375rem 1rem",
+        width: "100%",
+        marginTop: "0.25rem",
+        gap: "1rem",
+    },
+    buttonInfoWrapper: {
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "center",
+    },
+    buttonCoinName: {
+        fontSize: "1rem",
+        fontWeight: "500",
+        color: darkGray,
+    },
+    arrowIcon: {
+        width: "0.625rem",
+        height: "0.625rem",
     },
 };

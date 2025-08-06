@@ -85,4 +85,16 @@ export class PricesUtil {
         const added = Number(priceOfAdded.split("$")[0]);
         return String(old + added) + "$";
     }
+    static convertBaseToQuoteValue(baseValue: string, basePrice: string | undefined, quotePrice: string | undefined) {
+        if (!baseValue || !basePrice || !quotePrice) return "";
+
+        const baseValueNum = Number(baseValue);
+        const basePriceNum = Number(basePrice);
+        const quotePriceNum = Number(quotePrice);
+
+        if (isNaN(baseValueNum) || isNaN(basePriceNum) || isNaN(quotePriceNum)) return "";
+
+        const result = (baseValueNum * basePriceNum) / quotePriceNum;
+        return result.toFixed(4);
+    }
 }
