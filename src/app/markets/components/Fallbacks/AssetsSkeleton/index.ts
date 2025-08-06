@@ -1,0 +1,1 @@
+export { AssetsSkeleton } from "./view";

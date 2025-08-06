@@ -4,16 +4,18 @@ import { useEffect, useState } from "react";
 
 import { Stack, Table, TableContainer, Tbody, Th, Thead, Tr } from "@chakra-ui/react";
 
-import { USER_ID } from "services/constants";
+import { CURRENT_ASSETS_PAGE, USER_ID } from "services/constants";
 import { ASSETS_LIMIT } from "shared/constants/assetsLimit";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { assetsListGet, getWallet } from "store/slices/assets/assets.selectors";
 import { ITEMS_PER_PAGE } from "store/slices/assets/assets.slice";
 import { getAssets, updateCoinsWallet } from "store/slices/assets/assets.thunks";
 import { LocalStorageUtil } from "utils/localStorage";
+import { Toast } from "utils/toast";
 
 import { AssetItem } from "../AssetItem";
-import { Pagination } from "../Pagination/view";
+import { AssetsSkeleton } from "../Fallbacks/AssetsSkeleton";
+import { Pagination } from "../Pagination";
 import { styles } from "./styles";
 
 export const AssetsList = () => {
@@ -45,15 +47,33 @@ export const AssetsList = () => {
     };
 
     const loadData = async () => {
-        setIsLoading(true);
-        await dispatch(getAssets({ limit: ASSETS_LIMIT.INITIAL, offset: 0 }));
-        handleChangeOffset(currentPage);
-        setUserPortfolio();
-        setIsLoading(false);
+        try {
+            if (Object.keys(assets).length > 0) {
+                return;
+            }
+            setIsLoading(true);
+            await dispatch(getAssets({ limit: ASSETS_LIMIT.INITIAL, offset: 0 }));
+            handleChangeOffset(currentPage);
+            setUserPortfolio();
+        } catch (error) {
+            console.log(error);
+            Toast.error("Failed to load the assets. Please reload the page or try again later.");
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     const isShowBack = currentPage !== 1;
     const isShowNext = hasMore || getTotalPages() > currentPage * ITEMS_PER_PAGE;
+
+    useEffect(() => {
+        const savedPage = localStorage.getItem(CURRENT_ASSETS_PAGE);
+        if (savedPage) {
+            const lastOpenedPage = JSON.parse(savedPage);
+            setCurrentPage(lastOpenedPage);
+            localStorage.removeItem(CURRENT_ASSETS_PAGE);
+        }
+    }, []);
 
     useEffect(() => {
         loadData();
@@ -86,9 +106,13 @@ export const AssetsList = () => {
                             </Tr>
                         </Thead>
                         <Tbody sx={styles.bodyWrapper}>
-                            {assets[currentPage]?.map((asset) => (
-                                <AssetItem key={asset.id} asset={asset} />
-                            ))}
+                            {isLoading ? (
+                                <AssetsSkeleton />
+                            ) : (
+                                assets[currentPage]?.map((asset) => (
+                                    <AssetItem key={asset.id} asset={asset} currentPage={currentPage} />
+                                ))
+                            )}
                         </Tbody>
                     </Table>
                 </TableContainer>

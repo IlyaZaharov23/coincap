@@ -8,7 +8,9 @@ import { bluePrimary, darkGray } from "shared/constants/colors";
 import { useAppDispatch } from "store/hooks";
 import { getAssets } from "store/slices/assets/assets.thunks";
 import { Asset } from "types/types";
+import { getVisiblePages } from "utils/helpers/pagination/getVisiblePages";
 
+import { PaginationSkeleton } from "../Fallbacks/PaginationSketelon";
 import { styles } from "./styles";
 import { PaginationProps } from "./types";
 
@@ -32,62 +34,62 @@ export const Pagination = ({
     };
 
     const handleNext = async () => {
-        setIsLoading(true);
-        const resp = (await dispatch(getAssets({ limit: ASSETS_LIMIT.PAGINATION, offset })).unwrap()) as {
-            data: Asset[];
-            timestamp: number;
-        };
-        if (resp.data.length < ASSETS_LIMIT.PAGINATION) {
-            setHasMore(false);
+        try {
+            setIsLoading(true);
+            if (totalPages - currentPage > 5) {
+                return;
+            }
+            const resp = (await dispatch(getAssets({ limit: ASSETS_LIMIT.PAGINATION, offset })).unwrap()) as {
+                data: Asset[];
+                timestamp: number;
+            };
+            if (resp.data.length < ASSETS_LIMIT.PAGINATION) {
+                setHasMore(false);
+            }
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setCurrentPage(currentPage + 1);
+            setOffset(currentPage + 1);
+            setIsLoading(false);
         }
-        setCurrentPage(currentPage + 1);
-        setOffset(currentPage + 1);
-        setIsLoading(false);
     };
 
     const handlePageChange = async (page: number) => {
-        setIsLoading(true);
-        const resp = (await dispatch(getAssets({ limit: ASSETS_LIMIT.PAGINATION, offset })).unwrap()) as {
-            data: Asset[];
-            timestamp: number;
-        };
-        if (resp.data.length < ASSETS_LIMIT.PAGINATION) {
-            setHasMore(false);
+        try {
+            setIsLoading(true);
+            if (page < currentPage) {
+                return;
+            }
+            if (totalPages - page > 4) {
+                return;
+            }
+            const resp = (await dispatch(getAssets({ limit: ASSETS_LIMIT.PAGINATION, offset })).unwrap()) as {
+                data: Asset[];
+                timestamp: number;
+            };
+            if (resp.data.length < ASSETS_LIMIT.PAGINATION) {
+                setHasMore(false);
+            }
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setIsLoading(false);
+            setCurrentPage(page);
+            setOffset(page);
         }
-        setCurrentPage(page);
-        setOffset(page);
-        setIsLoading(false);
     };
 
-    // TODO: ВЫНЕСТИ В УТИЛИТУ
-    const getVisiblePages = () => {
-        let startPage = 1;
-        let endPage = totalPages;
-
-        if (totalPages <= 10) {
-            return Array.from({ length: totalPages }, (_, i) => i + 1);
-        }
-
-        if (currentPage <= 4) {
-            endPage = 10;
-        } else if (currentPage >= totalPages - 4) {
-            startPage = totalPages - 9;
-        } else {
-            startPage = currentPage - 4;
-            endPage = currentPage + 5;
-        }
-
-        return Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i);
-    };
-
-    const visiblePages = getVisiblePages();
+    const visiblePages = getVisiblePages(totalPages, currentPage);
 
     return (
-        <>
-            {!isLoading && (
-                <Stack>
-                    <Stack>{children}</Stack>
-                    <Stack sx={styles.paginationWrapper}>
+        <Stack>
+            <Stack>{children}</Stack>
+            <Stack sx={styles.paginationWrapper}>
+                {isLoading ? (
+                    <PaginationSkeleton />
+                ) : (
+                    <>
                         <ChevronLeftIcon
                             onClick={handleBack}
                             sx={showBack ? styles.arrowIcon : styles.unavailableArrowIcon}
@@ -98,6 +100,7 @@ export const Pagination = ({
                                 variant={BUTTON_VARIANT.TAB}
                                 color={currentPage == page ? bluePrimary : darkGray}
                                 onClick={() => handlePageChange(page)}
+                                fontWeight={currentPage == page ? "600" : " 400"}
                             >
                                 {page}
                             </Button>
@@ -108,9 +111,9 @@ export const Pagination = ({
                                 sx={showNext ? styles.arrowIcon : styles.unavailableArrowIcon}
                             />
                         )}
-                    </Stack>
-                </Stack>
-            )}
-        </>
+                    </>
+                )}
+            </Stack>
+        </Stack>
     );
 };

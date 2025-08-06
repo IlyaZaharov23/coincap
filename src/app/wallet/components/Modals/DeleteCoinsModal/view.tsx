@@ -14,6 +14,7 @@ export const DeleteCoinsModal = ({
     modalButtonText,
     modalTitle,
     isDelete,
+    isLoading,
 }: DeleteCoinsModalProps) => {
     return (
         <ModalWrapper
@@ -24,6 +25,7 @@ export const DeleteCoinsModal = ({
             isOpen={isOpen}
             isDelete={isDelete}
             assetSymbol={assetSymbol}
+            isLoading={isLoading}
         >
             <Text
                 sx={styles.text}

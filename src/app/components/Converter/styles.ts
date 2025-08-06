@@ -6,7 +6,7 @@ export const styles = {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        border: `2px solid ${bluePrimary}`,
+        border: `1px solid ${borderGray}`,
         borderRadius: "20px",
         padding: "1.5rem 2rem",
         boxShadow: `0 4px 12px ${black}3A, 0 2px 6px ${black}3A`,

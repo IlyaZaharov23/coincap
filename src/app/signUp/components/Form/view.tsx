@@ -1,12 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { passwordRequirementsMap } from "app/signUp/constants/inputRequirements";
 import registrationIcon from "assets/registrationIcon.svg";
 import { FormWrapper } from "components/FormWrapper";
 import { Input } from "components/Input";
 import { useRouter } from "next/navigation";
+import { ApiWrapper } from "services/ApiWrapper";
 import { PASSWORD_REQUIREMENT_KEYS } from "shared/constants/formRequirements";
 import { INPUT_SIZE } from "shared/constants/inputSizes";
 import { ROUTES } from "shared/constants/routes";
@@ -26,12 +27,20 @@ export const SignUpForm = () => {
     const [errors, setErrors] = useState<FormErrors>({});
     const [showPassword, setShowPassword] = useState<boolean>(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState(false);
+
+    useEffect(() => {
+        if (ApiWrapper.getToken()) {
+            router.push(ROUTES.MARKETS);
+        }
+    }, []);
 
     const handleClickPasswordIcon = () => setShowPassword(!showPassword);
     const handleClickConfirmPasswordIcon = () => setShowConfirmPassword(!showConfirmPassword);
 
     const handleSubmit = async () => {
         try {
+            setIsLoading(true);
             if (InputValidationUtil.validateRegForm(formState, setErrors)) {
                 await dispatch(
                     userRegistration({
@@ -48,6 +57,8 @@ export const SignUpForm = () => {
         } catch (error) {
             Toast.error("A user with this email or username already exists.");
             console.log(error);
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -66,6 +77,8 @@ export const SignUpForm = () => {
         router.push(ROUTES.SIGN_IN);
     };
 
+    if (ApiWrapper.getToken()) return null;
+
     return (
         <FormWrapper
             formTitle="Sign Up"
@@ -77,6 +90,7 @@ export const SignUpForm = () => {
             navigate={navigateToSignIn}
             onSubmit={handleSubmit}
             regFormState={formState}
+            isLoading={isLoading}
         >
             <Input
                 value={formState.username}

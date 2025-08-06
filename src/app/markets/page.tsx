@@ -1,15 +1,15 @@
-import { Spinner, Stack } from "@chakra-ui/react";
+import { Stack } from "@chakra-ui/react";
 
 import { Header } from "components/Header";
+import { FullscreenLoader } from "components/Header/components/FullscreenLoader";
 import dynamic from "next/dynamic";
 
-import { AssetsList } from "./components/AssetsList";
 import { PortfolioOverview } from "./components/PortfolioOverview";
 import { TopCurrencies } from "./components/TopCurrencies";
 import { styles } from "./styles";
 
 const DynamicAssetsList = dynamic(() => import("./components/AssetsList").then((mod) => mod.AssetsList), {
-    loading: () => <Spinner />,
+    loading: () => <FullscreenLoader />,
 });
 
 const PricesPage = () => {

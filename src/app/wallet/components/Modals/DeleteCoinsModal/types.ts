@@ -7,4 +7,5 @@ export interface DeleteCoinsModalProps extends Pick<ModalProps, "isOpen" | "onCl
     modalButtonText: string;
     isDelete?: boolean;
     onSubmit: () => void;
+    isLoading: boolean;
 }

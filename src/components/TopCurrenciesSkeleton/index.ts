@@ -1,0 +1,1 @@
+export { TopCurrenciesSkeleton } from "./view";
