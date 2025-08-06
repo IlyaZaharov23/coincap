@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 import { Stack } from "@chakra-ui/react";
 
-import { FullscreenLoader } from "components/Header/components/FullscreenLoader";
+import { FullscreenLoader } from "components/FullscreenLoader";
 import { useParams } from "next/navigation";
 import { ApiWrapper } from "services/ApiWrapper";
 import { ASSET_HISTORY_INTERVALS } from "shared/constants/apiParams";

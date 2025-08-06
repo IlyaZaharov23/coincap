@@ -1,7 +1,7 @@
 import { Stack } from "@chakra-ui/react";
 
+import { FullscreenLoader } from "components/FullscreenLoader";
 import { Header } from "components/Header";
-import { FullscreenLoader } from "components/Header/components/FullscreenLoader";
 import dynamic from "next/dynamic";
 
 import { styles } from "./styles";

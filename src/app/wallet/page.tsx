@@ -3,8 +3,8 @@
 import { Stack } from "@chakra-ui/react";
 
 import { ErrorPage } from "components/ErrorPage";
+import { FullscreenLoader } from "components/FullscreenLoader";
 import { Header } from "components/Header";
-import { FullscreenLoader } from "components/Header/components/FullscreenLoader";
 import dynamic from "next/dynamic";
 import { ApiWrapper } from "services/ApiWrapper";
 
