@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import { Stack } from "@chakra-ui/react";
 
+import { FullscreenLoader } from "components/FullscreenLoader";
 import { useParams } from "next/navigation";
 import { ApiWrapper } from "services/ApiWrapper";
 import { ASSET_HISTORY_INTERVALS } from "shared/constants/apiParams";
@@ -23,9 +24,11 @@ export const CoinContent = () => {
     const assetDetails = useAppSelector(getAssetDetails);
     const dispatch = useAppDispatch();
     const params = useParams();
+    const [isLoading, setIsLoading] = useState(false);
 
     const getCoinData = async () => {
         try {
+            setIsLoading(true);
             if (!assetDetails) {
                 await dispatch(getAssetById(params.itemName as string));
             }
@@ -40,6 +43,8 @@ export const CoinContent = () => {
         } catch (error) {
             console.log(error);
             Toast.error("Failed to load coin data.");
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -51,13 +56,19 @@ export const CoinContent = () => {
 
     return (
         <Stack display="flex" flexDirection="column" alignItems="center" justifyContent="center" width="70vw">
-            <Stack sx={styles.topWrapper}>
-                <MainInfo />
-                {isUserAuth && <BuyForm />}
-            </Stack>
-            <CoinChart />
-            <Market />
-            <PopularCoins />
+            {isLoading ? (
+                <FullscreenLoader />
+            ) : (
+                <>
+                    <Stack sx={styles.topWrapper}>
+                        <MainInfo />
+                        {isUserAuth && <BuyForm />}
+                    </Stack>
+                    <CoinChart />
+                    <Market />
+                    <PopularCoins />
+                </>
+            )}
         </Stack>
     );
 };

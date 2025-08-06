@@ -16,7 +16,7 @@ export default function Home() {
                     <Description />
                     <Converter />
                 </Stack>
-                <Stack>
+                <Stack sx={styles.topMarketsWrapper}>
                     <Markets />
                 </Stack>
             </Stack>

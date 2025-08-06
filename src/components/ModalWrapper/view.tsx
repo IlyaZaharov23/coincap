@@ -23,6 +23,7 @@ export const ModalWrapper = ({
     submitButtonText,
     onSubmit,
     assetSymbol,
+    isLoading,
 }: ModalWrapperProps) => {
     return (
         <Modal isOpen={isOpen} onClose={onClose}>
@@ -38,7 +39,7 @@ export const ModalWrapper = ({
                     <Button variant={BUTTON_VARIANT.TAB} onClick={onClose}>
                         Cancel
                     </Button>
-                    <Button variant={BUTTON_VARIANT.PRIMARY} onClick={onSubmit}>
+                    <Button variant={BUTTON_VARIANT.PRIMARY} onClick={onSubmit} isLoading={isLoading}>
                         {submitButtonText}
                     </Button>
                 </ModalFooter>

@@ -1,12 +1,13 @@
-import { Spinner, Stack } from "@chakra-ui/react";
+import { Stack } from "@chakra-ui/react";
 
+import { FullscreenLoader } from "components/FullscreenLoader";
 import { Header } from "components/Header";
 import dynamic from "next/dynamic";
 
 import { styles } from "./styles";
 
 const DynamicCoinContent = dynamic(() => import("./components/CoinContent").then((mod) => mod.CoinContent), {
-    loading: () => <Spinner />,
+    loading: () => <FullscreenLoader />,
 });
 
 export default function MarketItem() {

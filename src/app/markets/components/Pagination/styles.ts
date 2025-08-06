@@ -10,7 +10,6 @@ export const styles = {
         alignItems: "center",
         justifyContent: "center",
         padding: `${PAGINATION_WRAPPER_PADDING_TOP}px 16px ${PAGINATION_WRAPPER_PADDING_BOTTOM}px`,
-        paddingTop: "0",
         width: "100%",
         gap: "0rem",
     },

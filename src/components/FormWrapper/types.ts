@@ -22,4 +22,5 @@ export type FormWrapperPropsType = {
     onSubmit: () => void;
     regFormState?: FormState;
     authFormState?: FormData;
+    isLoading: boolean;
 };

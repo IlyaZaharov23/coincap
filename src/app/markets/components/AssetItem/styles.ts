@@ -1,5 +1,7 @@
 import { darkGray } from "shared/constants/colors";
 
+export const ROW_HEIGHT = 75;
+
 export const styles = {
     nameWrapper: {
         display: "flex",
@@ -27,7 +29,7 @@ export const styles = {
         whiteSpace: "nowrap",
         maxWidth: width,
         width: width,
-        maxHeight: "75px",
+        maxHeight: `${ROW_HEIGHT}px`,
         paddgin: "0 1.5rem",
     }),
 };

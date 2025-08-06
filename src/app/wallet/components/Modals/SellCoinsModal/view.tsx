@@ -19,6 +19,7 @@ export const SellCoinsModal = ({
     onSubmit,
     modalButtonText,
     modalTitle,
+    isLoading,
 }: CoinsModalProps) => {
     return (
         <ModalWrapper
@@ -28,6 +29,7 @@ export const SellCoinsModal = ({
             onSubmit={onSubmit}
             isOpen={isOpen}
             assetSymbol={assetSymbol}
+            isLoading={isLoading}
         >
             <Stack>
                 <Input

@@ -22,6 +22,7 @@ export const FormWrapper: FC<FormWrapperPropsType> = ({
     onSubmit,
     regFormState,
     authFormState,
+    isLoading,
 }) => {
     return (
         <Stack sx={styles.mainWrapper}>
@@ -32,6 +33,7 @@ export const FormWrapper: FC<FormWrapperPropsType> = ({
                 variant={BUTTON_VARIANT.PRIMARY}
                 sx={styles.confirmButton}
                 onClick={onSubmit}
+                isLoading={isLoading}
                 isDisabledState={
                     isRegistrationFlow
                         ? regFormState && !InputValidationUtil.isRegFormValidates(regFormState)

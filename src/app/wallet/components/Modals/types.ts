@@ -9,4 +9,5 @@ export interface CoinsModalProps extends Pick<ModalProps, "isOpen" | "onClose"> 
     modalTitle: string;
     modalButtonText: string;
     onSubmit: () => void;
+    isLoading: boolean;
 }

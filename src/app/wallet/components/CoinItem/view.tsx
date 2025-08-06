@@ -24,6 +24,7 @@ export const CoinItem = ({ symbol, name, amount, price, id, cost }: CoinItemProp
     const [coinsCount, setCoinsCount] = useState<string>("");
     const wallet = useAppSelector(getWallet);
     const dispatch = useAppDispatch();
+    const [isLoading, setIsLoading] = useState(false);
     const { isOpen: isAddOpen, onOpen: onAddOpen, onClose: onAddClose } = useDisclosure();
     const { isOpen: isSellOpen, onOpen: onSellOpen, onClose: onSellClose } = useDisclosure();
     const { isOpen: isDeleteOpen, onOpen: onDeleteOpen, onClose: onDeleteClose } = useDisclosure();
@@ -45,6 +46,7 @@ export const CoinItem = ({ symbol, name, amount, price, id, cost }: CoinItemProp
 
     const deleteCoins = () => {
         try {
+            setIsLoading(true);
             const userId = localStorage.getItem(USER_ID);
             if (!userId) return;
             LocalStorageUtil.removePortfolioCoin(userId, id);
@@ -54,11 +56,14 @@ export const CoinItem = ({ symbol, name, amount, price, id, cost }: CoinItemProp
         } catch (error) {
             console.log(error);
             Toast.error(`Something wrong while adding ${name} to your portfolio. Please try again later.`);
+        } finally {
+            setIsLoading(false);
         }
     };
 
     const sellCoins = () => {
         try {
+            setIsLoading(true);
             const userId = localStorage.getItem(USER_ID);
             if (!userId) return;
             const currentCoin = wallet[id];
@@ -81,11 +86,14 @@ export const CoinItem = ({ symbol, name, amount, price, id, cost }: CoinItemProp
         } catch (error) {
             console.log(error);
             Toast.error(`Something wrong while adding ${name} to your portfolio. Please try again later.`);
+        } finally {
+            setIsLoading(false);
         }
     };
 
     const addCoins = () => {
         try {
+            setIsLoading(true);
             const userId = localStorage.getItem(USER_ID);
             if (!userId) return;
             const currentCoin = wallet[id];
@@ -102,6 +110,8 @@ export const CoinItem = ({ symbol, name, amount, price, id, cost }: CoinItemProp
         } catch (error) {
             console.log(error);
             Toast.error(`Something wrong while adding ${name} to your portfolio. Please try again later.`);
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -153,6 +163,7 @@ export const CoinItem = ({ symbol, name, amount, price, id, cost }: CoinItemProp
                 onSubmit={addCoins}
                 modalButtonText="Add"
                 modalTitle="Add Coins"
+                isLoading={isLoading}
             />
             <SellCoinsModal
                 assetSymbol={symbol}
@@ -165,6 +176,7 @@ export const CoinItem = ({ symbol, name, amount, price, id, cost }: CoinItemProp
                 onSubmit={sellCoins}
                 modalButtonText="Sell"
                 modalTitle="Sell Coins"
+                isLoading={isLoading}
             />
             <DeleteCoinsModal
                 assetSymbol={symbol}
@@ -174,6 +186,7 @@ export const CoinItem = ({ symbol, name, amount, price, id, cost }: CoinItemProp
                 onSubmit={deleteCoins}
                 modalButtonText="Delete"
                 modalTitle="Delete Coins"
+                isLoading={isLoading}
             />
         </>
     );

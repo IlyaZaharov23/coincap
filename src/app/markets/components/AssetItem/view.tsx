@@ -8,6 +8,7 @@ import { ModalWrapper } from "components/ModalWrapper";
 import { useRouter } from "next/navigation";
 import { ApiWrapper } from "services/ApiWrapper";
 import { USER_ID } from "services/constants";
+import { CURRENT_ASSETS_PAGE } from "services/constants";
 import { darkGray, hoverGray, semiDarkGray } from "shared/constants/colors";
 import { ROUTES } from "shared/constants/routes";
 import { useAppDispatch, useAppSelector } from "store/hooks";
@@ -24,15 +25,17 @@ import { Toast } from "utils/toast";
 import { styles } from "./styles";
 import { AssetItemProps } from "./types";
 
-export const AssetItem = ({ asset }: AssetItemProps) => {
+export const AssetItem = ({ asset, currentPage }: AssetItemProps) => {
     const dispatch = useAppDispatch();
     const router = useRouter();
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [coinsCount, setCoinsCount] = useState<string>("");
+    const [isLoading, setIsLoading] = useState(false);
     const wallet = useAppSelector(getWallet);
 
     const onSubmit = () => {
         try {
+            setIsLoading(true);
             if (wallet[asset.id]) {
                 updatePortfolioCoins();
             } else {
@@ -44,6 +47,8 @@ export const AssetItem = ({ asset }: AssetItemProps) => {
         } catch (error) {
             console.log(error);
             Toast.error(`Something wrong while adding ${asset.name} to your portfolio. Please try again later.`);
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -76,9 +81,10 @@ export const AssetItem = ({ asset }: AssetItemProps) => {
         dispatch(addCoinToWallet({ coinId: asset.id, coinInfo }));
     };
 
-    const navigateToCurrency = (asset: Asset) => {
+    const onClickAsset = (asset: Asset) => {
         router.push(ROUTES.MARKET_ITEM(asset.id));
         dispatch(setAssetDetails(asset));
+        localStorage.setItem(CURRENT_ASSETS_PAGE, JSON.stringify(currentPage));
     };
 
     const handleChangeCoinsCount = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -95,7 +101,7 @@ export const AssetItem = ({ asset }: AssetItemProps) => {
 
     return (
         <>
-            <Tr key={asset.id} onClick={() => navigateToCurrency(asset)} _hover={{ backgroundColor: hoverGray }}>
+            <Tr key={asset.id} onClick={() => onClickAsset(asset)} _hover={{ backgroundColor: hoverGray }}>
                 <Td sx={{ ...styles.rowText("23vw"), ...styles.nameWrapper }}>
                     <CryptoIcon symbol={asset.symbol} size={40} />
                     <Stack gap="0.25rem">
@@ -143,8 +149,9 @@ export const AssetItem = ({ asset }: AssetItemProps) => {
                 onClose={onClose}
                 onSubmit={onSubmit}
                 submitButtonText="Add"
-                title="Add coins"
+                title={`Add ${asset.name}`}
                 assetSymbol={asset.symbol}
+                isLoading={isLoading}
             >
                 <CoinsAddModal
                     helper="Price"

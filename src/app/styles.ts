@@ -28,4 +28,7 @@ export const styles = {
         padding: "0 3rem",
         gap: "3rem",
     },
+    topMarketsWrapper: {
+        margin: "0 3rem",
+    },
 };

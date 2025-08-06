@@ -30,7 +30,7 @@ export const Coin = ({ asset }: CoinProps) => {
     return (
         <Stack sx={styles.mainWrapper} onClick={() => navigateToCoin(asset.id)}>
             <Stack sx={styles.coinWrapper}>
-                <CryptoIcon symbol={asset.symbol} size={40} />
+                <CryptoIcon symbol={asset.symbol} size={44} />
                 <Stack sx={styles.nameWrapper}>
                     <Text sx={styles.name}>{asset.name}</Text>
                     <Text sx={{ ...styles.name, fontWeight: "100" }}>{asset.symbol}</Text>
@@ -48,7 +48,7 @@ export const Coin = ({ asset }: CoinProps) => {
                             ),
                         }}
                     >
-                        {PricesUtil.getVWAPChangeValue(asset.vwap24Hr, asset.changePercent24Hr)}
+                        {PricesUtil.getVWAPChangeValue(asset.vwap24Hr, asset.changePercent24Hr) || 0}
                     </Text>
                     {getPriceArrowIcon(asset.vwap24Hr, asset.changePercent24Hr)}
                 </Stack>

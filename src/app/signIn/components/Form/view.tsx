@@ -25,12 +25,19 @@ export const SignInForm = () => {
     const [formState, setFormState] = useState<FormData>(formInitialData);
     const [emailError, setEmailError] = useState<boolean>(false);
     const [showPassword, setShowPassword] = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleClickPasswordIcon = () => setShowPassword(!showPassword);
 
     const navigateToSignUp = () => {
         router.push(ROUTES.SIGN_UP);
     };
+
+    useEffect(() => {
+        if (ApiWrapper.getToken()) {
+            router.push(ROUTES.MARKETS);
+        }
+    }, []);
 
     useEffect(() => {
         if (ApiWrapper.getEmail()) {
@@ -49,6 +56,7 @@ export const SignInForm = () => {
     };
     const onSubmit = async () => {
         try {
+            setIsLoading(true);
             if (!InputValidationUtil.isEmailValidates(formState.email)) {
                 setEmailError(true);
                 return;
@@ -59,8 +67,13 @@ export const SignInForm = () => {
         } catch (error) {
             Toast.error("Invalid email or password. Please check your credentials and try again.");
             console.log(error);
+        } finally {
+            setIsLoading(false);
         }
     };
+
+    if (ApiWrapper.getToken()) return null;
+
     return (
         <FormWrapper
             formTitle="Sign In"
@@ -70,6 +83,7 @@ export const SignInForm = () => {
             navigate={navigateToSignUp}
             onSubmit={onSubmit}
             authFormState={formState}
+            isLoading={isLoading}
         >
             <Input
                 value={formState.email}

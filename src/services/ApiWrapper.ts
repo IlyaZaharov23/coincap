@@ -13,7 +13,9 @@ export class ApiWrapper {
         return { headers };
     }
     static setToken(token: string) {
-        localStorage.setItem(AUTH_TOKEN, token);
+        if (typeof window !== "undefined") {
+            localStorage.setItem(AUTH_TOKEN, token);
+        }
     }
 
     static deleteToken() {
@@ -21,7 +23,9 @@ export class ApiWrapper {
     }
 
     static getToken() {
-        return localStorage.getItem(AUTH_TOKEN);
+        if (typeof window !== "undefined") {
+            return localStorage.getItem(AUTH_TOKEN);
+        }
     }
 
     static setEmail(email: string) {

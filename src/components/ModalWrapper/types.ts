@@ -7,4 +7,5 @@ export interface ModalWrapperProps extends Pick<ModalProps, "isOpen" | "onClose"
     onSubmit: () => void;
     isDelete?: boolean;
     assetSymbol: string;
+    isLoading: boolean;
 }
