@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 
 import { Stack, Text } from "@chakra-ui/react";
 
@@ -18,7 +18,7 @@ export const CoinsList = () => {
     const wallet = useAppSelector(getWallet);
     const dispatch = useAppDispatch();
 
-    const setUserPortfolio = () => {
+    const setUserPortfolio = useCallback(() => {
         if (Object.keys(wallet).length > 0) return;
         const userId = localStorage.getItem(USER_ID);
         if (!userId) return;
@@ -26,11 +26,11 @@ export const CoinsList = () => {
         if (!userPortfolio) return;
 
         dispatch(updateCoinsWallet(userPortfolio));
-    };
+    }, [dispatch, wallet]);
 
     useEffect(() => {
         setUserPortfolio();
-    }, []);
+    }, [setUserPortfolio]);
 
     return (
         <>

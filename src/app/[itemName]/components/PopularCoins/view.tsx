@@ -18,7 +18,7 @@ export const PopularCoins = () => {
         if (topAssets.length === 0) {
             dispatch(getTopAssets(ASSETS_LIMIT.TOP));
         }
-    }, []);
+    }, [dispatch, topAssets.length]);
 
     return (
         <Stack sx={styles.mainWrapper}>

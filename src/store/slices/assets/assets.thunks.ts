@@ -15,6 +15,7 @@ export const {
     updateCoinsWallet,
     removeCoinFromWallet,
     clearWallet,
+    setExchanges,
 } = assetsSlice.actions;
 
 export const getAssets = createAsyncThunk(
@@ -64,3 +65,13 @@ export const getAssetHistory = createAsyncThunk(
         }
     },
 );
+
+export const getExchangeMarkets = createAsyncThunk("assets/getExchangeMarkets", async (_, thunkApi) => {
+    try {
+        const resp = await ApiWrapper.get(COIN_CAP_API.MARKETS.GET_ALL);
+        thunkApi.dispatch(setExchanges(resp.data));
+    } catch (error) {
+        console.log(error);
+        thunkApi.rejectWithValue("Failed to fetch exchange markets");
+    }
+});

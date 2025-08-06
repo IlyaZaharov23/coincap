@@ -7,7 +7,6 @@ export const styles = {
         alignItems: "flex-start",
         justifyContent: "center",
     },
-    // TODO: переделать с добавлением кнопок для скролла (как рекомендации в GABBIAN)
     topAssetsWrapper: {
         display: "flex",
         flexDirection: "row",
@@ -17,8 +16,15 @@ export const styles = {
         gap: "2rem",
         marginTop: "1rem",
     },
+    topWrapper: {
+        display: "flex",
+        flexDirection: "center",
+        alignItems: "center",
+        justifyContent: "space-between",
+        width: "100%",
+    },
     wrapperName: {
-        fontSize: "2rem",
+        fontSize: "1.5rem",
         fontWeight: "500",
         color: black,
     },

@@ -63,6 +63,10 @@ export const BuyForm = () => {
 
     const onSubmit = () => {
         try {
+            if (value.trim().length === 0) {
+                Toast.info("To continue, please enter the amount of cryptocurrency you'd like to buy.");
+                return;
+            }
             if (wallet[assetDetails?.id]) {
                 updatePortfolioCoins();
             } else {

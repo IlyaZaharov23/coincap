@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import { Stack, Table, TableContainer, Tbody, Th, Thead, Tr } from "@chakra-ui/react";
 
@@ -26,12 +26,13 @@ export const AssetsList = () => {
     const dispatch = useAppDispatch();
     const assets = useAppSelector(assetsListGet);
     const wallet = useAppSelector(getWallet);
+    const [hasLoaded, setHasLoaded] = useState(false);
 
     const handleChangeOffset = (currentPage: number) => {
         setOffset(currentPage * ITEMS_PER_PAGE);
     };
 
-    const setUserPortfolio = () => {
+    const setUserPortfolio = useCallback(() => {
         if (Object.keys(wallet).length > 0) return;
         const userId = localStorage.getItem(USER_ID);
         if (!userId) return;
@@ -39,29 +40,30 @@ export const AssetsList = () => {
         if (!userPortfolio) return;
 
         dispatch(updateCoinsWallet(userPortfolio));
-    };
+    }, [dispatch, wallet]);
 
     const getTotalPages = () => {
         if (isLoading) return 0;
         return Object.keys(assets).length;
     };
 
-    const loadData = async () => {
+    const loadData = useCallback(async () => {
         try {
-            if (Object.keys(assets).length > 0) {
-                return;
-            }
+            if (Object.keys(assets).length > 0) return;
+            if (hasLoaded) return;
+
             setIsLoading(true);
             await dispatch(getAssets({ limit: ASSETS_LIMIT.INITIAL, offset: 0 }));
             handleChangeOffset(currentPage);
             setUserPortfolio();
+            setHasLoaded(true);
         } catch (error) {
             console.log(error);
             Toast.error("Failed to load the assets. Please reload the page or try again later.");
         } finally {
             setIsLoading(false);
         }
-    };
+    }, [assets, currentPage, dispatch, hasLoaded, setUserPortfolio]);
 
     const isShowBack = currentPage !== 1;
     const isShowNext = hasMore || getTotalPages() > currentPage * ITEMS_PER_PAGE;
@@ -77,7 +79,7 @@ export const AssetsList = () => {
 
     useEffect(() => {
         loadData();
-    }, []);
+    }, [hasLoaded, loadData]);
 
     return (
         <Pagination

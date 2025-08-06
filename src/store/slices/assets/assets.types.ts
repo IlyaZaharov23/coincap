@@ -9,6 +9,18 @@ export type WalletItem = {
     cost: string;
 };
 
+type ExchangeItem = {
+    exchangeId: string;
+    name: string;
+    rank: string;
+    percentTotalVolume: string;
+    volumeUsd: string;
+    tradingPairs: string;
+    socket: boolean;
+    exchangeUrl: string;
+    updated: number;
+};
+
 export interface AssetsState {
     assets: { [id: number]: Asset[] };
     topAssets: Asset[];
@@ -16,6 +28,5 @@ export interface AssetsState {
     history: AssetHistory[];
     wallet: { [coinId: string]: WalletItem };
     assetsPaths: string[];
-    loading: boolean;
-    error: string | null;
+    exchanges: ExchangeItem[];
 }

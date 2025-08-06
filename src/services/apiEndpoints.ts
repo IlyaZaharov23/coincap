@@ -9,23 +9,8 @@ export const COIN_CAP_API = {
             `${API_BASE}/assets/${id}/history?interval=${interval}&start=${start}&end=${end}`,
         GET_MARKETS: (id: string) => `${API_BASE}/assets/${id}/markets`,
     },
-    RATES: {
-        GET_ALL: `${API_BASE}/rates`,
-        GET_BY_ID: (id: string) => `${API_BASE}/rates/${id}`,
-    },
-    EXCHANGES: {
-        GET_ALL: `${API_BASE}/exchanges`,
-        GET_BY_ID: (id: string) => `${API_BASE}/exchanges/${id}`,
-    },
     MARKETS: {
         GET_ALL: `${API_BASE}/markets`,
-        GET_BY_EXCHANGE: (exchangeId: string) => `${API_BASE}/markets?exchangeId=${exchangeId}`,
-        GET_BY_BASE_QUOTE: (baseSymbol: string, quoteSymbol: string) =>
-            `${API_BASE}/markets?baseSymbol=${baseSymbol}&quoteSymbol=${quoteSymbol}`,
-    },
-    CANDLES: {
-        GET: (exchange: string, interval: string, baseId: string, quoteId: string) =>
-            `${API_BASE}/candles?exchange=${exchange}&interval=${interval}&baseId=${baseId}&quoteId=${quoteId}`,
     },
 };
 

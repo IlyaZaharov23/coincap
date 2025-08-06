@@ -1,12 +1,16 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import { Stack, Text } from "@chakra-ui/react";
 
+import { Button } from "components/Button";
 import { Coin } from "components/Coin";
 import { TopCurrenciesSkeleton } from "components/TopCurrenciesSkeleton";
+import { useRouter } from "next/navigation";
 import { ASSETS_LIMIT } from "shared/constants/assetsLimit";
+import { BUTTON_VARIANT } from "shared/constants/buttonVariants";
+import { ROUTES } from "shared/constants/routes";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { topAssetsListGet } from "store/slices/assets/assets.selectors";
 import { getTopAssets } from "store/slices/assets/assets.thunks";
@@ -18,8 +22,9 @@ export const Markets = () => {
     const dispatch = useAppDispatch();
     const topAssets = useAppSelector(topAssetsListGet);
     const [isLoading, setIsLoading] = useState(false);
+    const router = useRouter();
 
-    const loadTopMarkets = async () => {
+    const loadTopMarkets = useCallback(async () => {
         try {
             if (topAssets.length > 0) {
                 return;
@@ -31,15 +36,24 @@ export const Markets = () => {
         } finally {
             setIsLoading(false);
         }
+    }, [dispatch, topAssets.length]);
+
+    const navigateToMarkets = () => {
+        router.push(ROUTES.MARKETS);
     };
 
     useEffect(() => {
         loadTopMarkets();
-    }, []);
+    }, [loadTopMarkets]);
 
     return (
         <Stack sx={styles.mainWrapper}>
-            <Text sx={styles.wrapperName}>Top markets:</Text>
+            <Stack sx={styles.topWrapper}>
+                <Text sx={styles.wrapperName}>Top markets:</Text>
+                <Button variant={BUTTON_VARIANT.TAB} onClick={navigateToMarkets} fontSize="1.25rem">
+                    Explore all coins
+                </Button>
+            </Stack>
             <Stack sx={styles.topAssetsWrapper}>
                 {isLoading ? (
                     <TopCurrenciesSkeleton count={5} />

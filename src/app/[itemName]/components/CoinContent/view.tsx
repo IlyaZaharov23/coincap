@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import { Stack } from "@chakra-ui/react";
 
@@ -26,7 +26,7 @@ export const CoinContent = () => {
     const params = useParams();
     const [isLoading, setIsLoading] = useState(false);
 
-    const getCoinData = async () => {
+    const getCoinData = useCallback(async () => {
         try {
             setIsLoading(true);
             if (!assetDetails) {
@@ -46,13 +46,13 @@ export const CoinContent = () => {
         } finally {
             setIsLoading(false);
         }
-    };
+    }, [assetDetails, dispatch, params.itemName]);
 
     const isUserAuth = !!ApiWrapper.getToken();
 
     useEffect(() => {
         getCoinData();
-    }, []);
+    }, [getCoinData]);
 
     return (
         <Stack display="flex" flexDirection="column" alignItems="center" justifyContent="center" width="70vw">
