@@ -13,6 +13,7 @@ export const Button: FC<CombinedButtonProps> = ({ children, variant, isDisabledS
             _hover={!isDisabledState ? buttonVariantsMap[variant].hover : {}}
             textDecoration={buttonVariantsMap[variant].textDecoration}
             borderRadius={buttonVariantsMap[variant].borderRadius}
+            border={buttonVariantsMap[variant]?.border}
             {...rest}
         >
             {children}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import { Stack, Text } from "@chakra-ui/react";
 
@@ -19,24 +19,27 @@ export const TopCurrencies = () => {
     const topAssets = useAppSelector(topAssetsListGet);
     const dispatch = useAppDispatch();
     const [isLoading, setIsLoading] = useState(false);
+    const [hasLoaded, setHasLoaded] = useState(false);
 
-    const loadData = async () => {
+    const loadData = useCallback(async () => {
         try {
+            if (hasLoaded) return;
             setIsLoading(true);
             await dispatch(getTopAssets(ASSETS_LIMIT.TOP));
+            setHasLoaded(true);
         } catch (error) {
             console.log(error);
             Toast.error("Failed to load top currencies. Please reload page or try again later.");
         } finally {
             setIsLoading(false);
         }
-    };
+    }, [dispatch, hasLoaded]);
 
     useEffect(() => {
         if (topAssets.length === 0) {
             loadData();
         }
-    }, []);
+    }, [loadData, topAssets.length]);
 
     return (
         <Stack sx={styles.mainWrapper}>

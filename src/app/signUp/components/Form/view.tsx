@@ -33,7 +33,7 @@ export const SignUpForm = () => {
         if (ApiWrapper.getToken()) {
             router.push(ROUTES.MARKETS);
         }
-    }, []);
+    }, [router]);
 
     const handleClickPasswordIcon = () => setShowPassword(!showPassword);
     const handleClickConfirmPasswordIcon = () => setShowConfirmPassword(!showConfirmPassword);

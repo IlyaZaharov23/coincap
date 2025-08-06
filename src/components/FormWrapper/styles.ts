@@ -1,4 +1,4 @@
-import { black, bluePrimary, formGray } from "shared/constants/colors";
+import { black, borderGray, formGray } from "shared/constants/colors";
 
 export const styles = {
     mainWrapper: {
@@ -6,10 +6,11 @@ export const styles = {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        border: `2.5px solid ${bluePrimary}`,
+        border: `2px solid ${borderGray}`,
         borderRadius: "10px",
         backgroundColor: formGray,
         padding: "2rem",
+        boxShadow: `0 4px 12px ${black}3A, 0 2px 6px ${black}3A`,
     },
     text: {
         fontSize: "2rem",

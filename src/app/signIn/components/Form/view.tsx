@@ -37,7 +37,7 @@ export const SignInForm = () => {
         if (ApiWrapper.getToken()) {
             router.push(ROUTES.MARKETS);
         }
-    }, []);
+    }, [router]);
 
     useEffect(() => {
         if (ApiWrapper.getEmail()) {

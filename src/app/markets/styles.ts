@@ -10,7 +10,7 @@ export const styles = {
         justifyContent: "space-between",
         margin: `${TOP_WRAPPER_MARGIN}px`,
         marginBottom: "0",
-        padding: "0 3rem",
+        padding: "0 1rem",
         width: "75vw",
     },
     contentWrapper: {

@@ -1,4 +1,4 @@
-import { black, bluePrimary, blueSecondary, hoverGray, white } from "shared/constants/colors";
+import { black, bluePrimary, blueSecondary, borderGray, hoverGray, white } from "shared/constants/colors";
 
 import { BUTTON_VARIANT } from "../../shared/constants/buttonVariants";
 
@@ -41,6 +41,17 @@ export const buttonVariantsMap = {
             color: bluePrimary,
         },
         borderRadius: "0",
+        textDecoration: "none",
+    },
+    [BUTTON_VARIANT.SELECT]: {
+        backgroundColor: white,
+        color: () => black,
+        hover: {
+            backgroundColor: hoverGray,
+            color: black,
+        },
+        borderRadius: "0 6px 6px 0",
+        border: `1px solid ${borderGray}`,
         textDecoration: "none",
     },
 };

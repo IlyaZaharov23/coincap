@@ -11,8 +11,7 @@ const initialState: AssetsState = {
     history: [],
     wallet: {},
     assetsPaths: [],
-    loading: false,
-    error: null,
+    exchanges: [],
 };
 
 export const assetsSlice = createSlice({
@@ -60,6 +59,10 @@ export const assetsSlice = createSlice({
         },
         clearWallet: (state) => {
             state.wallet = {};
+        },
+        setExchanges: (state, action) => {
+            const { data } = action.payload;
+            state.exchanges = data;
         },
     },
 });
