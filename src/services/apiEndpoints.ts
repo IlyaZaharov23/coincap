@@ -11,9 +11,6 @@ export const COIN_CAP_API = {
     },
     MARKETS: {
         GET_ALL: `${API_BASE}/markets`,
-        // GET_BY_EXCHANGE: (exchangeId: string) => `${API_BASE}/markets?exchangeId=${exchangeId}`,
-        // GET_BY_BASE_QUOTE: (baseSymbol: string, quoteSymbol: string) =>
-        //     `${API_BASE}/markets?baseSymbol=${baseSymbol}&quoteSymbol=${quoteSymbol}`,
     },
 };
 
