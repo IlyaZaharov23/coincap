@@ -5,6 +5,7 @@ import { Stack, Td, Text, Tooltip, Tr, useDisclosure } from "@chakra-ui/react";
 import { CoinsAddModal } from "components/CoinsAddModal";
 import { CryptoIcon } from "components/CryptoIcon";
 import { ModalWrapper } from "components/ModalWrapper";
+import { useIsMobile, useIsTablet } from "hooks/useDevice";
 import { useRouter } from "next/navigation";
 import { ApiWrapper } from "services/ApiWrapper";
 import { USER_ID } from "services/constants";
@@ -32,6 +33,8 @@ export const AssetItem = ({ asset, currentPage }: AssetItemProps) => {
     const [coinsCount, setCoinsCount] = useState<string>("");
     const [isLoading, setIsLoading] = useState(false);
     const wallet = useAppSelector(getWallet);
+    const isMobile = useIsMobile();
+    const isTablet = useIsTablet();
 
     const onSubmit = () => {
         try {
@@ -102,17 +105,21 @@ export const AssetItem = ({ asset, currentPage }: AssetItemProps) => {
     return (
         <>
             <Tr key={asset.id} onClick={() => onClickAsset(asset)} _hover={{ backgroundColor: hoverGray }}>
-                <Td sx={{ ...styles.rowText("23vw"), ...styles.nameWrapper }}>
+                <Td sx={{ ...styles.rowText(isMobile ? "37vw" : isTablet ? "26vw" : "23vw"), ...styles.nameWrapper }}>
                     <CryptoIcon symbol={asset.symbol} size={40} />
-                    <Stack gap="0.25rem">
+                    <Stack sx={styles.coinInfoWrapper}>
                         <Text sx={styles.nameText}>{asset.name}</Text>
                         <Text sx={styles.symbolText}>{asset.symbol}</Text>
                     </Stack>
                 </Td>
-                <Td sx={styles.rowText("11vw")}>{PricesUtil.formatAsCurrency(asset.vwap24Hr)}</Td>
+                {!isMobile && (
+                    <Td sx={styles.rowText(isTablet ? "18vw" : "11vw")}>
+                        {PricesUtil.formatAsCurrency(asset.vwap24Hr)}
+                    </Td>
+                )}
                 <Td
                     sx={{
-                        ...styles.rowText("11vw"),
+                        ...styles.rowText(isMobile ? "37vw" : isTablet ? "20vw" : "11vw"),
                         color: StyleUtil.getCurrencyPriceChangeColor(
                             getPriceStatus(asset.vwap24Hr, asset.changePercent24Hr),
                         ),
@@ -127,22 +134,30 @@ export const AssetItem = ({ asset, currentPage }: AssetItemProps) => {
                         {getPriceArrowIcon(asset.vwap24Hr, asset.changePercent24Hr)}
                     </Stack>
                 </Td>
-                <Td sx={styles.rowText("14vw")}>{PricesUtil.formatLargeCurrency(asset.marketCapUsd)}</Td>
-                <Td sx={styles.rowText("11vw")}>{PricesUtil.formatAsCurrency(asset.priceUsd)}</Td>
-                <Tooltip
-                    isDisabled={isUserSignedIn}
-                    label="You need to sign in to add coin to the wallet. Please log in or create an account."
-                >
-                    <Td
-                        sx={{
-                            ...styles.rowText("5vw"),
-                            color: isUserSignedIn ? darkGray : semiDarkGray,
-                        }}
-                        onClick={handleOpenAddModal}
-                    >
-                        +
+                {!isMobile && (
+                    <Td sx={styles.rowText(isTablet ? "20vw" : "14vw")}>
+                        {PricesUtil.formatLargeCurrency(asset.marketCapUsd)}
                     </Td>
-                </Tooltip>
+                )}
+                <Td sx={styles.rowText(isMobile ? "26vw" : isTablet ? "17vw" : "11vw")}>
+                    {PricesUtil.formatAsCurrency(asset.priceUsd)}
+                </Td>
+                {!isMobile && !isTablet && (
+                    <Tooltip
+                        isDisabled={isUserSignedIn}
+                        label="You need to sign in to add coin to the wallet. Please log in or create an account."
+                    >
+                        <Td
+                            sx={{
+                                ...styles.rowText("5vw"),
+                                color: isUserSignedIn ? darkGray : semiDarkGray,
+                            }}
+                            onClick={handleOpenAddModal}
+                        >
+                            +
+                        </Td>
+                    </Tooltip>
+                )}
             </Tr>
             <ModalWrapper
                 isOpen={isOpen}

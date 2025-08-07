@@ -1,4 +1,5 @@
 import { black, bluePrimary } from "shared/constants/colors";
+import { responsive } from "utils/helpers/themeBreakpoints/breakpoints";
 
 export const styles = {
     mainWrapper: {
@@ -8,6 +9,7 @@ export const styles = {
         justifyContent: "center",
         gap: "1rem",
         cursor: "pointer",
+        paddingBottom: responsive("1rem", { xl: "0" }),
     },
     textWrapper: {
         display: "flex",

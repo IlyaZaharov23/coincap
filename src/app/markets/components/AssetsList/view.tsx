@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 
 import { Stack, Table, TableContainer, Tbody, Th, Thead, Tr } from "@chakra-ui/react";
 
+import { useIsMobile, useIsTablet } from "hooks/useDevice";
 import { CURRENT_ASSETS_PAGE, USER_ID } from "services/constants";
 import { ASSETS_LIMIT } from "shared/constants/assetsLimit";
 import { useAppDispatch, useAppSelector } from "store/hooks";
@@ -27,6 +28,8 @@ export const AssetsList = () => {
     const assets = useAppSelector(assetsListGet);
     const wallet = useAppSelector(getWallet);
     const [hasLoaded, setHasLoaded] = useState(false);
+    const isMobile = useIsMobile();
+    const isTablet = useIsTablet();
 
     const handleChangeOffset = (currentPage: number) => {
         setOffset(currentPage * ITEMS_PER_PAGE);
@@ -95,16 +98,20 @@ export const AssetsList = () => {
             setIsLoading={setIsLoading}
         >
             <Stack sx={styles.wrapper}>
-                <TableContainer sx={styles.container}>
+                <TableContainer sx={styles.container(isMobile ? 64 : 128)}>
                     <Table sx={styles.table}>
                         <Thead sx={styles.headWrapper}>
                             <Tr sx={styles.headText}>
-                                <Th sx={styles.headerItem("23vw")}>Name</Th>
-                                <Th sx={styles.headerItem("11vw")}>{`VWAP(24Hr)`}</Th>
-                                <Th sx={styles.headerItem("11vw")}>{`Change(24Hr)`}</Th>
-                                <Th sx={styles.headerItem("14vw")}>Market Cap</Th>
-                                <Th sx={styles.headerItem("11vw")}>Price</Th>
-                                <Th sx={styles.headerItem("5vw")}></Th>
+                                <Th sx={styles.headerItem(isMobile ? "40vw" : isTablet ? "28vw" : "23vw")}>Name</Th>
+                                {!isMobile && (
+                                    <Th sx={styles.headerItem(isTablet ? "18vw" : "11vw")}>{`VWAP(24Hr)`}</Th>
+                                )}
+                                <Th sx={styles.headerItem(isMobile ? "30vw" : isTablet ? "17vw" : "11vw")}>
+                                    {`Change(24Hr)`}
+                                </Th>
+                                {!isMobile && <Th sx={styles.headerItem(isTablet ? "20vw" : "14vw")}>Market Cap</Th>}
+                                <Th sx={styles.headerItem(isMobile ? "30vw" : isTablet ? "17vw" : "11vw")}>Price</Th>
+                                {!isMobile && !isTablet && <Th sx={styles.headerItem("5vw")}></Th>}
                             </Tr>
                         </Thead>
                         <Tbody sx={styles.bodyWrapper}>

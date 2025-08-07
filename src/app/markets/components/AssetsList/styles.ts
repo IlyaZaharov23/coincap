@@ -1,11 +1,11 @@
 import { TOP_WRAPPER_MARGIN } from "app/markets/styles";
 import { HEADER_HEIGHT } from "components/Header/styles";
 import { black } from "shared/constants/colors";
+import { responsive } from "utils/helpers/themeBreakpoints/breakpoints";
 
 import { PAGINATION_WRAPPER_PADDING_BOTTOM, PAGINATION_WRAPPER_PADDING_TOP } from "../Pagination/styles";
 
 const TABLE_MARGIN_TOP = 32;
-
 const TABLE_HEADER_HEIGHT = 41;
 
 export const styles = {
@@ -14,15 +14,23 @@ export const styles = {
         alignItems: "center",
         justifyContent: "center",
     },
-    container: {
+    container: (coefficient: number) => ({
         marginTop: `${TABLE_MARGIN_TOP}px`,
-        width: "75vw",
+        width: responsive("100vw", { md: "100vw", xl: "75vw" }),
         maxWidth: "100vw",
-        height: `calc(100vh - ${HEADER_HEIGHT + TOP_WRAPPER_MARGIN + TABLE_HEADER_HEIGHT + PAGINATION_WRAPPER_PADDING_BOTTOM + PAGINATION_WRAPPER_PADDING_TOP + 128 + 40}px)`,
+        height: `calc(100vh - ${
+            HEADER_HEIGHT +
+            TOP_WRAPPER_MARGIN +
+            TABLE_HEADER_HEIGHT +
+            PAGINATION_WRAPPER_PADDING_BOTTOM +
+            PAGINATION_WRAPPER_PADDING_TOP +
+            coefficient +
+            40
+        }px)`,
         overflow: "hidden",
         display: "flex",
         flexDirection: "column",
-    },
+    }),
     table: {
         display: "flex",
         flexDirection: "column",
@@ -35,7 +43,7 @@ export const styles = {
         top: 0,
         zIndex: 1,
         backgroundColor: "white",
-        width: "100%",
+        width: responsive("100vw", { xl: "100%" }),
     },
     bodyWrapper: {
         flex: 1,

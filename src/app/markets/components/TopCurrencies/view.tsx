@@ -5,7 +5,9 @@ import { useCallback, useEffect, useState } from "react";
 import { Stack, Text } from "@chakra-ui/react";
 
 import { Coin } from "components/Coin";
+import { TabletCoin } from "components/TabletCoin";
 import { TopCurrenciesSkeleton } from "components/TopCurrenciesSkeleton";
+import { useIsMobile, useIsTablet } from "hooks/useDevice";
 import { ASSETS_LIMIT } from "shared/constants/assetsLimit";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { topAssetsListGet } from "store/slices/assets/assets.selectors";
@@ -20,6 +22,9 @@ export const TopCurrencies = () => {
     const dispatch = useAppDispatch();
     const [isLoading, setIsLoading] = useState(false);
     const [hasLoaded, setHasLoaded] = useState(false);
+
+    const isMobile = useIsMobile();
+    const isTablet = useIsTablet();
 
     const loadData = useCallback(async () => {
         try {
@@ -41,6 +46,8 @@ export const TopCurrencies = () => {
         }
     }, [loadData, topAssets.length]);
 
+    if (isMobile) return null;
+
     return (
         <Stack sx={styles.mainWrapper}>
             <Text sx={styles.wrapperName}>Top markets:</Text>
@@ -48,7 +55,15 @@ export const TopCurrencies = () => {
                 {isLoading ? (
                     <TopCurrenciesSkeleton count={3} />
                 ) : (
-                    getTopAssetsByCount(topAssets, 3).map((asset) => <Coin key={asset.id} asset={asset} />)
+                    getTopAssetsByCount(topAssets, 3).map((asset) => (
+                        <>
+                            {isTablet ? (
+                                <TabletCoin key={asset.id} asset={asset} />
+                            ) : (
+                                <Coin key={asset.id} asset={asset} />
+                            )}
+                        </>
+                    ))
                 )}
             </Stack>
         </Stack>

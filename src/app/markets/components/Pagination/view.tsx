@@ -4,7 +4,6 @@ import { Stack } from "@chakra-ui/react";
 import { Button } from "components/Button";
 import { ASSETS_LIMIT } from "shared/constants/assetsLimit";
 import { BUTTON_VARIANT } from "shared/constants/buttonVariants";
-import { bluePrimary, darkGray } from "shared/constants/colors";
 import { useAppDispatch } from "store/hooks";
 import { getAssets } from "store/slices/assets/assets.thunks";
 import { Asset } from "types/types";
@@ -83,7 +82,7 @@ export const Pagination = ({
     const visiblePages = getVisiblePages(totalPages, currentPage);
 
     return (
-        <Stack>
+        <Stack height="100%" justifyContent="space-between">
             <Stack>{children}</Stack>
             <Stack sx={styles.paginationWrapper}>
                 {isLoading ? (
@@ -98,9 +97,7 @@ export const Pagination = ({
                             <Button
                                 key={`assets page${page}`}
                                 variant={BUTTON_VARIANT.TAB}
-                                color={currentPage == page ? bluePrimary : darkGray}
                                 onClick={() => handlePageChange(page)}
-                                fontWeight={currentPage == page ? "600" : " 400"}
                             >
                                 {page}
                             </Button>
