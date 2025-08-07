@@ -1,5 +1,6 @@
 import { black, darkGray, errorRed, green } from "shared/constants/colors";
 import { PRICE_STATUS } from "shared/constants/priceStatus";
+import { responsive } from "utils/helpers/themeBreakpoints/breakpoints";
 
 export const MAIN_WRAPPER_GAP = 8;
 export const COINS_WRAPPER_HEIGHT = 90;
@@ -18,7 +19,7 @@ export const styles = {
         alignItems: "center",
         justifyContent: "center",
         flexWrap: "wrap",
-        gap: "2rem",
+        gap: responsive("0.5rem", { xl: "2rem" }),
         minHeight: `${COINS_WRAPPER_HEIGHT}px`,
     },
     assetWrapper: {

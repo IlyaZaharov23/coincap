@@ -14,7 +14,8 @@ export const useIsTablet = () => {
         useBreakpointValue({
             base: false,
             md: true,
-            lg: false,
+            lg: true,
+            xl: false,
         }) ?? false
     );
 };
