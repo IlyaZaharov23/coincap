@@ -7,6 +7,7 @@ import loginIcon from "assets/loginIcon.svg";
 import { FormWrapper } from "components/FormWrapper";
 import { FormData } from "components/FormWrapper/types";
 import { Input } from "components/Input";
+import { useIsMobile } from "hooks/useDevice";
 import { useRouter } from "next/navigation";
 import { ApiWrapper } from "services/ApiWrapper";
 import { EMAIL_REQUIREMENT_KEYS } from "shared/constants/formRequirements";
@@ -26,6 +27,7 @@ export const SignInForm = () => {
     const [emailError, setEmailError] = useState<boolean>(false);
     const [showPassword, setShowPassword] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState(false);
+    const isMobile = useIsMobile();
 
     const handleClickPasswordIcon = () => setShowPassword(!showPassword);
 
@@ -93,7 +95,7 @@ export const SignInForm = () => {
                 hasError={emailError}
                 errorText={emailRequirementsMap[EMAIL_REQUIREMENT_KEYS.FORMAT]}
                 label="Email"
-                width="450px"
+                width={isMobile ? "100%" : "450px"}
                 autoComplete="off"
             />
             <Input
@@ -102,7 +104,7 @@ export const SignInForm = () => {
                 placeholder="Example!1"
                 size={INPUT_SIZE.LARGE}
                 label="Password"
-                width="450px"
+                width={isMobile ? "100%" : "450px"}
                 type={showPassword ? "text" : "password"}
                 autoComplete="new-password"
                 showPasswordIcon

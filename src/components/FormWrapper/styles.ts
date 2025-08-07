@@ -1,4 +1,5 @@
-import { black, borderGray, formGray } from "shared/constants/colors";
+import { black, borderGray, formGray, white } from "shared/constants/colors";
+import { responsive } from "utils/helpers/themeBreakpoints/breakpoints";
 
 export const styles = {
     mainWrapper: {
@@ -6,11 +7,11 @@ export const styles = {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        border: `2px solid ${borderGray}`,
+        border: responsive("none", { md: `2px solid ${borderGray}` }),
         borderRadius: "10px",
-        backgroundColor: formGray,
-        padding: "2rem",
-        boxShadow: `0 4px 12px ${black}3A, 0 2px 6px ${black}3A`,
+        backgroundColor: responsive(white, { md: formGray }),
+        padding: responsive("0 2rem", { md: "2rem" }),
+        boxShadow: responsive("none", { md: `0 4px 12px ${black}3A, 0 2px 6px ${black}3A` }),
     },
     text: {
         fontSize: "2rem",
