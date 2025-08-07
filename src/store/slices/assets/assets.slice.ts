@@ -21,6 +21,13 @@ export const assetsSlice = createSlice({
         setAssetsList: (state, action) => {
             const { data } = action.payload;
 
+            if (
+                Object.keys(state.assets).length > 0 &&
+                JSON.stringify(data) === JSON.stringify(Object.values(state.assets).flat())
+            ) {
+                return;
+            }
+
             const startPage =
                 Object.keys(state.assets).length === 0 ? 1 : Math.max(...Object.keys(state.assets).map(Number)) + 1;
 

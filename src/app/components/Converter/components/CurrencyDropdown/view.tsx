@@ -1,4 +1,6 @@
-import { TriangleDownIcon } from "@chakra-ui/icons";
+import { useCallback, useMemo } from "react";
+
+import { AddIcon } from "@chakra-ui/icons";
 import { Popover, PopoverContent, PopoverTrigger, Stack, Text, useDisclosure } from "@chakra-ui/react";
 
 import { CryptoIcon } from "components/CryptoIcon";
@@ -6,62 +8,49 @@ import { useAppSelector } from "store/hooks";
 import { topAssetsListGet } from "store/slices/assets/assets.selectors";
 import { Asset } from "types/types";
 
-import { CurrencyDropdownItem } from "../CurrencyDropdownItem";
 import { styles } from "./styles";
 import { CurrencyDropdownProps } from "./types";
 
-export const CurrencyDropdown = ({
-    baseCoin,
-    quoteCoin,
-    handleSelectBaseCoin,
-    handleSelectQuoteCoin,
-    isBaseCoin,
-    isQuoteCoin,
-}: CurrencyDropdownProps) => {
+export const CurrencyDropdown = ({ handleAddQuoteAsset, quoteInputValues }: CurrencyDropdownProps) => {
     const topAssets = useAppSelector(topAssetsListGet);
     const { isOpen, onClose, onOpen } = useDisclosure();
-    const selectedCoin = isBaseCoin ? baseCoin : quoteCoin;
 
-    const getSelectableAssets = () => {
-        if (isBaseCoin) {
-            return topAssets.filter((asset) => asset.id !== quoteCoin?.id);
-        }
-        if (isQuoteCoin) {
-            return topAssets.filter((asset) => asset.id !== baseCoin?.id);
-        }
-    };
+    const getAvaildableAssets = useMemo(() => {
+        const quoteIds = quoteInputValues.map((quote) => quote.id);
+        return topAssets.filter((asset) => !quoteIds.includes(asset.id));
+    }, [quoteInputValues, topAssets]);
 
-    const handleClickItem = (coin: Asset) => {
-        if (isBaseCoin) {
-            handleSelectBaseCoin?.(coin);
-        }
-        if (isQuoteCoin) {
-            handleSelectQuoteCoin?.(coin);
-        }
-        onClose();
-    };
+    const handleItemClick = useCallback(
+        (asset: Asset) => {
+            handleAddQuoteAsset(asset);
+            onClose();
+        },
+        [handleAddQuoteAsset, onClose],
+    );
+
     return (
         <Popover matchWidth isOpen={isOpen} onClose={onClose} onOpen={onOpen}>
             <PopoverTrigger>
-                <Stack sx={styles.buttonWrapper}>
-                    <Stack sx={styles.buttonInfoWrapper}>
-                        <CryptoIcon size={28} symbol={selectedCoin?.symbol} />
-                        <Text sx={styles.buttonCoinName}>{selectedCoin?.name}</Text>
+                {quoteInputValues.length < 5 ? (
+                    <Stack sx={styles.addCurrency(isOpen)}>
+                        <Stack>
+                            <AddIcon />
+                        </Stack>
+                        <Text sx={styles.addText}>Add Currency</Text>
                     </Stack>
-                    <TriangleDownIcon sx={styles.arrowIcon} />
-                </Stack>
+                ) : (
+                    <span />
+                )}
             </PopoverTrigger>
             <PopoverContent sx={styles.itemsWrapper}>
-                {getSelectableAssets()?.map((asset) => (
-                    <CurrencyDropdownItem
-                        key={asset.id}
-                        asset={asset}
-                        handleItemClick={handleClickItem}
-                        baseCoin={baseCoin}
-                        quoteCoin={quoteCoin}
-                        isBaseCoin={isBaseCoin}
-                        isQuoteCoin={isQuoteCoin}
-                    />
+                {getAvaildableAssets.map((asset) => (
+                    <Stack key={asset.id} sx={styles.mainWrapper} onClick={() => handleItemClick(asset)}>
+                        <CryptoIcon size={32} symbol={asset.symbol} />
+                        <Stack sx={styles.namesWrapper}>
+                            <Text sx={styles.coinName}>{asset.name}</Text>
+                            <Text sx={styles.coinSymbol}>{asset.symbol}</Text>
+                        </Stack>
+                    </Stack>
                 ))}
             </PopoverContent>
         </Popover>
