@@ -12,7 +12,6 @@ export const styles = {
         alignItems: "center",
         width: "100vw",
         padding: responsive(`${HEADER_PADDING_Y}px`, { md: `${HEADER_PADDING_Y}px 32px` }),
-        // padding: `${HEADER_PADDING_Y}px 32px`,
         backgroundColor: white,
         borderBottom: `1px solid ${borderGray}`,
         height: `${HEADER_HEIGHT}px`,
