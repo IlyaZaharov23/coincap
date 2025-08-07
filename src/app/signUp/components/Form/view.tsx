@@ -6,6 +6,7 @@ import { passwordRequirementsMap } from "app/signUp/constants/inputRequirements"
 import registrationIcon from "assets/registrationIcon.svg";
 import { FormWrapper } from "components/FormWrapper";
 import { Input } from "components/Input";
+import { useIsMobile } from "hooks/useDevice";
 import { useRouter } from "next/navigation";
 import { ApiWrapper } from "services/ApiWrapper";
 import { PASSWORD_REQUIREMENT_KEYS } from "shared/constants/formRequirements";
@@ -28,6 +29,7 @@ export const SignUpForm = () => {
     const [showPassword, setShowPassword] = useState<boolean>(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState(false);
+    const isMobile = useIsMobile();
 
     useEffect(() => {
         if (ApiWrapper.getToken()) {
@@ -100,7 +102,7 @@ export const SignUpForm = () => {
                 label="Username"
                 hasError={!!errors.username}
                 errorText={errors.username || ""}
-                width="450px"
+                width={isMobile ? "100%" : "450px"}
                 autoComplete="off"
             />
             <Input
@@ -111,7 +113,7 @@ export const SignUpForm = () => {
                 label="Email"
                 hasError={!!errors.email}
                 errorText={errors.email || ""}
-                width="450px"
+                width={isMobile ? "100%" : "450px"}
                 autoComplete="off"
             />
             <Input
@@ -122,7 +124,7 @@ export const SignUpForm = () => {
                 label="Password"
                 hasError={!!errors.password}
                 errorText={errors.password ? passwordRequirementsMap[PASSWORD_REQUIREMENT_KEYS.WRONG] : ""}
-                width="450px"
+                width={isMobile ? "100%" : "450px"}
                 type={showPassword ? "text" : "password"}
                 autoComplete="new-password"
                 showPassword={showPassword}
@@ -137,7 +139,7 @@ export const SignUpForm = () => {
                 label="Confirm password"
                 hasError={!!errors.confirmPassword}
                 errorText={errors.confirmPassword || ""}
-                width="450px"
+                width={isMobile ? "100%" : "450px"}
                 type={showConfirmPassword ? "text" : "password"}
                 autoComplete="new-password"
                 showPassword={showConfirmPassword}
@@ -152,7 +154,7 @@ export const SignUpForm = () => {
                 label="Years old"
                 hasError={!!errors.age}
                 errorText={errors.age || ""}
-                width="450px"
+                width={isMobile ? "100%" : "450px"}
                 autoComplete="off"
             />
             <PasswordRequirements passwordError={errors.password} />

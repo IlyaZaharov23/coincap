@@ -1,4 +1,5 @@
-import { black, bluePrimary, borderGray, white } from "shared/constants/colors";
+import { black, bluePrimary, borderGray, darkGray, white } from "shared/constants/colors";
+import { responsive } from "utils/helpers/themeBreakpoints/breakpoints";
 
 export const HEADER_PADDING_Y = 12;
 export const HEADER_HEIGHT = 65;
@@ -10,7 +11,7 @@ export const styles = {
         justifyContent: "space-between",
         alignItems: "center",
         width: "100vw",
-        padding: `${HEADER_PADDING_Y}px 32px`,
+        padding: responsive(`${HEADER_PADDING_Y}px`, { md: `${HEADER_PADDING_Y}px 32px` }),
         backgroundColor: white,
         borderBottom: `1px solid ${borderGray}`,
         height: `${HEADER_HEIGHT}px`,
@@ -21,7 +22,6 @@ export const styles = {
         zIndex: 10,
     },
     contentWrapper: {
-        width: "50vw",
         display: "flex",
         flexDirection: "row",
         alignItems: "center",
@@ -35,5 +35,11 @@ export const styles = {
         "&:hover": {
             color: black,
         },
+    },
+    pathname: {
+        fontSize: "1.25rem",
+        fontWeight: "600",
+        color: darkGray,
+        alignSelf: "center",
     },
 };

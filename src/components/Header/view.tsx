@@ -3,22 +3,25 @@
 import { FC } from "react";
 
 import { ChevronLeftIcon } from "@chakra-ui/icons";
-import { Stack } from "@chakra-ui/react";
+import { Stack, Text } from "@chakra-ui/react";
 
 import { Logo } from "components/Logo";
-import { useIsMobile } from "hooks/useDevice";
-import { useRouter } from "next/navigation";
+import { useIsMobile, useIsTablet } from "hooks/useDevice";
+import { usePathname, useRouter } from "next/navigation";
 import { ApiWrapper } from "services/ApiWrapper";
 import { USER_EMAIL } from "services/constants";
+import { TextUtil } from "utils/text";
 
 import { ActionButtons } from "./components/ActionButtons";
 import { Navbar } from "./components/Navbar";
 import { styles } from "./styles";
 import { HeaderPropsType } from "./types";
 
-export const Header: FC<HeaderPropsType> = ({ showNavbar, showBack, isSignInHidden, isSignUpHidden }) => {
+export const Header: FC<HeaderPropsType> = ({ showNavbar, showBack, isSignInHidden, isSignUpHidden, showClose }) => {
     const router = useRouter();
     const isMobile = useIsMobile();
+    const isTablet = useIsTablet();
+    const pathname = usePathname();
     const handleGoBack = () => {
         if (sessionStorage.getItem(USER_EMAIL)) {
             sessionStorage.removeItem(USER_EMAIL);
@@ -30,10 +33,18 @@ export const Header: FC<HeaderPropsType> = ({ showNavbar, showBack, isSignInHidd
     return (
         <Stack sx={styles.headerWrapper}>
             <Stack sx={styles.contentWrapper}>
-                {showBack ? <ChevronLeftIcon sx={styles.backIcon} onClick={handleGoBack} /> : !isMobile && <Logo />}
-                {showNavbar && <Navbar />}
+                {showBack ? <ChevronLeftIcon sx={styles.backIcon} onClick={handleGoBack} /> : <Logo />}
             </Stack>
-            <ActionButtons showLogOut={isShowLogout} isSignInHidden={isSignInHidden} isSignUpHidden={isSignUpHidden} />
+            {showNavbar && <Navbar />}
+            {(isMobile || isTablet) && !showNavbar && (
+                <Text sx={styles.pathname}>{TextUtil.pathToTitle(pathname)}</Text>
+            )}
+            <ActionButtons
+                showLogOut={isShowLogout}
+                isSignInHidden={isSignInHidden}
+                isSignUpHidden={isSignUpHidden}
+                showClose={showClose}
+            />
         </Stack>
     );
 };

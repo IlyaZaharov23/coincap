@@ -1,5 +1,6 @@
 import { FC } from "react";
 
+import { CloseIcon } from "@chakra-ui/icons";
 import { Stack } from "@chakra-ui/react";
 
 import logoutIcon from "assets/logoutIcon.svg";
@@ -18,7 +19,7 @@ import { userLogout } from "store/slices/auth/auth.thunks";
 import { styles } from "./styles";
 import { ActionButtonsProps } from "./types";
 
-export const ActionButtons: FC<ActionButtonsProps> = ({ showLogOut, isSignInHidden, isSignUpHidden }) => {
+export const ActionButtons: FC<ActionButtonsProps> = ({ showLogOut, isSignInHidden, isSignUpHidden, showClose }) => {
     const router = useRouter();
     const dispatch = useAppDispatch();
     const isMobile = useIsMobile();
@@ -29,6 +30,10 @@ export const ActionButtons: FC<ActionButtonsProps> = ({ showLogOut, isSignInHidd
 
     const navigateToSignUp = () => {
         router.push(ROUTES.SIGN_UP);
+    };
+
+    const navigateToStart = () => {
+        router.push(ROUTES.HOME);
     };
 
     const logOut = () => {
@@ -73,6 +78,11 @@ export const ActionButtons: FC<ActionButtonsProps> = ({ showLogOut, isSignInHidd
                         </>
                     )}
                 </>
+            )}
+            {showClose && (
+                <Stack padding="0 1rem">
+                    <CloseIcon onClick={navigateToStart} />
+                </Stack>
             )}
         </Stack>
     );

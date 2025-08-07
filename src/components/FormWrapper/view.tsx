@@ -3,6 +3,7 @@ import { FC } from "react";
 import { Stack, Text } from "@chakra-ui/react";
 
 import { Button } from "components/Button";
+import { useIsMobile, useIsTablet } from "hooks/useDevice";
 import Image from "next/image";
 import { BUTTON_VARIANT } from "shared/constants/buttonVariants";
 import { InputValidationUtil } from "utils/inputValidation";
@@ -24,11 +25,15 @@ export const FormWrapper: FC<FormWrapperPropsType> = ({
     authFormState,
     isLoading,
 }) => {
+    const isMobile = useIsMobile();
+    const isTablet = useIsTablet();
     return (
         <Stack sx={styles.mainWrapper}>
-            <Text sx={styles.text}>{formTitle}</Text>
+            {!isMobile && !isTablet && <Text sx={styles.text}>{formTitle}</Text>}
             <Image src={image} alt="auth-logo" width={128} />
-            {children}
+            <Stack width="100%" marginTop="0.5rem" gap={0}>
+                {children}
+            </Stack>
             <Button
                 variant={BUTTON_VARIANT.PRIMARY}
                 sx={styles.confirmButton}
