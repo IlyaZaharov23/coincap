@@ -1,4 +1,5 @@
 import { black, borderGray, darkGray, formGray, hoverGray, semiDarkGray, white } from "shared/constants/colors";
+import { responsive } from "utils/helpers/themeBreakpoints/breakpoints";
 
 export const styles = {
     itemsWrapper: {
@@ -57,7 +58,8 @@ export const styles = {
         border: `1.5px solid ${borderGray}`,
         backgroundColor: isOpen ? white : formGray,
         marginTop: "0.5rem",
-        marginLeft: "2.5rem",
+        marginLeft: responsive("0", { md: "3.5rem" }),
+        // marginLeft: "3.5rem",
         borderRadius: "6px",
         borderColor: isOpen ? semiDarkGray : borderGray,
         color: isOpen ? darkGray : darkGray,

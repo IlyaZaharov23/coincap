@@ -1,4 +1,5 @@
 import { HEADER_HEIGHT } from "components/Header/styles";
+import { responsive } from "utils/helpers/themeBreakpoints/breakpoints";
 
 export const styles = {
     pageWrapper: {
@@ -20,15 +21,20 @@ export const styles = {
         padding: "20px 0",
     },
     topContentWrapper: {
-        width: "60vw",
+        width: responsive("100vw", { md: "100vw", lg: "100vw", xl: "70vw" }),
         display: "flex",
-        flexDirection: "row",
+        flexDirection: responsive("column", { md: "column", lg: "row" }),
         alignItems: "center",
         justifyContent: "space-between",
-        padding: "0 3rem",
-        gap: "3rem",
+        padding: responsive("0 3rem", { md: "0 3rem", lg: "0 3rem" }),
+        gap: responsive("1.5rem", { xl: "3rem" }),
+        // gap: "3rem",
     },
     topMarketsWrapper: {
-        margin: "0 3rem",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        width: responsive("100vw", { md: "100vw", lg: "100vw", xl: "70vw" }),
     },
 };

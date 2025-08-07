@@ -6,6 +6,7 @@ import { ChevronLeftIcon } from "@chakra-ui/icons";
 import { Stack } from "@chakra-ui/react";
 
 import { Logo } from "components/Logo";
+import { useIsMobile } from "hooks/useDevice";
 import { useRouter } from "next/navigation";
 import { ApiWrapper } from "services/ApiWrapper";
 import { USER_EMAIL } from "services/constants";
@@ -17,6 +18,7 @@ import { HeaderPropsType } from "./types";
 
 export const Header: FC<HeaderPropsType> = ({ showNavbar, showBack, isSignInHidden, isSignUpHidden }) => {
     const router = useRouter();
+    const isMobile = useIsMobile();
     const handleGoBack = () => {
         if (sessionStorage.getItem(USER_EMAIL)) {
             sessionStorage.removeItem(USER_EMAIL);
@@ -24,10 +26,11 @@ export const Header: FC<HeaderPropsType> = ({ showNavbar, showBack, isSignInHidd
         router.back();
     };
     const isShowLogout = !!ApiWrapper.getToken();
+
     return (
         <Stack sx={styles.headerWrapper}>
             <Stack sx={styles.contentWrapper}>
-                {showBack ? <ChevronLeftIcon sx={styles.backIcon} onClick={handleGoBack} /> : <Logo />}
+                {showBack ? <ChevronLeftIcon sx={styles.backIcon} onClick={handleGoBack} /> : !isMobile && <Logo />}
                 {showNavbar && <Navbar />}
             </Stack>
             <ActionButtons showLogOut={isShowLogout} isSignInHidden={isSignInHidden} isSignUpHidden={isSignUpHidden} />

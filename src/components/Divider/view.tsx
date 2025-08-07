@@ -20,7 +20,7 @@ export const Divider: FC<DividerPropsType> = ({
             bg={color}
             height={isVertical ? `${length}px` : `${thickness}px`}
             width={isVertical ? `${thickness}px` : `${length}px`}
-            marginX={4}
+            marginX={2}
         />
     );
 };

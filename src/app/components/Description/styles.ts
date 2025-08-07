@@ -1,18 +1,19 @@
 import { black, bluePrimary } from "shared/constants/colors";
+import { responsive } from "utils/helpers/themeBreakpoints/breakpoints";
 
 export const styles = {
     mainWrapper: {
         gap: "1rem",
         padding: "1rem",
-        maxWidth: "500px",
+        width: responsive("100%", { md: "500px !important", lg: "500px !important" }),
     },
     mainTitle: {
-        fontSize: "3rem",
+        fontSize: responsive("2rem", { md: "3rem" }),
         fontWeight: "500",
         color: black,
     },
     secondaryTitle: {
-        fontSize: "1.5rem",
+        fontSize: responsive("1rem", { md: "1.5rem" }),
         fontWeight: "400",
         color: black,
     },
