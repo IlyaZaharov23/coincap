@@ -15,6 +15,7 @@ export const styles = {
         alignItems: "flex-start",
         justifyContent: "center",
         gap: "0",
+        minWidth: "170px",
     },
     total: {
         fontSize: "1rem",

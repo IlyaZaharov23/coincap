@@ -8,6 +8,7 @@ export const styles = {
         justifyContent: "center",
         marginBottom: hasError ? "0" : "1.125rem",
         gap: "0",
+        width: "100%",
     }),
     label: {
         fontSize: "0.75rem",

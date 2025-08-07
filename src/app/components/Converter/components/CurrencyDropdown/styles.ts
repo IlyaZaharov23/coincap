@@ -1,28 +1,22 @@
-import { bluePrimary, borderGray, darkGray } from "shared/constants/colors";
+import { black, borderGray, darkGray, formGray, hoverGray, semiDarkGray, white } from "shared/constants/colors";
 
 export const styles = {
-    select: {
-        borderRadius: "0 6px 6px 0",
-        width: "100%",
-        marginTop: "0.25rem",
-        height: "42px",
-        borderColor: borderGray,
-        "&:focus": {
-            borderColor: bluePrimary,
-            boxShadow: `0 0 0 1px ${bluePrimary}`,
-        },
-    },
     itemsWrapper: {
         gap: "0.5rem",
         maxHeight: "400px",
         overflowY: "auto",
         padding: "0.5rem 0",
+        outline: "none",
         "&::-webkit-scrollbar": {
             width: "6px",
         },
         "&::-webkit-scrollbar-thumb": {
             backgroundColor: borderGray,
             borderRadius: "3px",
+        },
+        "&:focus": {
+            outline: "none",
+            boxShadow: `0 4px 12px ${black}3A, 0 2px 6px ${black}3A`,
         },
     },
     buttonWrapper: {
@@ -52,5 +46,62 @@ export const styles = {
     arrowIcon: {
         width: "0.625rem",
         height: "0.625rem",
+    },
+    addCurrency: (isOpen: boolean) => ({
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        cursor: "pointer",
+        gap: "0.75rem",
+        padding: "0.5rem 1rem",
+        border: `1.5px solid ${borderGray}`,
+        backgroundColor: isOpen ? white : formGray,
+        marginTop: "0.5rem",
+        marginLeft: "2.5rem",
+        borderRadius: "6px",
+        borderColor: isOpen ? semiDarkGray : borderGray,
+        color: isOpen ? darkGray : darkGray,
+        "&:hover": {
+            color: darkGray,
+            backgroundColor: hoverGray,
+            borderColor: borderGray,
+        },
+    }),
+    addText: {
+        fontSize: "1rem",
+        fontWeight: "500",
+        color: "inherit",
+    },
+    mainWrapper: {
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "flex-start",
+        cursor: "pointer",
+        padding: "0.25rem 1rem",
+        gap: "1rem",
+        backgroundColor: white,
+        color: darkGray,
+        "&:hover": {
+            backgroundColor: hoverGray,
+            color: darkGray,
+        },
+    },
+    namesWrapper: {
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "flex-start",
+        justifyContent: "center",
+        gap: 0,
+    },
+    coinName: {
+        fontSize: "0.875rem",
+        fontWeight: "400",
+        color: "inherit",
+    },
+    coinSymbol: {
+        fontSize: "0.75rem",
+        fontWeight: "300",
+        color: "inherit",
     },
 };

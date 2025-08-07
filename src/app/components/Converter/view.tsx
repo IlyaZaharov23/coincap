@@ -1,130 +1,106 @@
 "use client";
 
-import { memo, useCallback, useEffect, useMemo, useState } from "react";
+import { memo, useCallback, useMemo } from "react";
 
+import { CloseIcon } from "@chakra-ui/icons";
 import { Stack } from "@chakra-ui/react";
 
+import coinFallback from "assets/coinFallback.svg";
+import { CryptoIcon } from "components/CryptoIcon";
 import { Input } from "components/Input";
+import { useConverterCalculations } from "hooks/useConverterCalculations";
+import Image from "next/image";
 import { INPUT_SIZE } from "shared/constants/inputSizes";
 import { useAppSelector } from "store/hooks";
 import { topAssetsListGet } from "store/slices/assets/assets.selectors";
-import { Asset } from "types/types";
 import { InputValidationUtil } from "utils/inputValidation";
-import { PricesUtil } from "utils/prices";
 
 import { CurrencyDropdown } from "./components/CurrencyDropdown";
-import { ACTIVE_INPUT } from "./constants/activeInput";
 import { styles } from "./styles";
 
 const MemoizedCurrencyDropdown = memo(CurrencyDropdown);
 
 export const Converter = () => {
     const topAssets = useAppSelector(topAssetsListGet);
-    const [baseCoin, setBaseCoin] = useState<Asset | null>(null);
-    const [quoteCoin, setQuoteCoin] = useState<Asset | null>(null);
-    const [baseInputValue, setBaseInputValue] = useState<string>("");
-    const [quoteInputValue, setQuoteInputValue] = useState<string>("");
-    const [activeInput, setActiveInput] = useState<string>(ACTIVE_INPUT.BASE);
+    const initialQuoteAssets = useMemo(() => topAssets.filter((_, i) => i < 2), [topAssets]);
 
-    const handleChangeBaseValue = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-        const inputValue = e.target.value;
-        if (inputValue === "" || InputValidationUtil.isDigit(inputValue)) {
-            setActiveInput(ACTIVE_INPUT.BASE);
-            setBaseInputValue(inputValue);
-        }
-    }, []);
+    const {
+        baseInputValue,
+        quoteInputValues,
+        quoteAmounts,
+        setBaseInputValue,
+        setActiveInput,
+        updateQuoteAmountsFromBase,
+        updateFromQuoteInput,
+        addQuoteAsset,
+        removeQuoteAsset,
+    } = useConverterCalculations(initialQuoteAssets);
 
-    const handleChangeQuoteValue = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-        const inputValue = e.target.value;
-        if (inputValue === "" || InputValidationUtil.isDigit(inputValue)) {
-            setActiveInput(ACTIVE_INPUT.QUOTE);
-            setQuoteInputValue(inputValue);
-        }
-    }, []);
+    const handleChangeBaseValue = useCallback(
+        (e: React.ChangeEvent<HTMLInputElement>) => {
+            const value = e.target.value;
+            if (value === "" || InputValidationUtil.isDigit(value)) {
+                setActiveInput("base");
+                setBaseInputValue(value);
+                updateQuoteAmountsFromBase(value);
+            }
+        },
+        [setActiveInput, setBaseInputValue, updateQuoteAmountsFromBase],
+    );
 
-    const handleSelectBaseCoin = useCallback((coin: Asset) => {
-        setBaseCoin(coin);
-        setActiveInput(ACTIVE_INPUT.BASE);
-    }, []);
-
-    const handleSelectQuoteCoin = useCallback((coin: Asset) => {
-        setQuoteCoin(coin);
-        setActiveInput(ACTIVE_INPUT.QUOTE);
-    }, []);
-
-    useMemo(() => {
-        if (!baseCoin?.priceUsd || !quoteCoin?.priceUsd) return;
-
-        if (activeInput === ACTIVE_INPUT.BASE && baseInputValue) {
-            const calculatedQuoteValue = PricesUtil.convertBaseToQuoteValue(
-                baseInputValue,
-                baseCoin.priceUsd,
-                quoteCoin.priceUsd,
-            );
-            setQuoteInputValue(calculatedQuoteValue);
-        } else if (activeInput === ACTIVE_INPUT.QUOTE && quoteInputValue) {
-            const calculatedBaseValue = PricesUtil.convertBaseToQuoteValue(
-                quoteInputValue,
-                quoteCoin.priceUsd,
-                baseCoin.priceUsd,
-            );
-            setBaseInputValue(calculatedBaseValue);
-        }
-    }, [baseInputValue, quoteInputValue, baseCoin?.priceUsd, quoteCoin?.priceUsd, activeInput]);
-
-    const baseDropdownProps = useMemo(
-        () => ({
-            baseCoin,
-            quoteCoin,
-            handleSelectCoin: handleSelectBaseCoin,
-            isBaseCoin: true,
-        }),
-        [baseCoin, quoteCoin, handleSelectBaseCoin],
+    const handleChangeQuoteValue = useCallback(
+        (assetId: string, e: React.ChangeEvent<HTMLInputElement>) => {
+            const value = e.target.value;
+            if (value === "" || InputValidationUtil.isDigit(value)) {
+                setActiveInput(assetId);
+                updateFromQuoteInput(assetId, value);
+            }
+        },
+        [setActiveInput, updateFromQuoteInput],
     );
 
     const quoteDropdownProps = useMemo(
         () => ({
-            baseCoin,
-            quoteCoin,
-            handleSelectCoin: handleSelectQuoteCoin,
-            isQuoteCoin: true,
+            handleAddQuoteAsset: addQuoteAsset,
+            quoteInputValues,
         }),
-        [baseCoin, quoteCoin, handleSelectQuoteCoin],
+        [addQuoteAsset, quoteInputValues],
     );
 
-    useEffect(() => {
-        if (topAssets.length > 0) {
-            setBaseCoin(topAssets[0]);
-            setQuoteCoin(topAssets[1]);
-        }
-    }, [topAssets]);
+    const showCloseIcon = quoteInputValues.length > 1;
 
     return (
         <Stack sx={styles.mainWrapper}>
-            <Stack sx={styles.topWrapper}>
+            <Stack sx={styles.baseInputWrapper}>
+                <Image src={coinFallback} alt="coin-fallback" width={40} />
                 <Input
                     sx={styles.input}
-                    label="Spend"
+                    label="USD"
                     size={INPUT_SIZE.LARGE}
                     inputMode="decimal"
                     type="text"
                     value={baseInputValue}
                     onChange={handleChangeBaseValue}
                 />
-                <MemoizedCurrencyDropdown {...baseDropdownProps} />
             </Stack>
             <Stack sx={styles.topWrapper}>
-                <Input
-                    sx={styles.input}
-                    label="Receive"
-                    size={INPUT_SIZE.LARGE}
-                    inputMode="decimal"
-                    type="text"
-                    value={quoteInputValue}
-                    onChange={handleChangeQuoteValue}
-                />
-                <MemoizedCurrencyDropdown {...quoteDropdownProps} />
+                {quoteInputValues.map((quote) => (
+                    <Stack key={quote.id} sx={styles.quoteInputWrapper}>
+                        <CryptoIcon size={40} symbol={quote.symbol} />
+                        <Input
+                            sx={{ ...styles.input, ...styles.quoteInput(showCloseIcon) }}
+                            label={quote.symbol}
+                            size={INPUT_SIZE.LARGE}
+                            value={quoteAmounts[quote.id] || ""}
+                            onChange={(e) => handleChangeQuoteValue(quote.id, e)}
+                        />
+                        {showCloseIcon && (
+                            <CloseIcon sx={styles.closeIcon} onClick={() => removeQuoteAsset(quote.id)} />
+                        )}
+                    </Stack>
+                ))}
             </Stack>
+            <MemoizedCurrencyDropdown {...quoteDropdownProps} />
         </Stack>
     );
 };
