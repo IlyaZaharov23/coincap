@@ -16,6 +16,7 @@ import { topAssetsListGet } from "store/slices/assets/assets.selectors";
 import { InputValidationUtil } from "utils/inputValidation";
 
 import { CurrencyDropdown } from "./components/CurrencyDropdown";
+import { ACTIVE_INPUT } from "./constants/activeInput";
 import { styles } from "./styles";
 
 const MemoizedCurrencyDropdown = memo(CurrencyDropdown);
@@ -40,7 +41,7 @@ export const Converter = () => {
         (e: React.ChangeEvent<HTMLInputElement>) => {
             const value = e.target.value;
             if (value === "" || InputValidationUtil.isDigit(value)) {
-                setActiveInput("base");
+                setActiveInput(ACTIVE_INPUT.BASE);
                 setBaseInputValue(value);
                 updateQuoteAmountsFromBase(value);
             }

@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 
+import { ACTIVE_INPUT } from "app/components/Converter/constants/activeInput";
 import { Asset } from "types/types";
 import { PricesUtil } from "utils/prices";
 
@@ -7,7 +8,7 @@ export const useConverterCalculations = (initialQuoteAssets: Asset[] = []) => {
     const [baseInputValue, setBaseInputValue] = useState<string>("");
     const [quoteInputValues, setQuoteInputValues] = useState<Asset[]>(initialQuoteAssets);
     const [quoteAmounts, setQuoteAmounts] = useState<Record<string, string>>({});
-    const [activeInput, setActiveInput] = useState<"base" | string>("base");
+    const [activeInput, setActiveInput] = useState<"base" | string>(ACTIVE_INPUT.BASE);
 
     const initializeQuoteValues = useCallback((assets: Asset[]) => {
         setQuoteInputValues(assets);
