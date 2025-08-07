@@ -1,8 +1,10 @@
+import { responsive } from "utils/helpers/themeBreakpoints/breakpoints";
+
 export const styles = {
     buttonsWrapper: {
         display: "flex",
         flexDirection: "row",
         alignItems: "center",
-        gap: "8px",
+        gap: responsive("16px", { md: "8px" }),
     },
 };

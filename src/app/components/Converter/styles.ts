@@ -1,4 +1,5 @@
 import { black, bluePrimary, borderGray } from "shared/constants/colors";
+import { responsive } from "utils/helpers/themeBreakpoints/breakpoints";
 
 const QUOTE_INPUT_WRAPPER_GAP = 16;
 const ICON_SIZE = 16;
@@ -13,7 +14,7 @@ export const styles = {
         borderRadius: "20px",
         padding: "1.5rem 2rem",
         boxShadow: `0 4px 12px ${black}3A, 0 2px 6px ${black}3A`,
-        width: "500px",
+        width: responsive("100%", { md: "500px !important", lg: "500px !important" }),
         gap: 0,
     },
     topWrapper: {

@@ -10,6 +10,7 @@ import { TopCurrenciesSkeleton } from "components/TopCurrenciesSkeleton";
 import { useRouter } from "next/navigation";
 import { ASSETS_LIMIT } from "shared/constants/assetsLimit";
 import { BUTTON_VARIANT } from "shared/constants/buttonVariants";
+import { darkGray } from "shared/constants/colors";
 import { ROUTES } from "shared/constants/routes";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { topAssetsListGet } from "store/slices/assets/assets.selectors";
@@ -50,7 +51,14 @@ export const Markets = () => {
         <Stack sx={styles.mainWrapper}>
             <Stack sx={styles.topWrapper}>
                 <Text sx={styles.wrapperName}>Top markets:</Text>
-                <Button variant={BUTTON_VARIANT.TAB} onClick={navigateToMarkets} fontSize="1.25rem">
+                <Button
+                    variant={BUTTON_VARIANT.TAB}
+                    onClick={navigateToMarkets}
+                    fontSize="1rem"
+                    fontWeight="400"
+                    padding="0.25rem"
+                    color={darkGray}
+                >
                     Explore all coins
                 </Button>
             </Stack>
