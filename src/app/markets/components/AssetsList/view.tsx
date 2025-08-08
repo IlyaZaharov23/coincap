@@ -37,10 +37,8 @@ export const AssetsList = () => {
     const setUserPortfolio = useCallback(() => {
         if (Object.keys(wallet).length > 0) return;
         const userId = localStorage.getItem(USER_ID);
-        console.log("userId: ", userId);
         if (!userId) return;
         const userPortfolio = LocalStorageUtil.getUserPortfolio(userId);
-        console.log("userPortfolio: ", userPortfolio);
         if (!userPortfolio) return;
         dispatch(updateCoinsWallet(userPortfolio));
     }, [dispatch, wallet]);
