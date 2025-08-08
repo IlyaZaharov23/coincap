@@ -1,1 +1,0 @@
-export { SellCoinsModal } from "./view";

@@ -27,7 +27,6 @@ export const AssetsList = () => {
     const dispatch = useAppDispatch();
     const assets = useAppSelector(assetsListGet);
     const wallet = useAppSelector(getWallet);
-    const [hasLoaded, setHasLoaded] = useState(false);
     const isMobile = useIsMobile();
     const isTablet = useIsTablet();
 
@@ -38,10 +37,11 @@ export const AssetsList = () => {
     const setUserPortfolio = useCallback(() => {
         if (Object.keys(wallet).length > 0) return;
         const userId = localStorage.getItem(USER_ID);
+        console.log("userId: ", userId);
         if (!userId) return;
         const userPortfolio = LocalStorageUtil.getUserPortfolio(userId);
+        console.log("userPortfolio: ", userPortfolio);
         if (!userPortfolio) return;
-
         dispatch(updateCoinsWallet(userPortfolio));
     }, [dispatch, wallet]);
 
@@ -53,20 +53,17 @@ export const AssetsList = () => {
     const loadData = useCallback(async () => {
         try {
             if (Object.keys(assets).length > 0) return;
-            if (hasLoaded) return;
 
             setIsLoading(true);
             await dispatch(getAssets({ limit: ASSETS_LIMIT.INITIAL, offset: 0 }));
             handleChangeOffset(currentPage);
-            setUserPortfolio();
-            setHasLoaded(true);
         } catch (error) {
             console.log(error);
             Toast.error("Failed to load the assets. Please reload the page or try again later.");
         } finally {
             setIsLoading(false);
         }
-    }, [assets, currentPage, dispatch, hasLoaded, setUserPortfolio]);
+    }, [assets, currentPage, dispatch]);
 
     const isShowBack = currentPage !== 1;
     const isShowNext = hasMore || getTotalPages() > currentPage * ITEMS_PER_PAGE;
@@ -82,7 +79,8 @@ export const AssetsList = () => {
 
     useEffect(() => {
         loadData();
-    }, [hasLoaded, loadData]);
+        setUserPortfolio();
+    }, [loadData, setUserPortfolio]);
 
     return (
         <Pagination

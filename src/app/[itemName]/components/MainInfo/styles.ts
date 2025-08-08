@@ -8,11 +8,15 @@ export const styles = {
         justifyContent: "center",
         alignItems: "center",
         gap: "1rem",
+        maxWidth: responsive("92vw", { md: "100%", lg: "50vw" }),
     },
     name: {
         fontSize: responsive("2rem", { md: "2.5rem" }),
         fontWeight: "500",
         color: darkGray,
+        whiteSpace: "nowrap",
+        overflow: "hidden",
+        textOverflow: "ellipsis",
     },
     symbol: {
         fontSize: responsive("2rem", { md: "2.5rem" }),

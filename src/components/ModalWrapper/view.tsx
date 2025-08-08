@@ -29,9 +29,9 @@ export const ModalWrapper = ({
         <Modal isOpen={isOpen} onClose={onClose}>
             <ModalOverlay />
             <ModalContent>
-                <ModalHeader display="flex" flexDirection="row" alignItems="center">
+                <ModalHeader display="flex" flexDirection="row" alignItems="center" gap="0.5rem">
                     <CryptoIcon size={40} symbol={assetSymbol} />
-                    <Text marginLeft="0.5rem">{title}</Text>
+                    <Text>{title}</Text>
                 </ModalHeader>
                 <ModalCloseButton />
                 <ModalBody width="100%">{children}</ModalBody>
