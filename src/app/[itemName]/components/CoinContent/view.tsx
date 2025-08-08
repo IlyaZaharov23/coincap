@@ -55,7 +55,7 @@ export const CoinContent = () => {
     }, [getCoinData]);
 
     return (
-        <Stack display="flex" flexDirection="column" alignItems="center" justifyContent="center" width="70vw">
+        <Stack sx={styles.mainWrapper}>
             {isLoading ? (
                 <FullscreenLoader />
             ) : (

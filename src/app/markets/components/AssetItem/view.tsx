@@ -105,7 +105,7 @@ export const AssetItem = ({ asset, currentPage }: AssetItemProps) => {
     return (
         <>
             <Tr key={asset.id} onClick={() => onClickAsset(asset)} _hover={{ backgroundColor: hoverGray }}>
-                <Td sx={{ ...styles.rowText(isMobile ? "37vw" : isTablet ? "26vw" : "23vw"), ...styles.nameWrapper }}>
+                <Td sx={{ ...styles.rowText, ...styles.nameWrapper, ...styles.col1 }}>
                     <CryptoIcon symbol={asset.symbol} size={40} />
                     <Stack sx={styles.coinInfoWrapper}>
                         <Text sx={styles.nameText}>{asset.name}</Text>
@@ -113,13 +113,12 @@ export const AssetItem = ({ asset, currentPage }: AssetItemProps) => {
                     </Stack>
                 </Td>
                 {!isMobile && (
-                    <Td sx={styles.rowText(isTablet ? "18vw" : "11vw")}>
-                        {PricesUtil.formatAsCurrency(asset.vwap24Hr)}
-                    </Td>
+                    <Td sx={{ ...styles.rowText, ...styles.col2 }}>{PricesUtil.formatAsCurrency(asset.vwap24Hr)}</Td>
                 )}
                 <Td
                     sx={{
-                        ...styles.rowText(isMobile ? "37vw" : isTablet ? "20vw" : "11vw"),
+                        ...styles.rowText,
+                        ...styles.col3,
                         color: StyleUtil.getCurrencyPriceChangeColor(
                             getPriceStatus(asset.vwap24Hr, asset.changePercent24Hr),
                         ),
@@ -135,13 +134,11 @@ export const AssetItem = ({ asset, currentPage }: AssetItemProps) => {
                     </Stack>
                 </Td>
                 {!isMobile && (
-                    <Td sx={styles.rowText(isTablet ? "20vw" : "14vw")}>
+                    <Td sx={{ ...styles.rowText, ...styles.col4 }}>
                         {PricesUtil.formatLargeCurrency(asset.marketCapUsd)}
                     </Td>
                 )}
-                <Td sx={styles.rowText(isMobile ? "26vw" : isTablet ? "17vw" : "11vw")}>
-                    {PricesUtil.formatAsCurrency(asset.priceUsd)}
-                </Td>
+                <Td sx={{ ...styles.rowText, ...styles.col5 }}>{PricesUtil.formatAsCurrency(asset.priceUsd)}</Td>
                 {!isMobile && !isTablet && (
                     <Tooltip
                         isDisabled={isUserSignedIn}
@@ -149,7 +146,8 @@ export const AssetItem = ({ asset, currentPage }: AssetItemProps) => {
                     >
                         <Td
                             sx={{
-                                ...styles.rowText("5vw"),
+                                ...styles.rowText,
+                                ...styles.col6,
                                 color: isUserSignedIn ? darkGray : semiDarkGray,
                             }}
                             onClick={handleOpenAddModal}

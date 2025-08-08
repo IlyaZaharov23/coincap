@@ -1,4 +1,5 @@
 import { darkGray } from "shared/constants/colors";
+import { responsive } from "utils/helpers/themeBreakpoints/breakpoints";
 
 export const styles = {
     mainWrapper: {
@@ -6,8 +7,8 @@ export const styles = {
         flexDirection: "column",
         alignItems: "flex-start",
         justifyContent: "center",
-        marginTop: "3rem",
-        gap: "2rem",
+        marginTop: responsive("1rem", { md: "2rem", lg: "3rem" }),
+        gap: responsive("1rem", { md: "2rem" }),
     },
     coinsWrapper: {
         display: "flex",
@@ -15,10 +16,10 @@ export const styles = {
         alignItems: "center",
         justifyContent: "flex-start",
         flexWrap: "wrap",
-        gap: "1.5rem",
+        gap: responsive("0.5rem", { md: "1.5rem" }),
     },
     mainHeader: {
-        fontSize: "2.5rem",
+        fontSize: responsive("2rem", { md: "2.5rem" }),
         fontWeight: "500",
         color: darkGray,
     },

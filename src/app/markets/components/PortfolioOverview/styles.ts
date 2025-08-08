@@ -9,7 +9,7 @@ export const styles = {
         justifyContent: "center",
         gap: "1rem",
         cursor: "pointer",
-        paddingBottom: responsive("1rem", { xl: "0" }),
+        paddingBottom: responsive("1rem", { xl: "1.125rem" }),
     },
     textWrapper: {
         display: "flex",

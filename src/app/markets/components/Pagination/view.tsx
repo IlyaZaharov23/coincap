@@ -97,6 +97,7 @@ export const Pagination = ({
                             <Button
                                 key={`assets page${page}`}
                                 variant={BUTTON_VARIANT.TAB}
+                                sx={styles.button(currentPage === page)}
                                 onClick={() => handlePageChange(page)}
                             >
                                 {page}

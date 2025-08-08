@@ -28,7 +28,6 @@ export const styles = {
         justifyContent: "space-between",
         padding: responsive("0 3rem", { md: "0 3rem", lg: "0 3rem" }),
         gap: responsive("1.5rem", { xl: "3rem" }),
-        // gap: "3rem",
     },
     topMarketsWrapper: {
         display: "flex",

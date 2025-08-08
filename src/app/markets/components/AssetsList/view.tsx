@@ -102,16 +102,12 @@ export const AssetsList = () => {
                     <Table sx={styles.table}>
                         <Thead sx={styles.headWrapper}>
                             <Tr sx={styles.headText}>
-                                <Th sx={styles.headerItem(isMobile ? "40vw" : isTablet ? "28vw" : "23vw")}>Name</Th>
-                                {!isMobile && (
-                                    <Th sx={styles.headerItem(isTablet ? "18vw" : "11vw")}>{`VWAP(24Hr)`}</Th>
-                                )}
-                                <Th sx={styles.headerItem(isMobile ? "30vw" : isTablet ? "17vw" : "11vw")}>
-                                    {`Change(24Hr)`}
-                                </Th>
-                                {!isMobile && <Th sx={styles.headerItem(isTablet ? "20vw" : "14vw")}>Market Cap</Th>}
-                                <Th sx={styles.headerItem(isMobile ? "30vw" : isTablet ? "17vw" : "11vw")}>Price</Th>
-                                {!isMobile && !isTablet && <Th sx={styles.headerItem("5vw")}></Th>}
+                                <Th sx={styles.col1}>Name</Th>
+                                {!isMobile && <Th sx={styles.col2}>{`VWAP(24Hr)`}</Th>}
+                                <Th sx={styles.col3}>{`Change(24Hr)`}</Th>
+                                {!isMobile && <Th sx={styles.col4}>Market Cap</Th>}
+                                <Th sx={styles.col5}>Price</Th>
+                                {!isMobile && !isTablet && <Th sx={styles.col6}></Th>}
                             </Tr>
                         </Thead>
                         <Tbody sx={styles.bodyWrapper}>

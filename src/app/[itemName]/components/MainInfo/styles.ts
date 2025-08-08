@@ -1,4 +1,5 @@
 import { darkGray, semiDarkGray } from "shared/constants/colors";
+import { responsive } from "utils/helpers/themeBreakpoints/breakpoints";
 
 export const styles = {
     wrapper: {
@@ -9,12 +10,12 @@ export const styles = {
         gap: "1rem",
     },
     name: {
-        fontSize: "2.5rem",
+        fontSize: responsive("2rem", { md: "2.5rem" }),
         fontWeight: "500",
         color: darkGray,
     },
     symbol: {
-        fontSize: "2.5rem",
+        fontSize: responsive("2rem", { md: "2.5rem" }),
         fontWeight: "500",
         color: semiDarkGray,
     },
