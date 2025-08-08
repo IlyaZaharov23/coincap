@@ -10,7 +10,7 @@ export const styles = {
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "center",
-        padding: responsive(`${PAGINATION_WRAPPER_PADDING_TOP}px 0px ${PAGINATION_WRAPPER_PADDING_BOTTOM}px`, {
+        padding: responsive(`${PAGINATION_WRAPPER_PADDING_TOP}px 8px ${PAGINATION_WRAPPER_PADDING_BOTTOM}px`, {
             md: `${PAGINATION_WRAPPER_PADDING_TOP}px 16px ${PAGINATION_WRAPPER_PADDING_BOTTOM}px`,
         }),
         width: "100%",
@@ -33,7 +33,7 @@ export const styles = {
     button: (isCurrentPage: boolean) => ({
         color: isCurrentPage ? bluePrimary : darkGray,
         fontWeight: isCurrentPage ? "600" : " 400",
-        padding: responsive("0.5rem", { md: "1rem" }),
+        padding: responsive("0.625rem", { md: "1rem" }),
         width: "auto",
         minWidth: responsive("20px", { md: "40px" }),
     }),

@@ -7,7 +7,7 @@ export const styles = {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        width: responsive("90vw", { md: "90vw", lg: "95vw", xl: "100%" }),
+        width: responsive("90vw", { md: "95vw", lg: "85vw", xl: "100%" }),
         margin: responsive("1.5rem", { md: "2rem" }),
     },
     topAssetsWrapper: {
@@ -16,7 +16,7 @@ export const styles = {
         alignItems: "center",
         flexWrap: "wrap",
         justifyContent: responsive("center", { xl: "flex-start" }),
-        gap: "1rem",
+        gap: responsive("0.5rem", { lg: "2rem" }),
         marginTop: "0.5rem",
     },
     topWrapper: {

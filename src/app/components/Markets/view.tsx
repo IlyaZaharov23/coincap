@@ -6,7 +6,9 @@ import { Stack, Text } from "@chakra-ui/react";
 
 import { Button } from "components/Button";
 import { Coin } from "components/Coin";
+import { TabletCoin } from "components/TabletCoin";
 import { TopCurrenciesSkeleton } from "components/TopCurrenciesSkeleton";
+import { useIsMobile, useIsTablet } from "hooks/useDevice";
 import { useRouter } from "next/navigation";
 import { ASSETS_LIMIT } from "shared/constants/assetsLimit";
 import { BUTTON_VARIANT } from "shared/constants/buttonVariants";
@@ -24,6 +26,8 @@ export const Markets = () => {
     const topAssets = useAppSelector(topAssetsListGet);
     const [isLoading, setIsLoading] = useState(false);
     const router = useRouter();
+    const isMobile = useIsMobile();
+    const isTablet = useIsTablet();
 
     const loadTopMarkets = useCallback(async () => {
         try {
@@ -66,7 +70,15 @@ export const Markets = () => {
                 {isLoading ? (
                     <TopCurrenciesSkeleton count={5} />
                 ) : (
-                    getTopAssetsByCount(topAssets, 5).map((asset) => <Coin key={asset.id} asset={asset} />)
+                    getTopAssetsByCount(topAssets, 5).map((asset) => (
+                        <>
+                            {isMobile || isTablet ? (
+                                <TabletCoin key={asset.id} asset={asset} />
+                            ) : (
+                                <Coin key={asset.id} asset={asset} />
+                            )}
+                        </>
+                    ))
                 )}
             </Stack>
         </Stack>

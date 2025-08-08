@@ -19,7 +19,7 @@ export const styles = {
         alignItems: "center",
         justifyContent: "center",
         flexWrap: "wrap",
-        gap: responsive("0.5rem", { xl: "2rem" }),
+        gap: responsive("0.5rem", { xl: "1rem" }),
         minHeight: `${COINS_WRAPPER_HEIGHT}px`,
     },
     assetWrapper: {

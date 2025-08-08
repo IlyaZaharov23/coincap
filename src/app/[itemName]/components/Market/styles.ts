@@ -1,4 +1,5 @@
 import { darkGray } from "shared/constants/colors";
+import { responsive } from "utils/helpers/themeBreakpoints/breakpoints";
 
 export const styles = {
     componentWrapper: {
@@ -6,22 +7,22 @@ export const styles = {
         flexDirection: "column",
         alignItems: "flex-start",
         width: "100%",
-        gap: "2rem",
-        marginTop: "3rem",
+        gap: responsive("1rem", { md: "2rem" }),
+        marginTop: responsive("1rem", { md: "2rem", lg: "3rem" }),
     },
     mainWrapper: {
         display: "flex",
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
-        width: "60%",
+        width: responsive("100%", { md: "60%" }),
     },
     itemsWrapper: {
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "flex-start",
-        gap: "2rem",
+        gap: responsive("1rem", { md: "2rem" }),
     },
     priceWrapper: {
         display: "flex",
@@ -30,17 +31,17 @@ export const styles = {
         alignItems: "flex-start",
     },
     mainHeader: {
-        fontSize: "2.5rem",
+        fontSize: responsive("2rem", { md: "2.5rem" }),
         fontWeight: "500",
         color: darkGray,
     },
     itemHeader: {
-        fontSize: "1rem",
+        fontSize: responsive("0.75rem", { md: "1rem" }),
         fontWeight: "400",
         color: darkGray,
     },
     price: {
-        fontSize: "1.25rem",
+        fontSize: responsive("1rem", { md: "1.25rem" }),
         fontWeight: "500",
         color: darkGray,
     },

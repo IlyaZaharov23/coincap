@@ -7,12 +7,12 @@ export const styles = {
     topWrapper: {
         display: "flex",
         flexDirection: "row",
-        alignItems: responsive("flex-end", { xl: "center" }),
+        alignItems: responsive("flex-end", { xl: "flex-end" }),
         justifyContent: "space-between",
-        margin: responsive(`${TOP_WRAPPER_MARGIN}px 0`, { xl: `${TOP_WRAPPER_MARGIN}px` }),
+        margin: responsive(`${TOP_WRAPPER_MARGIN}px 0`, { xl: `${TOP_WRAPPER_MARGIN}px 0` }),
         marginBottom: "0",
         padding: "0 1rem",
-        width: responsive("100%", { xl: "75vw" }),
+        width: responsive("100%", { xl: "90vw", "2xl": "75vw" }),
     },
     contentWrapper: {
         marginTop: `${HEADER_HEIGHT}px`,
