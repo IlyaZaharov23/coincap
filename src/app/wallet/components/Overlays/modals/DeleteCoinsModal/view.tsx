@@ -1,9 +1,7 @@
-import { Text } from "@chakra-ui/react";
-
 import { ModalWrapper } from "components/ModalWrapper";
 
-import { styles } from "../styles";
-import { DeleteCoinsModalProps } from "./types";
+import { DeleteCoinsContent } from "../../content/DeleteCoinsContent";
+import { DeleteCoinsModalProps } from "../../types";
 
 export const DeleteCoinsModal = ({
     assetSymbol,
@@ -27,9 +25,7 @@ export const DeleteCoinsModal = ({
             assetSymbol={assetSymbol}
             isLoading={isLoading}
         >
-            <Text
-                sx={styles.text}
-            >{`Are you sure you want to delete ${assetName}? You can't undo this action afterwards.`}</Text>
+            <DeleteCoinsContent assetName={assetName} />
         </ModalWrapper>
     );
 };

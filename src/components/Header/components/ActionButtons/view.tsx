@@ -45,35 +45,35 @@ export const ActionButtons: FC<ActionButtonsProps> = ({ showLogOut, isSignInHidd
         <Stack sx={styles.buttonsWrapper}>
             {showLogOut ? (
                 <>
-                    {isMobile ? (
-                        <Image src={logoutIcon} alt="logout" width={20} onClick={logOut} />
-                    ) : (
+                    {!isMobile ? (
                         <Button variant={BUTTON_VARIANT.PRIMARY} onClick={logOut}>
                             Log Out
                         </Button>
+                    ) : (
+                        <Image src={logoutIcon} alt="logout" width={20} onClick={logOut} />
                     )}
                 </>
             ) : (
                 <>
                     {!isSignInHidden && (
                         <>
-                            {isMobile ? (
-                                <Image src={signInIcon} alt="sign-in" width={20} onClick={navigateToSignIn} />
-                            ) : (
+                            {!isMobile ? (
                                 <Button onClick={navigateToSignIn} variant={BUTTON_VARIANT.PRIMARY}>
                                     Sign In
                                 </Button>
+                            ) : (
+                                <Image src={signInIcon} alt="sign-in" width={20} onClick={navigateToSignIn} />
                             )}
                         </>
                     )}
                     {!isSignUpHidden && (
                         <>
-                            {isMobile ? (
-                                <Image src={signUpIcon} alt="sign-up" width={20} onClick={navigateToSignUp} />
-                            ) : (
+                            {!isMobile ? (
                                 <Button onClick={navigateToSignUp} variant={BUTTON_VARIANT.PRIMARY}>
                                     Sign Up
                                 </Button>
+                            ) : (
+                                <Image src={signUpIcon} alt="sign-up" width={20} onClick={navigateToSignUp} />
                             )}
                         </>
                     )}

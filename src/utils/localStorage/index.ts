@@ -19,17 +19,20 @@ export class LocalStorageUtil {
     }
 
     static removePortfolioCoin(userId: string, coinId: string) {
-        const portfolios = localStorage.getItem(COINS_PORTFOLIO);
-        if (!portfolios) return;
+        const portfoliosStr = localStorage.getItem(COINS_PORTFOLIO);
+        if (!portfoliosStr) return;
 
-        const parsedPortfolios = JSON.parse(portfolios);
-        if (!parsedPortfolios[userId]) return;
+        const portfolios = JSON.parse(portfoliosStr);
+        if (!portfolios[userId]) return;
 
-        delete parsedPortfolios[userId][coinId];
+        const userPortfolio = portfolios[userId];
+        delete userPortfolio[coinId];
 
-        if (Object.keys(parsedPortfolios[userId].length === 0)) {
-            delete parsedPortfolios[userId];
+        portfolios[userId] = userPortfolio;
+
+        if (Object.keys(userPortfolio).length === 0) {
+            delete portfolios[userId];
         }
-        localStorage.setItem(COINS_PORTFOLIO, JSON.stringify(parsedPortfolios));
+        localStorage.setItem(COINS_PORTFOLIO, JSON.stringify(portfolios));
     }
 }

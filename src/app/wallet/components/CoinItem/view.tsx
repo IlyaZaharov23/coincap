@@ -1,138 +1,58 @@
-import { useState } from "react";
-
 import { BiMinusCircle, BiPlusCircle } from "react-icons/bi";
 import { FaFireAlt } from "react-icons/fa";
 
-import { IconButton, Stack, Text, Tooltip, useDisclosure } from "@chakra-ui/react";
+import { IconButton, Stack, Text, Tooltip } from "@chakra-ui/react";
 
 import { CryptoIcon } from "components/CryptoIcon";
-import { USER_ID } from "services/constants";
-import { useAppDispatch, useAppSelector } from "store/hooks";
-import { getWallet } from "store/slices/assets/assets.selectors";
-import { addCoinToWallet, removeCoinFromWallet } from "store/slices/assets/assets.thunks";
-import { LocalStorageUtil } from "utils/localStorage";
-import { PricesUtil } from "utils/prices";
-import { Toast } from "utils/toast";
+import { useCoinActions } from "hooks/useCoinActions";
+import { useIsMobile } from "hooks/useDevice";
 
-import { AddCoinsModal } from "../Modals/AddCoinsModal";
-import { DeleteCoinsModal } from "../Modals/DeleteCoinsModal";
-import { SellCoinsModal } from "../Modals/SellCoinsModal";
+import { AddCoinsDrawer } from "../Overlays/drawers/AddCoinsDrawer";
+import { DeleteCoinsDrawer } from "../Overlays/drawers/DeleteCoinsDrawer";
+import { SellCoinsDrawer } from "../Overlays/drawers/SellCoinsDrawer";
+import { AddCoinsModal } from "../Overlays/modals/AddCoinsModal";
+import { DeleteCoinsModal } from "../Overlays/modals/DeleteCoinsModal";
+import { SellCoinsModal } from "../Overlays/modals/SellCoinsModal";
 import { styles } from "./styles";
 import { CoinItemProps } from "./types";
 
 export const CoinItem = ({ symbol, name, amount, price, id, cost }: CoinItemProps) => {
-    const [coinsCount, setCoinsCount] = useState<string>("");
-    const wallet = useAppSelector(getWallet);
-    const dispatch = useAppDispatch();
-    const [isLoading, setIsLoading] = useState(false);
-    const { isOpen: isAddOpen, onOpen: onAddOpen, onClose: onAddClose } = useDisclosure();
-    const { isOpen: isSellOpen, onOpen: onSellOpen, onClose: onSellClose } = useDisclosure();
-    const { isOpen: isDeleteOpen, onOpen: onDeleteOpen, onClose: onDeleteClose } = useDisclosure();
+    const isMobile = useIsMobile();
 
-    const handleCloseAddModal = () => {
-        onAddClose();
-        setCoinsCount("");
-    };
-
-    const handleCloseDeleteModal = () => {
-        onDeleteClose();
-        setCoinsCount("");
-    };
-
-    const handleCloseSellModal = () => {
-        onSellClose();
-        setCoinsCount("");
-    };
-
-    const deleteCoins = () => {
-        try {
-            setIsLoading(true);
-            const userId = localStorage.getItem(USER_ID);
-            if (!userId) return;
-            LocalStorageUtil.removePortfolioCoin(userId, id);
-            dispatch(removeCoinFromWallet(id));
-            handleCloseDeleteModal();
-            Toast.success(`${name} has been successfully removed from your portfolio.`);
-        } catch (error) {
-            console.log(error);
-            Toast.error(`Something wrong while adding ${name} to your portfolio. Please try again later.`);
-        } finally {
-            setIsLoading(false);
-        }
-    };
-
-    const sellCoins = () => {
-        try {
-            setIsLoading(true);
-            const userId = localStorage.getItem(USER_ID);
-            if (!userId) return;
-            const currentCoin = wallet[id];
-            const newAmount = amount - Number(coinsCount);
-            if (newAmount <= 0) {
-                LocalStorageUtil.removePortfolioCoin(userId, id);
-                dispatch(removeCoinFromWallet(id));
-                Toast.success(`${name} has been successfully removed from your portfolio.`);
-            } else {
-                const coinInfo = {
-                    ...currentCoin,
-                    amount: newAmount,
-                    cost: PricesUtil.solvePrice(String(newAmount), price),
-                };
-                LocalStorageUtil.updatePortfolioCoin(userId, id, coinInfo);
-                dispatch(addCoinToWallet({ coinId: id, coinInfo }));
-                handleCloseSellModal();
-                Toast.success(`${name} has been successfully sold from your portfolio.`);
-            }
-        } catch (error) {
-            console.log(error);
-            Toast.error(`Something wrong while adding ${name} to your portfolio. Please try again later.`);
-        } finally {
-            setIsLoading(false);
-        }
-    };
-
-    const addCoins = () => {
-        try {
-            setIsLoading(true);
-            const userId = localStorage.getItem(USER_ID);
-            if (!userId) return;
-            const currentCoin = wallet[id];
-            const newAmount = currentCoin.amount + Number(coinsCount);
-            const coinInfo = {
-                ...currentCoin,
-                amount: newAmount,
-                cost: PricesUtil.solvePrice(String(newAmount), price),
-            };
-            LocalStorageUtil.updatePortfolioCoin(userId, id, coinInfo);
-            dispatch(addCoinToWallet({ coinId: id, coinInfo }));
-            handleCloseAddModal();
-            Toast.success(`${name} has been successfully added to your portfolio.`);
-        } catch (error) {
-            console.log(error);
-            Toast.error(`Something wrong while adding ${name} to your portfolio. Please try again later.`);
-        } finally {
-            setIsLoading(false);
-        }
-    };
-
-    const handleChangeCoinsCount = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setCoinsCount(e.target.value);
-    };
+    const {
+        coinsCount,
+        isLoading,
+        isAddOpen,
+        isSellOpen,
+        isDeleteOpen,
+        onAddOpen,
+        onSellOpen,
+        onDeleteOpen,
+        handleCloseAddModal,
+        handleCloseDeleteModal,
+        handleCloseSellModal,
+        deleteCoins,
+        sellCoins,
+        addCoins,
+        handleChangeCoinsCount,
+    } = useCoinActions({ id, name, price, amount, symbol });
     return (
         <>
             <Stack sx={styles.mainWrapper}>
-                <Stack sx={styles.infoWrapper}>
-                    <CryptoIcon symbol={symbol} size={40} />
-                    <Stack sx={styles.nameWrapper}>
-                        <Text sx={styles.coinName}>{name}</Text>
-                        <Text sx={styles.coinSymbol}>{symbol}</Text>
+                <Stack sx={styles.infoSummaryWrapper}>
+                    <Stack sx={styles.infoWrapper}>
+                        <CryptoIcon symbol={symbol} size={isMobile ? 24 : 40} />
+                        <Stack sx={styles.nameWrapper}>
+                            <Text sx={styles.coinName}>{name}</Text>
+                            <Text sx={styles.coinSymbol}>{symbol}</Text>
+                        </Stack>
                     </Stack>
-                </Stack>
-                <Stack sx={styles.priceWrapper}>
-                    <Text sx={styles.coinPrice}>
-                        {amount} {symbol}
-                    </Text>
-                    <Text sx={styles.coinPrice}>≈ {cost}</Text>
+                    <Stack sx={styles.priceWrapper}>
+                        <Text sx={styles.coinCount}>
+                            {amount} {symbol}
+                        </Text>
+                        <Text sx={styles.coinPrice}>≈ {cost}</Text>
+                    </Stack>
                 </Stack>
                 <Stack sx={styles.buttonsWrapper}>
                     <Tooltip label={`Buy ${name}`}>
@@ -152,42 +72,87 @@ export const CoinItem = ({ symbol, name, amount, price, id, cost }: CoinItemProp
                     </Tooltip>
                 </Stack>
             </Stack>
-            <AddCoinsModal
-                assetSymbol={symbol}
-                assetPrice={price}
-                helper="Price"
-                coinsCount={coinsCount}
-                handleChangeCoinsCount={handleChangeCoinsCount}
-                isOpen={isAddOpen}
-                onClose={handleCloseAddModal}
-                onSubmit={addCoins}
-                modalButtonText="Add"
-                modalTitle="Add Coins"
-                isLoading={isLoading}
-            />
-            <SellCoinsModal
-                assetSymbol={symbol}
-                assetPrice={price}
-                helper="Payout"
-                coinsCount={coinsCount}
-                handleChangeCoinsCount={handleChangeCoinsCount}
-                isOpen={isSellOpen}
-                onClose={handleCloseSellModal}
-                onSubmit={sellCoins}
-                modalButtonText="Sell"
-                modalTitle="Sell Coins"
-                isLoading={isLoading}
-            />
-            <DeleteCoinsModal
-                assetSymbol={symbol}
-                assetName={name}
-                isOpen={isDeleteOpen}
-                onClose={handleCloseDeleteModal}
-                onSubmit={deleteCoins}
-                modalButtonText="Delete"
-                modalTitle="Delete Coins"
-                isLoading={isLoading}
-            />
+            {isMobile ? (
+                <AddCoinsDrawer
+                    assetSymbol={symbol}
+                    assetPrice={price}
+                    helper="Price"
+                    coinsCount={coinsCount}
+                    handleChangeCoinsCount={handleChangeCoinsCount}
+                    isOpen={isAddOpen}
+                    onClose={handleCloseAddModal}
+                    onSubmit={addCoins}
+                    modalButtonText="Add"
+                    modalTitle="Add Coins"
+                    isLoading={isLoading}
+                />
+            ) : (
+                <AddCoinsModal
+                    assetSymbol={symbol}
+                    assetPrice={price}
+                    helper="Price"
+                    coinsCount={coinsCount}
+                    handleChangeCoinsCount={handleChangeCoinsCount}
+                    isOpen={isAddOpen}
+                    onClose={handleCloseAddModal}
+                    onSubmit={addCoins}
+                    modalButtonText="Add"
+                    modalTitle="Add Coins"
+                    isLoading={isLoading}
+                />
+            )}
+            {isMobile ? (
+                <SellCoinsDrawer
+                    assetSymbol={symbol}
+                    assetPrice={price}
+                    helper="Payout"
+                    coinsCount={coinsCount}
+                    handleChangeCoinsCount={handleChangeCoinsCount}
+                    isOpen={isSellOpen}
+                    onClose={handleCloseSellModal}
+                    onSubmit={sellCoins}
+                    modalButtonText="Sell"
+                    modalTitle="Sell Coins"
+                    isLoading={isLoading}
+                />
+            ) : (
+                <SellCoinsModal
+                    assetSymbol={symbol}
+                    assetPrice={price}
+                    helper="Payout"
+                    coinsCount={coinsCount}
+                    handleChangeCoinsCount={handleChangeCoinsCount}
+                    isOpen={isSellOpen}
+                    onClose={handleCloseSellModal}
+                    onSubmit={sellCoins}
+                    modalButtonText="Sell"
+                    modalTitle="Sell Coins"
+                    isLoading={isLoading}
+                />
+            )}
+            {isMobile ? (
+                <DeleteCoinsDrawer
+                    assetSymbol={symbol}
+                    assetName={name}
+                    isOpen={isDeleteOpen}
+                    onClose={handleCloseDeleteModal}
+                    onSubmit={deleteCoins}
+                    modalButtonText="Delete"
+                    modalTitle="Delete Coins"
+                    isLoading={isLoading}
+                />
+            ) : (
+                <DeleteCoinsModal
+                    assetSymbol={symbol}
+                    assetName={name}
+                    isOpen={isDeleteOpen}
+                    onClose={handleCloseDeleteModal}
+                    onSubmit={deleteCoins}
+                    modalButtonText="Delete"
+                    modalTitle="Delete Coins"
+                    isLoading={isLoading}
+                />
+            )}
         </>
     );
 };
