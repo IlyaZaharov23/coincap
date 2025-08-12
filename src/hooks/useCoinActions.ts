@@ -6,6 +6,7 @@ import { USER_ID } from "services/constants";
 import { useAppDispatch } from "store/hooks";
 import { addCoinToWallet, removeCoinFromWallet } from "store/slices/assets/assets.thunks";
 import { CoinItemProps } from "types/types";
+import { InputValidationUtil } from "utils/inputValidation";
 import { LocalStorageUtil } from "utils/localStorage";
 import { PricesUtil } from "utils/prices";
 import { Toast } from "utils/toast";
@@ -112,7 +113,10 @@ export const useCoinActions = ({ id, name, price, amount, symbol }: CoinItemProp
     };
 
     const handleChangeCoinsCount = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setCoinsCount(e.target.value);
+        const inputValue = e.target.value;
+        if (inputValue === "" || InputValidationUtil.isDigit(inputValue)) {
+            setCoinsCount(inputValue);
+        }
     };
 
     return {
