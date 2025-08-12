@@ -1,5 +1,7 @@
 import { responsive } from "utils/helpers/themeBreakpoints/breakpoints";
 
+export const MARKET_PADDING_X_MOB = 16;
+
 export const styles = {
     mainWrapper: {
         display: "flex",

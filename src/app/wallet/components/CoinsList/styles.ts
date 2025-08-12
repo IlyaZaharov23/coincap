@@ -13,7 +13,7 @@ export const styles = {
         flexDirection: "row",
         alignItems: responsive("flex-end", { md: "center" }),
         justifyContent: "space-between",
-        margin: responsive("0 1rem", { lg: "0.5rem 2rem", "2xl": "1rem 3rem" }),
+        margin: responsive("0 1rem", { md: "0 1.5rem", lg: "0.5rem 2rem", "2xl": "1rem 3rem" }),
     },
     title: {
         fontSize: responsive("1.5rem", { md: "2rem", xl: "2.5rem" }),

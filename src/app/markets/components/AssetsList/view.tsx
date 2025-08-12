@@ -16,6 +16,7 @@ import { LocalStorageUtil } from "utils/localStorage";
 import { Toast } from "utils/toast";
 
 import { AssetItem } from "../AssetItem";
+import { EmptyAssetsPlaceholder } from "../EmptyAssetsPlaceholder";
 import { AssetsSkeleton } from "../Fallbacks/AssetsSkeleton";
 import { Pagination } from "../Pagination";
 import { styles } from "./styles";
@@ -117,6 +118,8 @@ export const AssetsList = () => {
                         <Tbody sx={styles.bodyWrapper}>
                             {isLoading ? (
                                 <AssetsSkeleton />
+                            ) : assets[currentPage].length === 0 ? (
+                                <EmptyAssetsPlaceholder />
                             ) : (
                                 assets[currentPage]?.map((asset) => (
                                     <AssetItem key={asset.id} asset={asset} currentPage={currentPage} />

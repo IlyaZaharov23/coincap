@@ -4,6 +4,7 @@ import { Stack, Text } from "@chakra-ui/react";
 
 import { Coin } from "components/Coin";
 import { TabletCoin } from "components/TabletCoin";
+import { TopCurrenciesSkeleton } from "components/TopCurrenciesSkeleton";
 import { useIsMobile, useIsTablet } from "hooks/useDevice";
 import { useParams } from "next/navigation";
 import { ASSETS_LIMIT } from "shared/constants/assetsLimit";
@@ -35,12 +36,16 @@ export const PopularCoins = () => {
         <Stack sx={styles.mainWrapper}>
             <Text sx={styles.mainHeader}>Popular Coins</Text>
             <Stack sx={styles.coinsWrapper}>
-                {renderedTopAssets.map((asset) =>
-                    isMobile || isTablet ? (
-                        <TabletCoin key={asset.id} asset={asset} />
-                    ) : (
-                        <Coin asset={asset} key={asset.id} />
-                    ),
+                {topAssets.length === 0 ? (
+                    <TopCurrenciesSkeleton count={19} />
+                ) : (
+                    renderedTopAssets.map((asset) =>
+                        isMobile || isTablet ? (
+                            <TabletCoin key={asset.id} asset={asset} />
+                        ) : (
+                            <Coin asset={asset} key={asset.id} />
+                        ),
+                    )
                 )}
             </Stack>
         </Stack>
