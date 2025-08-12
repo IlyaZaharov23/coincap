@@ -22,13 +22,14 @@ export const TopCurrencies = () => {
     const dispatch = useAppDispatch();
     const [isLoading, setIsLoading] = useState(false);
     const [hasLoaded, setHasLoaded] = useState(false);
+    const [isMounted, setIsMounted] = useState(false);
 
     const isMobile = useIsMobile();
     const isTablet = useIsTablet();
 
     const loadData = useCallback(async () => {
         try {
-            if (hasLoaded) return;
+            if (hasLoaded || isMobile) return;
             setIsLoading(true);
             await dispatch(getTopAssets(ASSETS_LIMIT.TOP));
             setHasLoaded(true);
@@ -38,7 +39,11 @@ export const TopCurrencies = () => {
         } finally {
             setIsLoading(false);
         }
-    }, [dispatch, hasLoaded]);
+    }, [dispatch, hasLoaded, isMobile]);
+
+    useEffect(() => {
+        setIsMounted(true);
+    }, []);
 
     useEffect(() => {
         if (topAssets.length === 0) {
@@ -46,7 +51,7 @@ export const TopCurrencies = () => {
         }
     }, [loadData, topAssets.length]);
 
-    if (isMobile) return null;
+    if (!isMounted || isMobile) return null;
 
     return (
         <Stack sx={styles.mainWrapper}>

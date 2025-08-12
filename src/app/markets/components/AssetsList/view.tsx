@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 
 import { Stack, Table, TableContainer, Tbody, Th, Thead, Tr } from "@chakra-ui/react";
 
+import { FullscreenLoader } from "components/FullscreenLoader";
 import { useIsMobile, useIsTablet } from "hooks/useDevice";
 import { CURRENT_ASSETS_PAGE, USER_ID } from "services/constants";
 import { ASSETS_LIMIT } from "shared/constants/assetsLimit";
@@ -22,6 +23,7 @@ import { styles } from "./styles";
 export const AssetsList = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [isLoading, setIsLoading] = useState(false);
+    const [isClient, setIsClient] = useState(false);
     const [offset, setOffset] = useState(0);
     const [hasMore, setHasMore] = useState(true);
     const dispatch = useAppDispatch();
@@ -79,6 +81,12 @@ export const AssetsList = () => {
         loadData();
         setUserPortfolio();
     }, [loadData, setUserPortfolio]);
+
+    useEffect(() => {
+        setIsClient(true);
+    }, []);
+
+    if (!isClient) return <FullscreenLoader />;
 
     return (
         <Pagination

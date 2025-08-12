@@ -25,11 +25,12 @@ export const CoinContent = () => {
     const dispatch = useAppDispatch();
     const params = useParams();
     const [isLoading, setIsLoading] = useState(false);
+    const [isClient, setIsClient] = useState(false);
 
     const getCoinData = useCallback(async () => {
         try {
             setIsLoading(true);
-            if (!assetDetails) {
+            if (assetDetails?.id !== params.itemName) {
                 await dispatch(getAssetById(params.itemName as string));
             }
             await dispatch(
@@ -53,6 +54,12 @@ export const CoinContent = () => {
     useEffect(() => {
         getCoinData();
     }, [getCoinData]);
+
+    useEffect(() => {
+        setIsClient(true);
+    }, []);
+
+    if (!isClient) return <FullscreenLoader />;
 
     return (
         <Stack sx={styles.mainWrapper}>
