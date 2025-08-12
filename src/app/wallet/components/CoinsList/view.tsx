@@ -13,6 +13,7 @@ import { LocalStorageUtil } from "utils/localStorage";
 import { PricesUtil } from "utils/prices";
 
 import { CoinItem } from "../CoinItem";
+import { EmptyListPlaceholder } from "../EmptyListPlaceholder";
 import { styles } from "./styles";
 
 export const CoinsList = () => {
@@ -54,17 +55,21 @@ export const CoinsList = () => {
                         </Stack>
                     </Stack>
                     <Stack sx={styles.wrapper}>
-                        {Object.values(wallet).map((item) => (
-                            <CoinItem
-                                key={item.id}
-                                symbol={item.symbol}
-                                name={item.name}
-                                price={item.price}
-                                amount={item.amount}
-                                id={item.id}
-                                cost={item.cost}
-                            />
-                        ))}
+                        {Object.keys(wallet).length === 0 ? (
+                            <EmptyListPlaceholder />
+                        ) : (
+                            Object.values(wallet).map((item) => (
+                                <CoinItem
+                                    key={item.id}
+                                    symbol={item.symbol}
+                                    name={item.name}
+                                    price={item.price}
+                                    amount={item.amount}
+                                    id={item.id}
+                                    cost={item.cost}
+                                />
+                            ))
+                        )}
                     </Stack>
                 </>
             )}

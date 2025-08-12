@@ -16,7 +16,7 @@ export const styles = {
         alignItems: "center",
         justifyContent: "flex-start",
         flexWrap: "wrap",
-        gap: responsive("0.5rem", { md: "1.5rem" }),
+        gap: responsive("0.5rem", { md: "0.75rem", lg: "1rem", xl: "1.5rem" }),
     },
     mainHeader: {
         fontSize: responsive("2rem", { md: "2.5rem" }),

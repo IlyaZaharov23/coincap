@@ -23,7 +23,6 @@ export const styles = {
     contentWrapper: {
         display: "flex",
         flexDirection: "column",
-        justifyContent: "center",
         gap: 0,
         marginTop: responsive(`${HEADER_HEIGHT + WALLET_CONTENT_MARGIN_TOP_MOB}`, {
             md: `${HEADER_HEIGHT + WALLET_CONTENT_MARGIN_TOP_TAB}`,
