@@ -18,6 +18,7 @@ import { addCoinToWallet, setAssetDetails } from "store/slices/assets/assets.thu
 import { Asset } from "types/types";
 import { getPriceArrowIcon } from "utils/helpers/price/getArrowIcon";
 import { getPriceStatus } from "utils/helpers/price/status";
+import { InputValidationUtil } from "utils/inputValidation";
 import { LocalStorageUtil } from "utils/localStorage";
 import { PricesUtil } from "utils/prices";
 import { StyleUtil } from "utils/style";
@@ -36,6 +37,11 @@ export const AssetItem = ({ asset, currentPage }: AssetItemProps) => {
     const isMobile = useIsMobile();
     const isTablet = useIsTablet();
 
+    const handleCloseModal = () => {
+        setCoinsCount("");
+        onClose();
+    };
+
     const onSubmit = () => {
         try {
             setIsLoading(true);
@@ -45,7 +51,7 @@ export const AssetItem = ({ asset, currentPage }: AssetItemProps) => {
                 addCoinsToPortfolio();
             }
             setCoinsCount("");
-            onClose();
+            handleCloseModal();
             Toast.success(`${asset.name} has been successfully added to your portfolio.`);
         } catch (error) {
             console.log(error);
@@ -94,7 +100,10 @@ export const AssetItem = ({ asset, currentPage }: AssetItemProps) => {
     );
 
     const handleChangeCoinsCount = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setCoinsCount(e.target.value);
+        const inputValue = e.target.value;
+        if (inputValue === "" || InputValidationUtil.isDigit(inputValue)) {
+            setCoinsCount(inputValue);
+        }
     };
 
     const handleOpenAddModal = (e: React.MouseEvent) => {
@@ -163,7 +172,7 @@ export const AssetItem = ({ asset, currentPage }: AssetItemProps) => {
             {isOpen && (
                 <ModalWrapper
                     isOpen={isOpen}
-                    onClose={onClose}
+                    onClose={handleCloseModal}
                     onSubmit={onSubmit}
                     submitButtonText="Add"
                     title={`Add ${asset.name}`}
