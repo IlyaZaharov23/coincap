@@ -8,6 +8,8 @@ import { IconButton, Stack, Text, Tooltip } from "@chakra-ui/react";
 import { CryptoIcon } from "components/CryptoIcon";
 import { useCoinActions } from "hooks/useCoinActions";
 import { useIsMobile } from "hooks/useDevice";
+import { useRouter } from "next/navigation";
+import { ROUTES } from "shared/constants/routes";
 
 import { AddCoinsDrawer } from "../Overlays/drawers/AddCoinsDrawer";
 import { DeleteCoinsDrawer } from "../Overlays/drawers/DeleteCoinsDrawer";
@@ -20,6 +22,7 @@ import { CoinItemProps } from "./types";
 
 export const CoinItem = ({ symbol, name, amount, price, id, cost }: CoinItemProps) => {
     const isMobile = useIsMobile();
+    const router = useRouter();
 
     const {
         coinsCount,
@@ -107,11 +110,15 @@ export const CoinItem = ({ symbol, name, amount, price, id, cost }: CoinItemProp
         return isMobile ? <DeleteCoinsDrawer {...props} /> : <DeleteCoinsModal {...props} />;
     }, [isMobile, symbol, name, isDeleteOpen, isLoading, deleteCoins, handleCloseDeleteModal]);
 
+    const goToCoinPage = () => {
+        router.push(ROUTES.MARKET_ITEM(id));
+    };
+
     return (
         <>
             <Stack sx={styles.mainWrapper}>
                 <Stack sx={styles.infoSummaryWrapper}>
-                    <Stack sx={styles.infoWrapper}>
+                    <Stack sx={styles.infoWrapper} onClick={goToCoinPage}>
                         <CryptoIcon symbol={symbol} size={isMobile ? 24 : 40} />
                         <Stack sx={styles.nameWrapper}>
                             <Text sx={styles.coinName}>{name}</Text>

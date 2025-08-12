@@ -25,6 +25,7 @@ export const styles = {
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "flex-start",
+        cursor: "pointer",
     },
     nameWrapper: {
         display: "flex",
