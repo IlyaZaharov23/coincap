@@ -67,18 +67,16 @@ export const Markets = () => {
                 </Button>
             </Stack>
             <Stack sx={styles.topAssetsWrapper}>
-                {isLoading ? (
+                {isLoading || topAssets.length === 0 ? (
                     <TopCurrenciesSkeleton count={5} />
                 ) : (
-                    getTopAssetsByCount(topAssets, 5).map((asset) => (
-                        <>
-                            {isMobile || isTablet ? (
-                                <TabletCoin key={asset.id} asset={asset} />
-                            ) : (
-                                <Coin key={asset.id} asset={asset} />
-                            )}
-                        </>
-                    ))
+                    getTopAssetsByCount(topAssets, 5).map((asset) =>
+                        isMobile || isTablet ? (
+                            <TabletCoin key={asset.id} asset={asset} />
+                        ) : (
+                            <Coin key={asset.id} asset={asset} />
+                        ),
+                    )
                 )}
             </Stack>
         </Stack>

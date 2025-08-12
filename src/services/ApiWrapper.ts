@@ -1,9 +1,13 @@
-import axios from "axios";
+import axios, { AxiosInstance, AxiosResponse } from "axios";
 import { apiToken } from "shared/constants/apiToken";
 
+import { API_BASE } from "./apiEndpoints";
 import { AUTH_TOKEN, USER_EMAIL } from "./constants";
 
 export class ApiWrapper {
+    private static instance: AxiosInstance = axios.create({
+        baseURL: API_BASE,
+    });
     static getHeaders() {
         const headers = {
             "Content-Type": "application/json",
@@ -40,8 +44,8 @@ export class ApiWrapper {
         sessionStorage.removeItem(USER_EMAIL);
     }
 
-    static get(url: string) {
-        return axios.get(url, this.getHeaders());
+    static get<T>(url: string): Promise<AxiosResponse<T>> {
+        return this.instance.get<T>(url, this.getHeaders());
     }
 
     static post(url: string, bodyObj: unknown = {}) {

@@ -4,9 +4,9 @@ import { PAGINATION_WRAPPER_PADDING_BOTTOM, PAGINATION_WRAPPER_PADDING_TOP } fro
 
 export const PaginationSkeleton = () => {
     return (
-        <Stack>
+        <Stack height="40px">
             <Skeleton
-                height="40px"
+                height="100%"
                 width="25vw"
                 padding={`${PAGINATION_WRAPPER_PADDING_TOP}px 16px ${PAGINATION_WRAPPER_PADDING_BOTTOM}px`}
             />

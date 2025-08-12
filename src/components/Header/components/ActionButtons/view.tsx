@@ -37,16 +37,16 @@ export const ActionButtons: FC<ActionButtonsProps> = ({ showLogOut, isSignInHidd
     };
 
     const logOut = () => {
+        router.push(ROUTES.SIGN_IN);
         dispatch(userLogout());
         dispatch(clearWallet());
-        router.push(ROUTES.SIGN_IN);
     };
     return (
         <Stack sx={styles.buttonsWrapper}>
             {showLogOut ? (
                 <>
                     {!isMobile ? (
-                        <Button variant={BUTTON_VARIANT.PRIMARY} onClick={logOut}>
+                        <Button variant={BUTTON_VARIANT.PRIMARY} onClick={logOut} sx={styles.button}>
                             Log Out
                         </Button>
                     ) : (
@@ -58,7 +58,7 @@ export const ActionButtons: FC<ActionButtonsProps> = ({ showLogOut, isSignInHidd
                     {!isSignInHidden && (
                         <>
                             {!isMobile ? (
-                                <Button onClick={navigateToSignIn} variant={BUTTON_VARIANT.PRIMARY}>
+                                <Button onClick={navigateToSignIn} variant={BUTTON_VARIANT.PRIMARY} sx={styles.button}>
                                     Sign In
                                 </Button>
                             ) : (
@@ -69,7 +69,7 @@ export const ActionButtons: FC<ActionButtonsProps> = ({ showLogOut, isSignInHidd
                     {!isSignUpHidden && (
                         <>
                             {!isMobile ? (
-                                <Button onClick={navigateToSignUp} variant={BUTTON_VARIANT.PRIMARY}>
+                                <Button onClick={navigateToSignUp} variant={BUTTON_VARIANT.PRIMARY} sx={styles.button}>
                                     Sign Up
                                 </Button>
                             ) : (

@@ -1,3 +1,5 @@
+import { useMemo } from "react";
+
 import { BiMinusCircle, BiPlusCircle } from "react-icons/bi";
 import { FaFireAlt } from "react-icons/fa";
 
@@ -36,6 +38,75 @@ export const CoinItem = ({ symbol, name, amount, price, id, cost }: CoinItemProp
         addCoins,
         handleChangeCoinsCount,
     } = useCoinActions({ id, name, price, amount, symbol });
+
+    const addCoinsComponent = useMemo(() => {
+        const props = {
+            assetSymbol: symbol,
+            assetPrice: price,
+            helper: "Price",
+            coinsCount,
+            handleChangeCoinsCount,
+            isOpen: isAddOpen,
+            onClose: handleCloseAddModal,
+            onSubmit: addCoins,
+            modalButtonText: "Add",
+            modalTitle: "Add Coins",
+            isLoading,
+        };
+        return isMobile ? <AddCoinsDrawer {...props} /> : <AddCoinsModal {...props} />;
+    }, [
+        isMobile,
+        symbol,
+        price,
+        coinsCount,
+        isAddOpen,
+        isLoading,
+        addCoins,
+        handleCloseAddModal,
+        handleChangeCoinsCount,
+    ]);
+
+    const sellCoinsComponent = useMemo(() => {
+        const props = {
+            assetSymbol: symbol,
+            assetPrice: price,
+            helper: "Payout",
+            coinsCount,
+            handleChangeCoinsCount,
+            isOpen: isSellOpen,
+            onClose: handleCloseSellModal,
+            onSubmit: sellCoins,
+            modalButtonText: "Sell",
+            modalTitle: "Sell Coins",
+            isLoading,
+        };
+        return isMobile ? <SellCoinsDrawer {...props} /> : <SellCoinsModal {...props} />;
+    }, [
+        isMobile,
+        symbol,
+        price,
+        coinsCount,
+        isSellOpen,
+        isLoading,
+        handleChangeCoinsCount,
+        handleCloseSellModal,
+        sellCoins,
+    ]);
+
+    const deleteCoinsComponent = useMemo(() => {
+        const props = {
+            assetSymbol: symbol,
+            assetName: name,
+            isOpen: isDeleteOpen,
+            onClose: handleCloseDeleteModal,
+            onSubmit: deleteCoins,
+            modalButtonText: "Delete",
+            modalTitle: "Delete Coins",
+            isLoading,
+        };
+        return isMobile ? <DeleteCoinsDrawer {...props} /> : <DeleteCoinsModal {...props} />;
+    }, [isMobile, symbol, name, isDeleteOpen, isLoading, deleteCoins, handleCloseDeleteModal]);
+
     return (
         <>
             <Stack sx={styles.mainWrapper}>
@@ -72,87 +143,9 @@ export const CoinItem = ({ symbol, name, amount, price, id, cost }: CoinItemProp
                     </Tooltip>
                 </Stack>
             </Stack>
-            {isMobile ? (
-                <AddCoinsDrawer
-                    assetSymbol={symbol}
-                    assetPrice={price}
-                    helper="Price"
-                    coinsCount={coinsCount}
-                    handleChangeCoinsCount={handleChangeCoinsCount}
-                    isOpen={isAddOpen}
-                    onClose={handleCloseAddModal}
-                    onSubmit={addCoins}
-                    modalButtonText="Add"
-                    modalTitle="Add Coins"
-                    isLoading={isLoading}
-                />
-            ) : (
-                <AddCoinsModal
-                    assetSymbol={symbol}
-                    assetPrice={price}
-                    helper="Price"
-                    coinsCount={coinsCount}
-                    handleChangeCoinsCount={handleChangeCoinsCount}
-                    isOpen={isAddOpen}
-                    onClose={handleCloseAddModal}
-                    onSubmit={addCoins}
-                    modalButtonText="Add"
-                    modalTitle="Add Coins"
-                    isLoading={isLoading}
-                />
-            )}
-            {isMobile ? (
-                <SellCoinsDrawer
-                    assetSymbol={symbol}
-                    assetPrice={price}
-                    helper="Payout"
-                    coinsCount={coinsCount}
-                    handleChangeCoinsCount={handleChangeCoinsCount}
-                    isOpen={isSellOpen}
-                    onClose={handleCloseSellModal}
-                    onSubmit={sellCoins}
-                    modalButtonText="Sell"
-                    modalTitle="Sell Coins"
-                    isLoading={isLoading}
-                />
-            ) : (
-                <SellCoinsModal
-                    assetSymbol={symbol}
-                    assetPrice={price}
-                    helper="Payout"
-                    coinsCount={coinsCount}
-                    handleChangeCoinsCount={handleChangeCoinsCount}
-                    isOpen={isSellOpen}
-                    onClose={handleCloseSellModal}
-                    onSubmit={sellCoins}
-                    modalButtonText="Sell"
-                    modalTitle="Sell Coins"
-                    isLoading={isLoading}
-                />
-            )}
-            {isMobile ? (
-                <DeleteCoinsDrawer
-                    assetSymbol={symbol}
-                    assetName={name}
-                    isOpen={isDeleteOpen}
-                    onClose={handleCloseDeleteModal}
-                    onSubmit={deleteCoins}
-                    modalButtonText="Delete"
-                    modalTitle="Delete Coins"
-                    isLoading={isLoading}
-                />
-            ) : (
-                <DeleteCoinsModal
-                    assetSymbol={symbol}
-                    assetName={name}
-                    isOpen={isDeleteOpen}
-                    onClose={handleCloseDeleteModal}
-                    onSubmit={deleteCoins}
-                    modalButtonText="Delete"
-                    modalTitle="Delete Coins"
-                    isLoading={isLoading}
-                />
-            )}
+            {addCoinsComponent}
+            {sellCoinsComponent}
+            {deleteCoinsComponent}
         </>
     );
 };

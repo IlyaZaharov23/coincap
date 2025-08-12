@@ -1,5 +1,7 @@
 "use client";
 
+import { memo } from "react";
+
 import { Stack, Text } from "@chakra-ui/react";
 
 import { CryptoIcon } from "components/CryptoIcon";
@@ -13,7 +15,7 @@ import { TextUtil } from "utils/text";
 import { styles } from "./styles";
 import { TabletCoinProps } from "./types";
 
-export const TabletCoin = ({ asset }: TabletCoinProps) => {
+export const TabletCoin = memo(({ asset }: TabletCoinProps) => {
     const router = useRouter();
     const dispatch = useAppDispatch();
 
@@ -32,4 +34,6 @@ export const TabletCoin = ({ asset }: TabletCoinProps) => {
             </Stack>
         </Stack>
     );
-};
+});
+
+TabletCoin.displayName = "TabletCoin";

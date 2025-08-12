@@ -15,17 +15,19 @@ export const DeleteCoinsModal = ({
     isLoading,
 }: DeleteCoinsModalProps) => {
     return (
-        <ModalWrapper
-            title={modalTitle}
-            submitButtonText={modalButtonText}
-            onClose={onClose}
-            onSubmit={onSubmit}
-            isOpen={isOpen}
-            isDelete={isDelete}
-            assetSymbol={assetSymbol}
-            isLoading={isLoading}
-        >
-            <DeleteCoinsContent assetName={assetName} />
-        </ModalWrapper>
+        isOpen && (
+            <ModalWrapper
+                title={modalTitle}
+                submitButtonText={modalButtonText}
+                onClose={onClose}
+                onSubmit={onSubmit}
+                isOpen={isOpen}
+                isDelete={isDelete}
+                assetSymbol={assetSymbol}
+                isLoading={isLoading}
+            >
+                <DeleteCoinsContent assetName={assetName} />
+            </ModalWrapper>
+        )
     );
 };

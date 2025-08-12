@@ -1,6 +1,8 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-import { AssetsState } from "./assets.types";
+import { Asset, AssetHistory } from "types/types";
+
+import { AssetsState, WalletItem } from "./assets.types";
 
 export const ITEMS_PER_PAGE = 10;
 
@@ -18,8 +20,8 @@ export const assetsSlice = createSlice({
     name: "assets",
     initialState,
     reducers: {
-        setAssetsList: (state, action) => {
-            const { data } = action.payload;
+        setAssetsList: (state, action: PayloadAction<Asset[]>) => {
+            const data = action.payload;
 
             if (
                 Object.keys(state.assets).length > 0 &&
@@ -38,38 +40,34 @@ export const assetsSlice = createSlice({
                 state.assets[pageNumber] = pageItems;
             }
         },
-        setTopAssets: (state, action) => {
-            const { data } = action.payload;
+        setTopAssets: (state, action: PayloadAction<Asset[]>) => {
+            const data = action.payload;
             state.topAssets = data;
         },
-        setAssetDetails: (state, action) => {
-            const { data } = action.payload;
+        setAssetDetails: (state, action: PayloadAction<Asset>) => {
+            const data = action.payload;
             state.assetDetails = data;
         },
-        setAssetHistory: (state, action) => {
-            const { data } = action.payload;
+        setAssetHistory: (state, action: PayloadAction<AssetHistory[]>) => {
+            const data = action.payload;
             state.history = data;
         },
         clearAssetDetails: (state) => {
             state.assetDetails = null;
             state.history = [];
         },
-        addCoinToWallet: (state, action) => {
+        addCoinToWallet: (state, action: PayloadAction<{ coinInfo: WalletItem; coinId: string }>) => {
             const { coinId, coinInfo } = action.payload;
             state.wallet[coinId] = coinInfo;
         },
-        removeCoinFromWallet: (state, action) => {
+        removeCoinFromWallet: (state, action: PayloadAction<string>) => {
             delete state.wallet[action.payload];
         },
-        updateCoinsWallet: (state, action) => {
+        updateCoinsWallet: (state, action: PayloadAction<{ [coinId: string]: WalletItem }>) => {
             state.wallet = action.payload;
         },
         clearWallet: (state) => {
             state.wallet = {};
-        },
-        setExchanges: (state, action) => {
-            const { data } = action.payload;
-            state.exchanges = data;
         },
     },
 });

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 import { Stack, Td, Text, Tooltip, Tr, useDisclosure } from "@chakra-ui/react";
 
@@ -84,11 +84,14 @@ export const AssetItem = ({ asset, currentPage }: AssetItemProps) => {
         dispatch(addCoinToWallet({ coinId: asset.id, coinInfo }));
     };
 
-    const onClickAsset = (asset: Asset) => {
-        router.push(ROUTES.MARKET_ITEM(asset.id));
-        dispatch(setAssetDetails(asset));
-        localStorage.setItem(CURRENT_ASSETS_PAGE, JSON.stringify(currentPage));
-    };
+    const onClickAsset = useCallback(
+        (asset: Asset) => {
+            router.push(ROUTES.MARKET_ITEM(asset.id));
+            dispatch(setAssetDetails(asset));
+            localStorage.setItem(CURRENT_ASSETS_PAGE, JSON.stringify(currentPage));
+        },
+        [router, dispatch, currentPage],
+    );
 
     const handleChangeCoinsCount = (e: React.ChangeEvent<HTMLInputElement>) => {
         setCoinsCount(e.target.value);
@@ -157,23 +160,25 @@ export const AssetItem = ({ asset, currentPage }: AssetItemProps) => {
                     </Tooltip>
                 )}
             </Tr>
-            <ModalWrapper
-                isOpen={isOpen}
-                onClose={onClose}
-                onSubmit={onSubmit}
-                submitButtonText="Add"
-                title={`Add ${asset.name}`}
-                assetSymbol={asset.symbol}
-                isLoading={isLoading}
-            >
-                <CoinsAddModal
-                    helper="Price"
+            {isOpen && (
+                <ModalWrapper
+                    isOpen={isOpen}
+                    onClose={onClose}
+                    onSubmit={onSubmit}
+                    submitButtonText="Add"
+                    title={`Add ${asset.name}`}
                     assetSymbol={asset.symbol}
-                    assetPrice={asset.priceUsd}
-                    coinsAmount={coinsCount}
-                    changeCoinsAmount={handleChangeCoinsCount}
-                />
-            </ModalWrapper>
+                    isLoading={isLoading}
+                >
+                    <CoinsAddModal
+                        helper="Price"
+                        assetSymbol={asset.symbol}
+                        assetPrice={asset.priceUsd}
+                        coinsAmount={coinsCount}
+                        changeCoinsAmount={handleChangeCoinsCount}
+                    />
+                </ModalWrapper>
+            )}
         </>
     );
 };

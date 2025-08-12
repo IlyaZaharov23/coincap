@@ -3,7 +3,7 @@ import { Stack } from "@chakra-ui/react";
 import { Header } from "components/Header";
 
 import { Converter } from "./components/Converter";
-import { Description } from "./components/Description";
+import { DynamicDescription } from "./components/DynamicDescription";
 import { Markets } from "./components/Markets";
 import { styles } from "./styles";
 
@@ -13,7 +13,7 @@ export default function Home() {
             <Header showNavbar />
             <Stack sx={styles.contentWrapper}>
                 <Stack sx={styles.topContentWrapper}>
-                    <Description />
+                    <DynamicDescription />
                     <Converter />
                 </Stack>
                 <Stack sx={styles.topMarketsWrapper}>

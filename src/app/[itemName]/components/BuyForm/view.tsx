@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 import { Stack, Text } from "@chakra-ui/react";
 
@@ -23,18 +23,15 @@ export const BuyForm = () => {
     const dispatch = useAppDispatch();
     const [value, setValue] = useState<string>("");
 
-    if (!assetDetails) return null;
-
     const handleChangeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
         const inputValue = e.target.value;
         if (inputValue === "" || InputValidationUtil.isDigit(inputValue)) {
             setValue(inputValue);
         }
     };
-
-    const updatePortfolioCoins = () => {
+    const updatePortfolioCoins = useCallback(() => {
         const userId = localStorage.getItem(USER_ID);
-        if (!userId) return;
+        if (!userId || !assetDetails) return;
         const currentCoin = wallet[assetDetails?.id];
         const newAmount = currentCoin.amount + Number(value);
         const coinInfo = {
@@ -44,11 +41,11 @@ export const BuyForm = () => {
         };
         LocalStorageUtil.updatePortfolioCoin(userId, assetDetails.id, coinInfo);
         dispatch(addCoinToWallet({ coinId: assetDetails.id, coinInfo }));
-    };
+    }, [assetDetails, dispatch, value, wallet]);
 
-    const addCoinsToPortfolio = () => {
+    const addCoinsToPortfolio = useCallback(() => {
         const userId = localStorage.getItem(USER_ID);
-        if (!userId) return;
+        if (!userId || !assetDetails) return;
         const coinInfo = {
             name: assetDetails.name,
             id: assetDetails.id,
@@ -59,26 +56,30 @@ export const BuyForm = () => {
         };
         LocalStorageUtil.updatePortfolioCoin(userId, assetDetails.id, coinInfo);
         dispatch(addCoinToWallet({ coinId: assetDetails.id, coinInfo }));
-    };
+    }, [assetDetails, dispatch, value]);
 
-    const onSubmit = () => {
+    const onSubmit = useCallback(() => {
         try {
             if (value.trim().length === 0) {
                 Toast.info("To continue, please enter the amount of cryptocurrency you'd like to buy.");
                 return;
             }
-            if (wallet[assetDetails?.id]) {
+            if (assetDetails && wallet[assetDetails?.id]) {
                 updatePortfolioCoins();
             } else {
                 addCoinsToPortfolio();
             }
             setValue("");
-            Toast.success(`${assetDetails.name} has been successfully added to your portfolio.`);
+            Toast.success(`${assetDetails?.name} has been successfully added to your portfolio.`);
         } catch (error) {
             console.log(error);
-            Toast.error(`Something wrong while adding ${assetDetails.name} to your portfolio. Please try again later.`);
+            Toast.error(
+                `Something wrong while adding ${assetDetails?.name} to your portfolio. Please try again later.`,
+            );
         }
-    };
+    }, [addCoinsToPortfolio, assetDetails, updatePortfolioCoins, value, wallet]);
+
+    if (!assetDetails) return null;
 
     return (
         <Stack sx={styles.wrapper}>

@@ -1,3 +1,5 @@
+import { useCallback, useMemo } from "react";
+
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 import { Stack } from "@chakra-ui/react";
 
@@ -6,7 +8,6 @@ import { ASSETS_LIMIT } from "shared/constants/assetsLimit";
 import { BUTTON_VARIANT } from "shared/constants/buttonVariants";
 import { useAppDispatch } from "store/hooks";
 import { getAssets } from "store/slices/assets/assets.thunks";
-import { Asset } from "types/types";
 import { getVisiblePages } from "utils/helpers/pagination/getVisiblePages";
 
 import { PaginationSkeleton } from "../Fallbacks/PaginationSketelon";
@@ -32,16 +33,11 @@ export const Pagination = ({
         setOffset(currentPage - 1);
     };
 
-    const handleNext = async () => {
+    const handleNext = useCallback(async () => {
         try {
             setIsLoading(true);
-            if (totalPages - currentPage > 5) {
-                return;
-            }
-            const resp = (await dispatch(getAssets({ limit: ASSETS_LIMIT.PAGINATION, offset })).unwrap()) as {
-                data: Asset[];
-                timestamp: number;
-            };
+            if (totalPages - currentPage > 5) return;
+            const resp = await dispatch(getAssets({ limit: ASSETS_LIMIT.PAGINATION, offset })).unwrap();
             if (resp.data.length < ASSETS_LIMIT.PAGINATION) {
                 setHasMore(false);
             }
@@ -52,34 +48,29 @@ export const Pagination = ({
             setOffset(currentPage + 1);
             setIsLoading(false);
         }
-    };
+    }, [currentPage, offset, totalPages, dispatch, setCurrentPage, setOffset, setHasMore, setIsLoading]);
 
-    const handlePageChange = async (page: number) => {
-        try {
-            setIsLoading(true);
-            if (page < currentPage) {
-                return;
+    const handlePageChange = useCallback(
+        async (page: number) => {
+            try {
+                setIsLoading(true);
+                if (page < currentPage || totalPages - page > 4) return;
+                const resp = await dispatch(getAssets({ limit: ASSETS_LIMIT.PAGINATION, offset })).unwrap();
+                if (resp.data.length < ASSETS_LIMIT.PAGINATION) {
+                    setHasMore(false);
+                }
+            } catch (error) {
+                console.log(error);
+            } finally {
+                setIsLoading(false);
+                setCurrentPage(page);
+                setOffset(page);
             }
-            if (totalPages - page > 4) {
-                return;
-            }
-            const resp = (await dispatch(getAssets({ limit: ASSETS_LIMIT.PAGINATION, offset })).unwrap()) as {
-                data: Asset[];
-                timestamp: number;
-            };
-            if (resp.data.length < ASSETS_LIMIT.PAGINATION) {
-                setHasMore(false);
-            }
-        } catch (error) {
-            console.log(error);
-        } finally {
-            setIsLoading(false);
-            setCurrentPage(page);
-            setOffset(page);
-        }
-    };
+        },
+        [currentPage, offset, totalPages, dispatch, setCurrentPage, setOffset, setHasMore, setIsLoading],
+    );
 
-    const visiblePages = getVisiblePages(totalPages, currentPage);
+    const visiblePages = useMemo(() => getVisiblePages(totalPages, currentPage), [currentPage, totalPages]);
 
     return (
         <Stack height="100%" justifyContent="space-between">

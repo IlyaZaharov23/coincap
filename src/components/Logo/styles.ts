@@ -1,4 +1,5 @@
 import { black } from "shared/constants/colors";
+import { responsive } from "utils/helpers/themeBreakpoints/breakpoints";
 
 export const styles = {
     mainWrapper: {
@@ -12,7 +13,7 @@ export const styles = {
         fontSize: "1.25rem",
         fontWeight: "700",
         transform: "skew(-3deg)",
-        display: "inline-block",
+        display: responsive("none", { md: "inline-block" }),
         color: black,
         marginLeft: "0.25rem",
     },

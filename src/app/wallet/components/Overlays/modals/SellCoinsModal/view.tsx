@@ -17,22 +17,24 @@ export const SellCoinsModal = ({
     isLoading,
 }: CoinsModalProps) => {
     return (
-        <ModalWrapper
-            title={modalTitle}
-            submitButtonText={modalButtonText}
-            onClose={onClose}
-            onSubmit={onSubmit}
-            isOpen={isOpen}
-            assetSymbol={assetSymbol}
-            isLoading={isLoading}
-        >
-            <SellCoinsContent
-                assetPrice={assetPrice}
+        isOpen && (
+            <ModalWrapper
+                title={modalTitle}
+                submitButtonText={modalButtonText}
+                onClose={onClose}
+                onSubmit={onSubmit}
+                isOpen={isOpen}
                 assetSymbol={assetSymbol}
-                handleChangeCoinsCount={handleChangeCoinsCount}
-                helper={helper}
-                coinsCount={coinsCount}
-            />
-        </ModalWrapper>
+                isLoading={isLoading}
+            >
+                <SellCoinsContent
+                    assetPrice={assetPrice}
+                    assetSymbol={assetSymbol}
+                    handleChangeCoinsCount={handleChangeCoinsCount}
+                    helper={helper}
+                    coinsCount={coinsCount}
+                />
+            </ModalWrapper>
+        )
     );
 };

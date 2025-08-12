@@ -23,7 +23,7 @@ export const styles = {
     topContentWrapper: {
         width: responsive("100vw", { md: "100vw", lg: "100vw", xl: "70vw" }),
         display: "flex",
-        flexDirection: responsive("column", { md: "column", lg: "row" }),
+        flexDirection: responsive("column", { lg: "row" }),
         alignItems: "center",
         justifyContent: "space-between",
         padding: responsive("0 3rem", { md: "0 3rem", lg: "0 3rem" }),
