@@ -56,7 +56,7 @@ export const CoinContent = () => {
 
     return (
         <Stack sx={styles.mainWrapper}>
-            {isLoading ? (
+            {isLoading || !assetDetails ? (
                 <FullscreenLoader />
             ) : (
                 <>

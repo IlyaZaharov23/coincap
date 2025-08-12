@@ -5,7 +5,7 @@ export const styles = {
     mainWrapper: {
         gap: "1rem",
         padding: "1rem",
-        width: responsive("100%", { md: "500px !important", lg: "500px !important" }),
+        width: responsive("100%", { md: "500px !important" }),
     },
     mainTitle: {
         fontSize: responsive("2rem", { md: "3rem" }),

@@ -21,6 +21,7 @@ export const AddCoinsContent = ({
                 size={INPUT_SIZE.LARGE}
                 value={coinsCount}
                 onChange={handleChangeCoinsCount}
+                width="100%"
             />
             <Stack sx={styles.bottomWrapper}>
                 <Text sx={styles.info}>{helper}:</Text>

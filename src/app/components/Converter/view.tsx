@@ -15,6 +15,7 @@ import { useAppSelector } from "store/hooks";
 import { topAssetsListGet } from "store/slices/assets/assets.selectors";
 import { InputValidationUtil } from "utils/inputValidation";
 
+import { ConverterSkeleton } from "./components/ConverterSkeleton";
 import { CurrencyDropdown } from "./components/CurrencyDropdown";
 import { ACTIVE_INPUT } from "./constants/activeInput";
 import { styles } from "./styles";
@@ -72,35 +73,41 @@ export const Converter = () => {
 
     return (
         <Stack sx={styles.mainWrapper}>
-            <Stack sx={styles.baseInputWrapper}>
-                <Image src={coinFallback} alt="coin-fallback" width={40} />
-                <Input
-                    sx={styles.input}
-                    label="USD"
-                    size={INPUT_SIZE.LARGE}
-                    inputMode="decimal"
-                    type="text"
-                    value={baseInputValue}
-                    onChange={handleChangeBaseValue}
-                />
-            </Stack>
-            <Stack sx={styles.topWrapper}>
-                {quoteInputValues.map((quote) => (
-                    <Stack key={quote.id} sx={styles.quoteInputWrapper}>
-                        <CryptoIcon size={40} symbol={quote.symbol} />
+            {quoteInputValues.length === 0 ? (
+                <ConverterSkeleton />
+            ) : (
+                <>
+                    <Stack sx={styles.baseInputWrapper}>
+                        <Image src={coinFallback} alt="coin-fallback" width={40} />
                         <Input
-                            sx={{ ...styles.input, ...styles.quoteInput(showCloseIcon) }}
-                            label={quote.symbol}
+                            sx={styles.input}
+                            label="USD"
                             size={INPUT_SIZE.LARGE}
-                            value={quoteAmounts[quote.id] || ""}
-                            onChange={(e) => handleChangeQuoteValue(quote.id, e)}
+                            inputMode="decimal"
+                            type="text"
+                            value={baseInputValue}
+                            onChange={handleChangeBaseValue}
                         />
-                        {showCloseIcon && (
-                            <CloseIcon sx={styles.closeIcon} onClick={() => removeQuoteAsset(quote.id)} />
-                        )}
                     </Stack>
-                ))}
-            </Stack>
+                    <Stack sx={styles.topWrapper}>
+                        {quoteInputValues.map((quote) => (
+                            <Stack key={quote.id} sx={styles.quoteInputWrapper}>
+                                <CryptoIcon size={40} symbol={quote.symbol} />
+                                <Input
+                                    sx={{ ...styles.input, ...styles.quoteInput(showCloseIcon) }}
+                                    label={quote.symbol}
+                                    size={INPUT_SIZE.LARGE}
+                                    value={quoteAmounts[quote.id] || ""}
+                                    onChange={(e) => handleChangeQuoteValue(quote.id, e)}
+                                />
+                                {showCloseIcon && (
+                                    <CloseIcon sx={styles.closeIcon} onClick={() => removeQuoteAsset(quote.id)} />
+                                )}
+                            </Stack>
+                        ))}
+                    </Stack>
+                </>
+            )}
             <MemoizedCurrencyDropdown {...quoteDropdownProps} />
         </Stack>
     );

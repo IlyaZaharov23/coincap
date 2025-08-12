@@ -1,4 +1,4 @@
-const API_BASE = "https://rest.coincap.io/v3";
+export const API_BASE = "https://rest.coincap.io/v3";
 const AUTH_BASE = "https://todo-redev.herokuapp.com";
 
 export const COIN_CAP_API = {

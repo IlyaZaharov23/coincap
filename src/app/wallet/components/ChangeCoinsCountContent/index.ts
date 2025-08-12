@@ -1,1 +1,0 @@
-export { ChangeCoinsCountContent } from "./view";

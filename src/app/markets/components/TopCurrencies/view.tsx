@@ -52,18 +52,12 @@ export const TopCurrencies = () => {
         <Stack sx={styles.mainWrapper}>
             <Text sx={styles.wrapperName}>Top markets:</Text>
             <Stack sx={styles.topAssetsWrapper}>
-                {isLoading ? (
+                {isLoading || topAssets.length === 0 ? (
                     <TopCurrenciesSkeleton count={3} />
                 ) : (
-                    getTopAssetsByCount(topAssets, 3).map((asset) => (
-                        <>
-                            {isTablet ? (
-                                <TabletCoin key={asset.id} asset={asset} />
-                            ) : (
-                                <Coin key={asset.id} asset={asset} />
-                            )}
-                        </>
-                    ))
+                    getTopAssetsByCount(topAssets, 3).map((asset) =>
+                        isTablet ? <TabletCoin key={asset.id} asset={asset} /> : <Coin key={asset.id} asset={asset} />,
+                    )
                 )}
             </Stack>
         </Stack>

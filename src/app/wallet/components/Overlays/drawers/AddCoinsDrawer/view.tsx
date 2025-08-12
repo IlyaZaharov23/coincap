@@ -17,22 +17,24 @@ export const AddCoinsDrawer = ({
     isLoading,
 }: CoinsDrawerProps) => {
     return (
-        <DrawerWrapper
-            title={modalTitle}
-            submitButtonText={modalButtonText}
-            onClose={onClose}
-            onSubmit={onSubmit}
-            isOpen={isOpen}
-            assetSymbol={assetSymbol}
-            isLoading={isLoading}
-        >
-            <AddCoinsContent
-                assetPrice={assetPrice}
+        isOpen && (
+            <DrawerWrapper
+                title={modalTitle}
+                submitButtonText={modalButtonText}
+                onClose={onClose}
+                onSubmit={onSubmit}
+                isOpen={isOpen}
                 assetSymbol={assetSymbol}
-                helper={helper}
-                coinsCount={coinsCount}
-                handleChangeCoinsCount={handleChangeCoinsCount}
-            />
-        </DrawerWrapper>
+                isLoading={isLoading}
+            >
+                <AddCoinsContent
+                    assetPrice={assetPrice}
+                    assetSymbol={assetSymbol}
+                    helper={helper}
+                    coinsCount={coinsCount}
+                    handleChangeCoinsCount={handleChangeCoinsCount}
+                />
+            </DrawerWrapper>
+        )
     );
 };

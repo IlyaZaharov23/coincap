@@ -30,3 +30,20 @@ export interface AssetsState {
     assetsPaths: string[];
     exchanges: ExchangeItem[];
 }
+
+export interface ApiResponse<T> {
+    data: T;
+    timestamp?: number;
+}
+
+export interface AssetsListResponse {
+    data: Asset[];
+}
+
+export interface AssetDetailsResponse {
+    data: Asset;
+}
+
+export interface AssetHistoryResponse {
+    data: AssetHistory[];
+}

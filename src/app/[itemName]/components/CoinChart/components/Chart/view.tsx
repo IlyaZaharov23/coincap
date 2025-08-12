@@ -1,3 +1,5 @@
+import { useCallback } from "react";
+
 import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { bluePrimary } from "shared/constants/colors";
 import { useAppSelector } from "store/hooks";
@@ -30,11 +32,11 @@ export const Chart = ({ currentItem, setCurrentItem, setPriceDifference }: Chart
         }
     };
 
-    const getTicks = () => {
+    const getTicks = useCallback(() => {
         return ChartUtil.getChartFields(assetHistory)
             .filter((_, index) => index % 2 === 0)
             .map((item) => item.name);
-    };
+    }, [assetHistory]);
 
     return (
         <ResponsiveContainer width="100%" height={400}>

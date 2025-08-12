@@ -3,7 +3,7 @@
 import { Stack } from "@chakra-ui/react";
 
 import { Button } from "components/Button";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { BUTTON_VARIANT } from "shared/constants/buttonVariants";
 import { ROUTES } from "shared/constants/routes";
 
@@ -12,7 +12,6 @@ import { useActiveNav } from "./hooks/useActiveNav";
 import { styles } from "./styles";
 
 export const Navbar = () => {
-    const pathname = usePathname();
     const router = useRouter();
     const activeNav = useActiveNav();
 
@@ -24,7 +23,6 @@ export const Navbar = () => {
     };
     return (
         <Stack sx={styles.navPanel}>
-            {/* <Button variant={BUTTON_VARIANT.TAB}>Converter</Button> */}
             <Button
                 variant={BUTTON_VARIANT.TAB}
                 onClick={navigateToMarkets}

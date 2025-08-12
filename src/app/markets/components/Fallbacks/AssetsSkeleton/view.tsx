@@ -1,36 +1,41 @@
 import { Skeleton, Td, Tr } from "@chakra-ui/react";
 
-import { ROW_HEIGHT } from "../../AssetItem/styles";
+import { useIsMobile, useIsTablet } from "hooks/useDevice";
 
-const ROW_PADDING_Y = 16;
+import { styles } from "./styles";
 
 export const AssetsSkeleton = () => {
+    const isMobile = useIsMobile();
+    const isTablet = useIsTablet();
     const skeletonList = Array.from({ length: 10 });
     return (
         <>
             {skeletonList.map((_, index) => (
-                <Tr key={index}>
-                    <Td width="23vw">
-                        <Skeleton
-                            height={`${ROW_HEIGHT - ROW_PADDING_Y * 2 - 0.5}px`}
-                            padding={`${ROW_PADDING_Y}px 24px`}
-                        />
+                <Tr key={index} sx={styles.tableRow}>
+                    <Td sx={styles.col1}>
+                        <Skeleton height="100%" />
                     </Td>
-                    <Td width="11vw">
-                        <Skeleton height={`${ROW_HEIGHT - ROW_PADDING_Y * 2}px`} padding={`${ROW_PADDING_Y}px 24px`} />
+                    {!isMobile && (
+                        <Td sx={styles.col2}>
+                            <Skeleton height="100%" />
+                        </Td>
+                    )}
+                    <Td sx={styles.col3}>
+                        <Skeleton height="100%" />
                     </Td>
-                    <Td width="11vw">
-                        <Skeleton height={`${ROW_HEIGHT - ROW_PADDING_Y * 2}px`} padding={`${ROW_PADDING_Y}px 24px`} />
+                    {!isMobile && (
+                        <Td sx={styles.col4}>
+                            <Skeleton height="100%" />
+                        </Td>
+                    )}
+                    <Td sx={styles.col5}>
+                        <Skeleton height="100%" />
                     </Td>
-                    <Td width="14vw">
-                        <Skeleton height={`${ROW_HEIGHT - ROW_PADDING_Y * 2}px`} padding={`${ROW_PADDING_Y}px 24px`} />
-                    </Td>
-                    <Td width="11vw">
-                        <Skeleton height={`${ROW_HEIGHT - ROW_PADDING_Y * 2}px`} padding={`${ROW_PADDING_Y}px 24px`} />
-                    </Td>
-                    <Td width="5vw">
-                        <Skeleton height={`${ROW_HEIGHT - ROW_PADDING_Y * 2}px`} padding={`${ROW_PADDING_Y}px 24px`} />
-                    </Td>
+                    {!isMobile && !isTablet && (
+                        <Td sx={styles.col6}>
+                            <Skeleton height="100%" />
+                        </Td>
+                    )}
                 </Tr>
             ))}
         </>

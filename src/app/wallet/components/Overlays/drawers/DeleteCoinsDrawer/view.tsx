@@ -15,17 +15,19 @@ export const DeleteCoinsDrawer = ({
     isLoading,
 }: DeleteCoinsDrawerProps) => {
     return (
-        <DrawerWrapper
-            title={modalTitle}
-            submitButtonText={modalButtonText}
-            onClose={onClose}
-            onSubmit={onSubmit}
-            isOpen={isOpen}
-            isDelete={isDelete}
-            assetSymbol={assetSymbol}
-            isLoading={isLoading}
-        >
-            <DeleteCoinsContent assetName={assetName} />
-        </DrawerWrapper>
+        isOpen && (
+            <DrawerWrapper
+                title={modalTitle}
+                submitButtonText={modalButtonText}
+                onClose={onClose}
+                onSubmit={onSubmit}
+                isOpen={isOpen}
+                isDelete={isDelete}
+                assetSymbol={assetSymbol}
+                isLoading={isLoading}
+            >
+                <DeleteCoinsContent assetName={assetName} />
+            </DrawerWrapper>
+        )
     );
 };

@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect, useState } from "react";
+
 import { Stack } from "@chakra-ui/react";
 
 import { ErrorPage } from "components/ErrorPage";
@@ -15,7 +17,20 @@ const DynamicCoinsList = dynamic(() => import("./components/CoinsList").then((mo
 });
 
 export default function Wallet() {
-    if (!ApiWrapper.getToken()) return <ErrorPage />;
+    const [isValidToken, setIsValidToken] = useState<boolean | null>(null);
+
+    useEffect(() => {
+        setIsValidToken(!!ApiWrapper.getToken());
+    }, []);
+
+    if (isValidToken === null) {
+        return <FullscreenLoader />;
+    }
+
+    if (!isValidToken) {
+        return <ErrorPage />;
+    }
+
     return (
         <Stack sx={styles.mainWrapper}>
             <Header showNavbar />

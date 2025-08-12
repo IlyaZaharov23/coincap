@@ -1,13 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 
 import coinFallback from "assets/coinFallback.svg";
 import Image from "next/image";
 
 import { CryptoIconProps } from "./types";
 
-export const CryptoIcon = ({ symbol, size }: CryptoIconProps) => {
+export const CryptoIcon = memo(({ symbol, size }: CryptoIconProps) => {
     const [icon, setIcon] = useState<string>(coinFallback);
 
     useEffect(() => {
@@ -24,4 +24,6 @@ export const CryptoIcon = ({ symbol, size }: CryptoIconProps) => {
     }, [symbol]);
 
     return <Image src={icon} alt={`${symbol}-icon`} width={size} height={size} />;
-};
+});
+
+CryptoIcon.displayName = "CryptoCoin";
