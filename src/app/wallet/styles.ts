@@ -1,6 +1,6 @@
 import { HEADER_HEIGHT } from "components/Header/styles";
 import { white } from "shared/constants/colors";
-import { responsive } from "utils/helpers/themeBreakpoints/breakpoints";
+import { responsive } from "utils/helpers/themeBreakpoints";
 
 const WALLET_CONTENT_MARGIN_TOP_MOB = 16;
 const WALLET_CONTENT_MARGIN_TOP_TAB = 24;

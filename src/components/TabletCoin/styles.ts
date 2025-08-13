@@ -1,4 +1,5 @@
 import { black, borderGray, darkGray } from "shared/constants/colors";
+import { responsive } from "utils/helpers/themeBreakpoints";
 
 export const styles = {
     mainWrapper: {
@@ -26,16 +27,21 @@ export const styles = {
         flexDirection: "column",
         alignItems: "flex-start",
         justifyContent: "center",
-        gap: "0.25rem",
-        marginLeft: "0.5rem",
+        gap: "0",
+        marginLeft: 0,
+        width: responsive("120px", { md: "86px", lg: "110px" }),
     },
     name: {
-        fontSize: "1rem",
+        fontSize: "0.938rem",
         fontWeigth: "400",
         color: black,
+        whiteSpace: "nowrap",
+        overflow: "hidden",
+        textOverflow: "ellipsis",
+        width: "100%",
     },
     price: {
-        fontSize: "1rem",
+        fontSize: "0.938rem",
         fontWeight: "500",
     },
 };

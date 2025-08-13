@@ -1,5 +1,5 @@
 import { black } from "shared/constants/colors";
-import { responsive } from "utils/helpers/themeBreakpoints/breakpoints";
+import { responsive } from "utils/helpers/themeBreakpoints";
 
 export const styles = {
     mainWrapper: {

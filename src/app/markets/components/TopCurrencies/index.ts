@@ -1,1 +1,1 @@
-export { TopCurrencies } from "./view";
+export * from "./view";

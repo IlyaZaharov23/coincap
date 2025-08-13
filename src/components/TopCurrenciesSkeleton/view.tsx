@@ -1,3 +1,7 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
 import { Skeleton, Stack } from "@chakra-ui/react";
 
 import { Divider } from "components/Divider";
@@ -8,8 +12,18 @@ import { DIVIDER_ORIENTATION, DIVIDER_SIZE } from "shared/constants/divider";
 import { styles } from "./styles";
 
 export const TopCurrenciesSkeleton = ({ count }: { count: number }) => {
+    const [isMounted, setIsMounted] = useState(false);
     const isMobile = useIsMobile();
     const isTablet = useIsTablet();
+
+    useEffect(() => {
+        setIsMounted(true);
+    }, []);
+
+    if (!isMounted) {
+        return null;
+    }
+
     const skeletonList = Array.from({ length: count });
     return (
         <>

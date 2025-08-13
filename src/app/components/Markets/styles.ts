@@ -1,5 +1,5 @@
 import { black } from "shared/constants/colors";
-import { responsive } from "utils/helpers/themeBreakpoints/breakpoints";
+import { responsive } from "utils/helpers/themeBreakpoints";
 
 export const styles = {
     mainWrapper: {
@@ -7,8 +7,8 @@ export const styles = {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        width: responsive("90vw", { md: "95vw", lg: "85vw", xl: "100%" }),
-        margin: responsive("1.5rem", { md: "2rem" }),
+        width: responsive("100vw", { md: "85vw", xl: "100%" }),
+        margin: responsive("0.75rem 0", { md: "2rem" }),
     },
     topAssetsWrapper: {
         display: "flex",
@@ -25,7 +25,7 @@ export const styles = {
         alignItems: "center",
         justifyContent: "space-between",
         width: "100%",
-        padding: responsive("0 1.5rem", { md: "0 2rem", xl: "0" }),
+        padding: responsive("0 1.5rem", { md: "0 1rem", lg: "0 2rem", xl: "0", "2xl": "0 1rem" }),
     },
     wrapperName: {
         fontSize: "1.5rem",

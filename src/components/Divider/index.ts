@@ -1,1 +1,1 @@
-export { Divider } from "./view";
+export * from "./view";

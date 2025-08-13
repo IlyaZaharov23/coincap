@@ -9,8 +9,8 @@ import { useIsMobile, useIsTablet } from "hooks/useDevice";
 import { useParams } from "next/navigation";
 import { ASSETS_LIMIT } from "shared/constants/assetsLimit";
 import { useAppDispatch, useAppSelector } from "store/hooks";
-import { topAssetsListGet } from "store/slices/assets/assets.selectors";
-import { getTopAssets } from "store/slices/assets/assets.thunks";
+import { getTopAssets } from "store/slices/assets/actions";
+import { topAssetsListGet } from "store/slices/assets/selectors";
 
 import { styles } from "./styles";
 

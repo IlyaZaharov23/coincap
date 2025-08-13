@@ -1,13 +1,13 @@
 import { Stack, Text } from "@chakra-ui/react";
 
 import { useAppSelector } from "store/hooks";
-import { getAssetDetails } from "store/slices/assets/assets.selectors";
-import { getPriceArrowIcon } from "utils/helpers/price/getArrowIcon";
+import { getAssetDetails } from "store/slices/assets/selectors";
+import { getPriceArrowIcon } from "utils/helpers/price";
 import { getPriceStatus } from "utils/helpers/price/status";
 import { PricesUtil } from "utils/prices";
 import { StyleUtil } from "utils/style";
 
-import { MarketSkeleton } from "../MarketSkeleton";
+import { MarketSkeleton } from "../Fallbacks/MarketSkeleton";
 import { styles } from "./styles";
 
 export const Market = () => {

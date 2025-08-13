@@ -1,1 +1,1 @@
-export { SignUpForm } from "./view";
+export * from "./view";

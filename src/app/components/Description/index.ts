@@ -1,1 +1,1 @@
-export { Description } from "./view";
+export * from "./view";

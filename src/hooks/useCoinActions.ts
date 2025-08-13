@@ -4,7 +4,7 @@ import { useDisclosure } from "@chakra-ui/react";
 
 import { USER_ID } from "services/constants";
 import { useAppDispatch } from "store/hooks";
-import { addCoinToWallet, removeCoinFromWallet } from "store/slices/assets/assets.thunks";
+import { addCoinToWallet, removeCoinFromWallet } from "store/slices/assets/actions";
 import { CoinItemProps } from "types/types";
 import { InputValidationUtil } from "utils/inputValidation";
 import { LocalStorageUtil } from "utils/localStorage";

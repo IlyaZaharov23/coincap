@@ -15,7 +15,7 @@ const DynamicCoinContent = dynamic(() => import("./components/CoinContent").then
 export default function MarketItem() {
     return (
         <Stack>
-            <Header showBack showNavbar />
+            <Header showNavbar />
             <Stack sx={styles.contentWrapper}>
                 <DynamicCoinContent />
             </Stack>

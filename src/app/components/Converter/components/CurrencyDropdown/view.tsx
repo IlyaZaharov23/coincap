@@ -5,7 +5,7 @@ import { Popover, PopoverContent, PopoverTrigger, Stack, Text, useDisclosure } f
 
 import { CryptoIcon } from "components/CryptoIcon";
 import { useAppSelector } from "store/hooks";
-import { topAssetsListGet } from "store/slices/assets/assets.selectors";
+import { topAssetsListGet } from "store/slices/assets/selectors";
 import { Asset } from "types/types";
 
 import { styles } from "./styles";

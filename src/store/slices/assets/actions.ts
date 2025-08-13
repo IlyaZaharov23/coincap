@@ -4,8 +4,8 @@ import { ApiWrapper } from "services/ApiWrapper";
 import { COIN_CAP_API } from "services/apiEndpoints";
 import { Asset, AssetHistory } from "types/types";
 
-import { assetsSlice } from "./assets.slice";
-import { ApiResponse } from "./assets.types";
+import { assetsSlice } from "./reducers";
+import { ApiResponse } from "./types";
 
 export const {
     setAssetsList,

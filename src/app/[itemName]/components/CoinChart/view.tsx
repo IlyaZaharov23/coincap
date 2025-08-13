@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Stack, Text } from "@chakra-ui/react";
 
 import { useAppSelector } from "store/hooks";
-import { getPriceHistory } from "store/slices/assets/assets.selectors";
+import { getPriceHistory } from "store/slices/assets/selectors";
 import { AssetHistory } from "types/types";
 import { ChartUtil } from "utils/chartUtil";
 import { PricesUtil } from "utils/prices";

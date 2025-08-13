@@ -1,5 +1,5 @@
 import { TABLE_DATA_WIDTH } from "app/markets/constants/tableDataWidth";
-import { responsive } from "utils/helpers/themeBreakpoints/breakpoints";
+import { responsive } from "utils/helpers/themeBreakpoints";
 
 import { ROW_HEIGHT, ROW_HEIGHT_MOB } from "../../AssetItem/styles";
 

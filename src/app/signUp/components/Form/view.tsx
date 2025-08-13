@@ -13,7 +13,7 @@ import { PASSWORD_REQUIREMENT_KEYS } from "shared/constants/formRequirements";
 import { INPUT_SIZE } from "shared/constants/inputSizes";
 import { ROUTES } from "shared/constants/routes";
 import { useAppDispatch } from "store/hooks";
-import { userRegistration } from "store/slices/auth/auth.thunks";
+import { userRegistration } from "store/slices/auth/actions";
 import { FormErrors, FormState } from "types/types";
 import { InputValidationUtil } from "utils/inputValidation";
 import { Toast } from "utils/toast";

@@ -1,1 +1,1 @@
-export { ActionButtons } from "./view";
+export * from "./view";

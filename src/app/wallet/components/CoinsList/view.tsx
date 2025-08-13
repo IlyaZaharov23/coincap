@@ -7,8 +7,8 @@ import { Stack, Text } from "@chakra-ui/react";
 import { FullscreenLoader } from "components/FullscreenLoader";
 import { USER_ID } from "services/constants";
 import { useAppDispatch, useAppSelector } from "store/hooks";
-import { getWallet } from "store/slices/assets/assets.selectors";
-import { updateCoinsWallet } from "store/slices/assets/assets.thunks";
+import { updateCoinsWallet } from "store/slices/assets/actions";
+import { getWallet } from "store/slices/assets/selectors";
 import { LocalStorageUtil } from "utils/localStorage";
 import { PricesUtil } from "utils/prices";
 

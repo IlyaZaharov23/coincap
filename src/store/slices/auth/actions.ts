@@ -5,8 +5,8 @@ import { USER_AUTH } from "services/apiEndpoints";
 import { USER_ID } from "services/constants";
 import { TextUtil } from "utils/text";
 
-import { assetsSlice } from "../assets/assets.slice";
-import { AuthRequestData, AuthRespData, RegRequestData, RegistrationRespData } from "./auth.types";
+import { assetsSlice } from "../assets/reducers";
+import { AuthRequestData, AuthRespData, RegRequestData, RegistrationRespData } from "./types";
 
 export const userLogin = createAsyncThunk("auth/userLogin", async (data: AuthRequestData, thunkApi) => {
     try {

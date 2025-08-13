@@ -1,1 +1,1 @@
-export { Chart } from "./view";
+export * from "./view";

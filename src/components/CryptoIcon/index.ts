@@ -1,1 +1,1 @@
-export { CryptoIcon } from "./view";
+export * from "./view";

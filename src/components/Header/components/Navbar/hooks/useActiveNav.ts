@@ -1,7 +1,7 @@
 import { usePathname } from "next/navigation";
 import { ROUTES } from "shared/constants/routes";
 import { useAppSelector } from "store/hooks";
-import { getAssetsPaths } from "store/slices/assets/assets.selectors";
+import { getAssetsPaths } from "store/slices/assets/selectors";
 
 export const useActiveNav = () => {
     const pathname = usePathname();

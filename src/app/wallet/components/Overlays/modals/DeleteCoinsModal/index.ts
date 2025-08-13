@@ -1,1 +1,1 @@
-export { DeleteCoinsModal } from "./view";
+export * from "./view";

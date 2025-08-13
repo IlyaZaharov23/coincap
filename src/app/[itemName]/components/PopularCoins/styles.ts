@@ -1,5 +1,5 @@
 import { darkGray } from "shared/constants/colors";
-import { responsive } from "utils/helpers/themeBreakpoints/breakpoints";
+import { responsive } from "utils/helpers/themeBreakpoints";
 
 export const styles = {
     mainWrapper: {
@@ -14,9 +14,9 @@ export const styles = {
         display: "flex",
         flexDirection: "row",
         alignItems: "center",
-        justifyContent: "flex-start",
+        justifyContent: "center",
         flexWrap: "wrap",
-        gap: responsive("0.5rem", { md: "0.75rem", lg: "1rem", xl: "1.5rem" }),
+        gap: responsive("0.75rem", { lg: "1rem", xl: "1.5rem" }),
     },
     mainHeader: {
         fontSize: responsive("2rem", { md: "2.5rem" }),

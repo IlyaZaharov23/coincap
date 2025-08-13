@@ -1,5 +1,5 @@
 import { HEADER_HEIGHT } from "components/Header/styles";
-import { responsive } from "utils/helpers/themeBreakpoints/breakpoints";
+import { responsive } from "utils/helpers/themeBreakpoints";
 
 export const TOP_WRAPPER_MARGIN = 32;
 
@@ -7,11 +7,10 @@ export const styles = {
     topWrapper: {
         display: "flex",
         flexDirection: "row",
-        alignItems: responsive("flex-end", { xl: "flex-end" }),
+        alignItems: "flex-end",
         justifyContent: "space-between",
-        margin: responsive(`${TOP_WRAPPER_MARGIN}px 0`, { xl: `${TOP_WRAPPER_MARGIN}px 0` }),
-        marginBottom: "0",
-        padding: "0 1rem",
+        margin: `${TOP_WRAPPER_MARGIN}px 0 0`,
+        padding: responsive("0 0.5rem", { md: "0 1rem", lg: "0 1rem" }),
         width: responsive("100%", { xl: "90vw", "2xl": "75vw" }),
     },
     contentWrapper: {

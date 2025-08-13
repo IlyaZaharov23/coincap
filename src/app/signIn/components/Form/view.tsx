@@ -14,7 +14,7 @@ import { EMAIL_REQUIREMENT_KEYS } from "shared/constants/formRequirements";
 import { INPUT_SIZE } from "shared/constants/inputSizes";
 import { ROUTES } from "shared/constants/routes";
 import { useAppDispatch } from "store/hooks";
-import { userLogin } from "store/slices/auth/auth.thunks";
+import { userLogin } from "store/slices/auth/actions";
 import { InputValidationUtil } from "utils/inputValidation";
 import { Toast } from "utils/toast";
 

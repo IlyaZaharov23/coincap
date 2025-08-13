@@ -1,1 +1,1 @@
-export { AssetsList } from "./view";
+export * from "./view";

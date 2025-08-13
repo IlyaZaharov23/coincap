@@ -1,5 +1,5 @@
 import { black, bluePrimary, borderGray, darkGray, white } from "shared/constants/colors";
-import { responsive } from "utils/helpers/themeBreakpoints/breakpoints";
+import { responsive } from "utils/helpers/themeBreakpoints";
 
 export const HEADER_PADDING_Y = 12;
 export const HEADER_HEIGHT = 65;

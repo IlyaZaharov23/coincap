@@ -1,1 +1,1 @@
-export { Pagination } from "./view";
+export * from "./view";

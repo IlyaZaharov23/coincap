@@ -1,1 +1,1 @@
-export { PortfolioOverview } from "./view";
+export * from "./view";

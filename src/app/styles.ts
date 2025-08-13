@@ -1,5 +1,5 @@
 import { HEADER_HEIGHT } from "components/Header/styles";
-import { responsive } from "utils/helpers/themeBreakpoints/breakpoints";
+import { responsive } from "utils/helpers/themeBreakpoints";
 
 export const styles = {
     pageWrapper: {
@@ -18,7 +18,7 @@ export const styles = {
         marginTop: `${HEADER_HEIGHT}px`,
         height: "auto",
         overflowY: "auto",
-        padding: "20px 0",
+        padding: responsive("0", { md: "20px 0" }),
     },
     topContentWrapper: {
         width: responsive("100vw", { md: "100vw", lg: "100vw", xl: "70vw" }),
@@ -26,8 +26,8 @@ export const styles = {
         flexDirection: responsive("column", { lg: "row" }),
         alignItems: "center",
         justifyContent: "space-between",
-        padding: responsive("0 3rem", { md: "0 3rem", lg: "0 3rem" }),
-        gap: responsive("1.5rem", { xl: "3rem" }),
+        padding: responsive("0 1.5rem", { md: "0 3rem", lg: "0 3rem" }),
+        gap: responsive("0.75rem", { md: "1.5rem", xl: "3rem" }),
     },
     topMarketsWrapper: {
         display: "flex",

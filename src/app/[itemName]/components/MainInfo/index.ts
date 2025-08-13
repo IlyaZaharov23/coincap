@@ -1,1 +1,1 @@
-export { MainInfo } from "./view";
+export * from "./view";

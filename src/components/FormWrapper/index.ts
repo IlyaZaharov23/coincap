@@ -1,1 +1,1 @@
-export { FormWrapper } from "./view";
+export * from "./view";

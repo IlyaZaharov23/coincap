@@ -9,14 +9,14 @@ import { useParams } from "next/navigation";
 import { ApiWrapper } from "services/ApiWrapper";
 import { ASSET_HISTORY_INTERVALS } from "shared/constants/apiParams";
 import { useAppDispatch, useAppSelector } from "store/hooks";
-import { getAssetDetails } from "store/slices/assets/assets.selectors";
-import { getAssetById, getAssetHistory } from "store/slices/assets/assets.thunks";
+import { getAssetById, getAssetHistory } from "store/slices/assets/actions";
+import { getAssetDetails } from "store/slices/assets/selectors";
 import { Toast } from "utils/toast";
 
 import { BuyForm } from "../BuyForm";
 import { CoinChart } from "../CoinChart";
 import { MainInfo } from "../MainInfo";
-import { Market } from "../Market/view";
+import { Market } from "../Market";
 import { PopularCoins } from "../PopularCoins";
 import { styles } from "./styles";
 

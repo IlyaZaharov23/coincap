@@ -1,1 +1,1 @@
-export { CoinItem } from "./view";
+export * from "./view";

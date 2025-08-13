@@ -8,7 +8,7 @@ import { CryptoIcon } from "components/CryptoIcon";
 import { useRouter } from "next/navigation";
 import { ROUTES } from "shared/constants/routes";
 import { useAppDispatch } from "store/hooks";
-import { setAssetDetails } from "store/slices/assets/assets.thunks";
+import { setAssetDetails } from "store/slices/assets/actions";
 import { PricesUtil } from "utils/prices";
 import { TextUtil } from "utils/text";
 
