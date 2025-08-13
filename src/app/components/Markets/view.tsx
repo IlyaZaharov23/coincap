@@ -7,7 +7,6 @@ import { Stack, Text } from "@chakra-ui/react";
 import { Button } from "components/Button";
 import { Coin } from "components/Coin";
 import { TabletCoin } from "components/TabletCoin";
-import { TopCurrenciesSkeleton } from "components/TopCurrenciesSkeleton";
 import { useIsMobile, useIsTablet } from "hooks/useDevice";
 import { useRouter } from "next/navigation";
 import { ASSETS_LIMIT } from "shared/constants/assetsLimit";
