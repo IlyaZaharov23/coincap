@@ -10,9 +10,9 @@ import { TopCurrenciesSkeleton } from "components/TopCurrenciesSkeleton";
 import { useIsMobile, useIsTablet } from "hooks/useDevice";
 import { ASSETS_LIMIT } from "shared/constants/assetsLimit";
 import { useAppDispatch, useAppSelector } from "store/hooks";
-import { topAssetsListGet } from "store/slices/assets/assets.selectors";
-import { getTopAssets } from "store/slices/assets/assets.thunks";
-import { getTopAssetsByCount } from "utils/helpers/topAssets/getTopAssets";
+import { getTopAssets } from "store/slices/assets/actions";
+import { topAssetsListGet } from "store/slices/assets/selectors";
+import { getTopAssetsByCount } from "utils/helpers/topAssets";
 import { Toast } from "utils/toast";
 
 import { styles } from "./styles";

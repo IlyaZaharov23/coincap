@@ -9,15 +9,15 @@ import { useIsMobile, useIsTablet } from "hooks/useDevice";
 import { CURRENT_ASSETS_PAGE, USER_ID } from "services/constants";
 import { ASSETS_LIMIT } from "shared/constants/assetsLimit";
 import { useAppDispatch, useAppSelector } from "store/hooks";
-import { assetsListGet, getWallet } from "store/slices/assets/assets.selectors";
-import { ITEMS_PER_PAGE } from "store/slices/assets/assets.slice";
-import { getAssets, updateCoinsWallet } from "store/slices/assets/assets.thunks";
+import { getAssets, updateCoinsWallet } from "store/slices/assets/actions";
+import { ITEMS_PER_PAGE } from "store/slices/assets/reducers";
+import { assetsListGet, getWallet } from "store/slices/assets/selectors";
 import { LocalStorageUtil } from "utils/localStorage";
 import { Toast } from "utils/toast";
 
 import { AssetItem } from "../AssetItem";
-import { EmptyAssetsPlaceholder } from "../EmptyAssetsPlaceholder";
 import { AssetsSkeleton } from "../Fallbacks/AssetsSkeleton";
+import { EmptyAssetsPlaceholder } from "../Fallbacks/EmptyAssetsPlaceholder";
 import { Pagination } from "../Pagination";
 import { styles } from "./styles";
 

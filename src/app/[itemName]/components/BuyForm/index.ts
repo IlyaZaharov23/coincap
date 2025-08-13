@@ -1,1 +1,1 @@
-export { BuyForm } from "./view";
+export * from "./view";

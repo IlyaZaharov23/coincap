@@ -1,6 +1,6 @@
-import { responsive } from "utils/helpers/themeBreakpoints/breakpoints";
+import { responsive } from "utils/helpers/themeBreakpoints";
 
-import { MARKET_PADDING_X_MOB } from "../CoinContent/styles";
+import { MARKET_PADDING_X_MOB } from "../../CoinContent/styles";
 
 export const styles = {
     wrapper: {

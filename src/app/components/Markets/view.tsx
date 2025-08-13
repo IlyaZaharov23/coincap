@@ -7,7 +7,6 @@ import { Stack, Text } from "@chakra-ui/react";
 import { Button } from "components/Button";
 import { Coin } from "components/Coin";
 import { TabletCoin } from "components/TabletCoin";
-import { TopCurrenciesSkeleton } from "components/TopCurrenciesSkeleton";
 import { useIsMobile, useIsTablet } from "hooks/useDevice";
 import { useRouter } from "next/navigation";
 import { ASSETS_LIMIT } from "shared/constants/assetsLimit";
@@ -15,10 +14,11 @@ import { BUTTON_VARIANT } from "shared/constants/buttonVariants";
 import { darkGray } from "shared/constants/colors";
 import { ROUTES } from "shared/constants/routes";
 import { useAppDispatch, useAppSelector } from "store/hooks";
-import { topAssetsListGet } from "store/slices/assets/assets.selectors";
-import { getTopAssets } from "store/slices/assets/assets.thunks";
-import { getTopAssetsByCount } from "utils/helpers/topAssets/getTopAssets";
+import { getTopAssets } from "store/slices/assets/actions";
+import { topAssetsListGet } from "store/slices/assets/selectors";
+import { getTopAssetsByCount } from "utils/helpers/topAssets";
 
+import { MarketsSkeleton } from "../Fallbacks/MarketsSkeleton";
 import { styles } from "./styles";
 
 export const Markets = () => {
@@ -68,9 +68,9 @@ export const Markets = () => {
             </Stack>
             <Stack sx={styles.topAssetsWrapper}>
                 {isLoading || topAssets.length === 0 ? (
-                    <TopCurrenciesSkeleton count={5} />
+                    <MarketsSkeleton />
                 ) : (
-                    getTopAssetsByCount(topAssets, 5).map((asset) =>
+                    getTopAssetsByCount(topAssets, isMobile ? 6 : isTablet ? 8 : 5).map((asset) =>
                         isMobile || isTablet ? (
                             <TabletCoin key={asset.id} asset={asset} />
                         ) : (

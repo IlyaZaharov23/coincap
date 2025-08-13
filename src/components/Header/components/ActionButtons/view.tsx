@@ -13,8 +13,8 @@ import { useRouter } from "next/navigation";
 import { BUTTON_VARIANT } from "shared/constants/buttonVariants";
 import { ROUTES } from "shared/constants/routes";
 import { useAppDispatch } from "store/hooks";
-import { clearWallet } from "store/slices/assets/assets.thunks";
-import { userLogout } from "store/slices/auth/auth.thunks";
+import { clearWallet } from "store/slices/assets/actions";
+import { userLogout } from "store/slices/auth/actions";
 
 import { styles } from "./styles";
 import { ActionButtonsProps } from "./types";

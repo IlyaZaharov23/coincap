@@ -1,4 +1,4 @@
-import { responsive } from "utils/helpers/themeBreakpoints/breakpoints";
+import { responsive } from "utils/helpers/themeBreakpoints";
 
 export const MARKET_PADDING_X_MOB = 16;
 

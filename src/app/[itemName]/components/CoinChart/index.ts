@@ -1,1 +1,1 @@
-export { CoinChart } from "./view";
+export * from "./view";

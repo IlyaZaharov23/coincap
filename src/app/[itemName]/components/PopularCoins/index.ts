@@ -1,1 +1,1 @@
-export { PopularCoins } from "./view";
+export * from "./view";

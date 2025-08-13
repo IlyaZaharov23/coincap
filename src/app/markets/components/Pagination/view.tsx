@@ -7,8 +7,8 @@ import { Button } from "components/Button";
 import { ASSETS_LIMIT } from "shared/constants/assetsLimit";
 import { BUTTON_VARIANT } from "shared/constants/buttonVariants";
 import { useAppDispatch } from "store/hooks";
-import { getAssets } from "store/slices/assets/assets.thunks";
-import { getVisiblePages } from "utils/helpers/pagination/getVisiblePages";
+import { getAssets } from "store/slices/assets/actions";
+import { getVisiblePages } from "utils/helpers/pagination";
 
 import { PaginationSkeleton } from "../Fallbacks/PaginationSketelon";
 import { styles } from "./styles";

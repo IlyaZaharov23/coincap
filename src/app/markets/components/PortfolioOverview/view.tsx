@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import { ApiWrapper } from "services/ApiWrapper";
 import { ROUTES } from "shared/constants/routes";
 import { useAppSelector } from "store/hooks";
-import { getWallet } from "store/slices/assets/assets.selectors";
+import { getWallet } from "store/slices/assets/selectors";
 import { PricesUtil } from "utils/prices";
 
 import { styles } from "./styles";

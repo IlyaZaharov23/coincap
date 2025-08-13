@@ -2,7 +2,7 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 import { Asset, AssetHistory } from "types/types";
 
-import { AssetsState, WalletItem } from "./assets.types";
+import { AssetsState, WalletItem } from "./types";
 
 export const ITEMS_PER_PAGE = 10;
 

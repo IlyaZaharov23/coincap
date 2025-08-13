@@ -12,7 +12,7 @@ import { useConverterCalculations } from "hooks/useConverterCalculations";
 import Image from "next/image";
 import { INPUT_SIZE } from "shared/constants/inputSizes";
 import { useAppSelector } from "store/hooks";
-import { topAssetsListGet } from "store/slices/assets/assets.selectors";
+import { topAssetsListGet } from "store/slices/assets/selectors";
 import { InputValidationUtil } from "utils/inputValidation";
 
 import { ConverterSkeleton } from "./components/ConverterSkeleton";

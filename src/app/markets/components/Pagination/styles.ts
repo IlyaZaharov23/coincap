@@ -1,5 +1,5 @@
 import { bluePrimary, darkGray, white } from "shared/constants/colors";
-import { responsive } from "utils/helpers/themeBreakpoints/breakpoints";
+import { responsive } from "utils/helpers/themeBreakpoints";
 
 export const PAGINATION_WRAPPER_PADDING_BOTTOM = 32;
 export const PAGINATION_WRAPPER_PADDING_TOP = 16;

@@ -1,1 +1,1 @@
-export { Logo } from "./view";
+export * from "./view";

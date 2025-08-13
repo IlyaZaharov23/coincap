@@ -1,1 +1,1 @@
-export { Header } from "./view";
+export * from "./view";

@@ -3,7 +3,7 @@ import { useCallback } from "react";
 import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { bluePrimary } from "shared/constants/colors";
 import { useAppSelector } from "store/hooks";
-import { getPriceHistory } from "store/slices/assets/assets.selectors";
+import { getPriceHistory } from "store/slices/assets/selectors";
 import { ChartUtil } from "utils/chartUtil";
 
 import { TooltipEvent } from "../../types";

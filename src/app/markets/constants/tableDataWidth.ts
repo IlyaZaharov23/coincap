@@ -1,4 +1,4 @@
-import { responsive } from "utils/helpers/themeBreakpoints/breakpoints";
+import { responsive } from "utils/helpers/themeBreakpoints";
 
 export const TABLE_DATA_WIDTH = {
     COL_1: responsive("37vw", { md: "26vw", xl: "21vw", "2xl": "23vw" }),

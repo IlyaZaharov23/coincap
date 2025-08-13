@@ -1,7 +1,7 @@
 import { TOP_WRAPPER_MARGIN } from "app/markets/styles";
 import { HEADER_HEIGHT } from "components/Header/styles";
 import { black } from "shared/constants/colors";
-import { responsive } from "utils/helpers/themeBreakpoints/breakpoints";
+import { responsive } from "utils/helpers/themeBreakpoints";
 
 import { PAGINATION_WRAPPER_PADDING_BOTTOM, PAGINATION_WRAPPER_PADDING_TOP } from "../Pagination/styles";
 

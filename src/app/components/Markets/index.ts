@@ -1,1 +1,1 @@
-export { Markets } from "./view";
+export * from "./view";

@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import { assetsSlice } from "./slices/assets/assets.slice";
+import { assetsSlice } from "./slices/assets/reducers";
 
 export const makeStore = (preloadedState?: RootState) => {
     return configureStore({

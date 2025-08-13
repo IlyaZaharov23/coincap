@@ -1,1 +1,1 @@
-export { ChartTooltip } from "./view";
+export * from "./view";

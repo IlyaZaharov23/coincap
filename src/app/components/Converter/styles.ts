@@ -1,5 +1,5 @@
 import { black, bluePrimary, borderGray } from "shared/constants/colors";
-import { responsive } from "utils/helpers/themeBreakpoints/breakpoints";
+import { responsive } from "utils/helpers/themeBreakpoints";
 
 const QUOTE_INPUT_WRAPPER_GAP = 16;
 const ICON_SIZE = 16;
@@ -12,11 +12,11 @@ export const styles = {
         justifyContent: "space-between",
         border: `1px solid ${borderGray}`,
         borderRadius: "20px",
-        padding: "1.5rem 2rem",
+        padding: responsive("1rem", { md: "1rem 1.5rem", lg: "1.5rem 2rem" }),
         boxShadow: `0 4px 12px ${black}3A, 0 2px 6px ${black}3A`,
         width: responsive("100%", { md: "500px !important", lg: "500px !important" }),
         gap: 0,
-        minHeight: "347px",
+        minHeight: responsive("315px", { md: "", lg: "347px" }),
     },
     topWrapper: {
         display: "flex",

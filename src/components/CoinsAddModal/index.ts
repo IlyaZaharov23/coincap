@@ -1,1 +1,1 @@
-export { CoinsAddModal } from "./view";
+export * from "./view";

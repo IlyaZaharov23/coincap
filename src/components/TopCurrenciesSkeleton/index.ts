@@ -1,1 +1,1 @@
-export { TopCurrenciesSkeleton } from "./view";
+export * from "./view";

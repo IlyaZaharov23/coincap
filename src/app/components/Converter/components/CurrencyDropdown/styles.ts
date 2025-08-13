@@ -1,5 +1,5 @@
 import { black, borderGray, darkGray, formGray, hoverGray, semiDarkGray, white } from "shared/constants/colors";
-import { responsive } from "utils/helpers/themeBreakpoints/breakpoints";
+import { responsive } from "utils/helpers/themeBreakpoints";
 
 export const styles = {
     itemsWrapper: {
