@@ -1,10 +1,16 @@
+import bundleAnalyzer from "@next/bundle-analyzer";
+
 import type { NextConfig } from "next";
 
-const nextConfig: NextConfig = {
+const withBundleAnalyzer = bundleAnalyzer({
+    enabled: process.env.ANALYZE === "true",
+});
+
+const nextConfig: NextConfig = withBundleAnalyzer({
     /* config options here */
     devIndicators: {
         buildActivityPosition: undefined,
     },
-};
+});
 
 export default nextConfig;

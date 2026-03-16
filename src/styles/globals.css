@@ -24,6 +24,36 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Initial SSR loader (hidden after hydration) */
+html[data-hydrated="true"] #app-initial-loader {
+  display: none;
+}
+
+#app-initial-loader {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: var(--background);
+  color: var(--foreground);
+  z-index: 2147483647;
+}
+
+#app-initial-loader__spinner {
+  width: 48px;
+  height: 48px;
+  border-radius: 9999px;
+  border: 4px solid #3268d9;
+  border-top-color: currentColor;
+  animation: app-initial-loader-spin 0.9s linear infinite;
+}
+
+@keyframes app-initial-loader-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 * {
   box-sizing: border-box;
   padding: 0;
