@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, memo } from "react";
+import { FC, memo, useEffect, useState } from "react";
 
 import { ChevronLeftIcon } from "@chakra-ui/icons";
 import { Stack, Text } from "@chakra-ui/react";
@@ -23,13 +23,18 @@ export const Header: FC<HeaderPropsType> = memo(
         const isMobile = useIsMobile();
         const isTablet = useIsTablet();
         const pathname = usePathname();
+        const [isShowLogout, setIsShowLogout] = useState(false);
         const handleGoBack = () => {
             if (sessionStorage.getItem(USER_EMAIL)) {
                 sessionStorage.removeItem(USER_EMAIL);
             }
             router.back();
         };
-        const isShowLogout = !!ApiWrapper.getToken();
+        useEffect(() => {
+            if (typeof window !== "undefined") {
+                setIsShowLogout(!!ApiWrapper.getToken());
+            }
+        }, []);
 
         return (
             <Stack sx={styles.headerWrapper}>
